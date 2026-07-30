@@ -68,7 +68,7 @@ MODELE = """<!DOCTYPE html>
     --danger: #c26b5f;
     --success: #5f9e6e;
     --radius: 10px;
-    --cockpit-w: clamp(260px, 24vw, 440px);
+    --cockpit-w: clamp(320px, 36vw, 720px);
   }
   * { box-sizing: border-box; }
   body {
@@ -152,20 +152,24 @@ MODELE = """<!DOCTYPE html>
     background-image: url("__COCKPIT__");
     background-size: cover;
     background-position: center;
-    -webkit-mask-image: radial-gradient(ellipse 72% 66% at 58% 50%,
-              #000 0%, #000 36%, rgba(0,0,0,.6) 64%, rgba(0,0,0,.2) 84%, transparent 100%);
-            mask-image: radial-gradient(ellipse 72% 66% at 58% 50%,
-              #000 0%, #000 36%, rgba(0,0,0,.6) 64%, rgba(0,0,0,.2) 84%, transparent 100%);
+    /* Fondu volontairement tardif : le cœur de l'image reste pleinement opaque,
+       seuls les bords s'estompent pour éviter l'effet de rectangle collé. */
+    -webkit-mask-image: radial-gradient(ellipse 82% 78% at 55% 50%,
+              #000 0%, #000 52%, rgba(0,0,0,.75) 72%, rgba(0,0,0,.3) 88%, transparent 100%);
+            mask-image: radial-gradient(ellipse 82% 78% at 55% 50%,
+              #000 0%, #000 52%, rgba(0,0,0,.75) 72%, rgba(0,0,0,.3) 88%, transparent 100%);
     -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
     -webkit-mask-size: 100% 100%;   mask-size: 100% 100%;
     pointer-events: none;
   }
   /* Le visuel n'apparaît que si l'écran est assez large pour l'accueillir sans
-     empiéter sur la colonne de lecture : celle-ci est alors décalée vers la
-     gauche par la marge droite, jamais recouverte. */
+     empiéter sur la colonne de lecture.
+     margin-left: 0 est indispensable : sans lui, le « margin: 0 auto » du body
+     absorberait tout l'espace libre à gauche et repousserait les annonces vers
+     la droite, contre l'image. Ici elles restent collées au bord gauche. */
   @media (min-width: 1500px) {
     .cockpit { display: block; }
-    body { margin-right: calc(var(--cockpit-w) + 40px); }
+    body { margin-left: 0; margin-right: calc(var(--cockpit-w) + 48px); }
   }
 </style>
 </head>
