@@ -82,7 +82,11 @@ MODELE = """<!DOCTYPE html>
   }
   h1 { font-size: 22px; margin: 0 0 4px; text-wrap: balance; }
   .subtitle { color: var(--text-dim); font-size: 13px; margin-bottom: 18px; line-height: 1.5; }
-  .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; align-items: center; }
+  .toolbar-label {
+    font-size: 12px; color: #ffd429; font-weight: 800; text-transform: uppercase;
+    letter-spacing: .06em; margin-right: 4px; min-width: 152px;
+  }
   .toolbar button {
     background: var(--panel-2); color: var(--text); border: 1px solid var(--border);
     border-radius: 20px; padding: 6px 14px; font-size: 13px; cursor: pointer;
@@ -96,8 +100,10 @@ MODELE = """<!DOCTYPE html>
   .searchbar input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
   .count-badge {
     background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 10px 14px; font-size: 13px; color: var(--text-dim); margin-bottom: 16px;
+    padding: 10px 14px; font-size: 13px; color: var(--text-dim); margin-bottom: 16px; line-height: 1.6;
   }
+  .count-badge strong { color: var(--text); }
+  .note { font-size: 12px; color: var(--text-dim); margin-top: 6px; font-style: italic; }
   .card {
     background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
     padding: 16px 18px; margin-bottom: 14px; transition: opacity .2s;
@@ -230,35 +236,47 @@ function dateCourte(iso) {
   return d.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
 }
 
+function mkBtn(texte, actif, onclick) {
+  const b = document.createElement("button");
+  b.textContent = texte;
+  if (actif) b.classList.add("active");
+  if (onclick) b.onclick = onclick;
+  return b;
+}
+
+/* Chaque famille de filtres occupe sa propre ligne, précédée de son intitulé :
+   on lit d'un coup d'œil sur quel critère on agit. */
+function mkRow(intitule) {
+  const row = document.createElement("div");
+  row.style.cssText = "display:flex;gap:6px;flex-wrap:wrap;align-items:center;width:100%";
+  const l = document.createElement("span");
+  l.className = "toolbar-label";
+  l.textContent = intitule;
+  row.appendChild(l);
+  return row;
+}
+
 function renderToolbar() {
   const tb = document.getElementById("toolbar");
   tb.innerHTML = "";
-  const regionWrap = document.createElement("div");
-  regionWrap.style.cssText = "display:flex;gap:6px;flex-wrap:wrap";
-  REGIONS.forEach(r => {
-    const b = document.createElement("button");
-    b.textContent = r;
-    if (r === currentRegionFilter) b.classList.add("active");
-    b.onclick = () => { currentRegionFilter = r; render(); };
-    regionWrap.appendChild(b);
-  });
-  tb.appendChild(regionWrap);
 
-  const statusWrap = document.createElement("div");
-  statusWrap.style.cssText = "display:flex;gap:6px;flex-wrap:wrap;margin-left:auto";
-  const allBtn = document.createElement("button");
-  allBtn.textContent = "Toutes";
-  if (currentStatusFilter === "Toutes") allBtn.classList.add("active");
-  allBtn.onclick = () => { currentStatusFilter = "Toutes"; render(); };
-  statusWrap.appendChild(allBtn);
-  Object.entries(STATUSES).forEach(([key, meta]) => {
-    const b = document.createElement("button");
-    b.textContent = meta.label;
-    if (key === currentStatusFilter) b.classList.add("active");
-    b.onclick = () => { currentStatusFilter = key; render(); };
-    statusWrap.appendChild(b);
-  });
-  tb.appendChild(statusWrap);
+  /* Une seule tranche d'ancienneté est publiée : le bouton indique la règle
+     appliquée, il n'y a pas d'autre choix à proposer. */
+  const rowDate = mkRow("Date de diffusion");
+  rowDate.appendChild(mkBtn(`< 1 mois (${ANNONCES.length})`, true, null));
+  tb.appendChild(rowDate);
+
+  const rowRegion = mkRow("Région");
+  REGIONS.forEach(r => rowRegion.appendChild(
+    mkBtn(r, r === currentRegionFilter, () => { currentRegionFilter = r; render(); })));
+  tb.appendChild(rowRegion);
+
+  const rowStatus = mkRow("Mon statut");
+  rowStatus.appendChild(
+    mkBtn("Toutes", currentStatusFilter === "Toutes", () => { currentStatusFilter = "Toutes"; render(); }));
+  Object.entries(STATUSES).forEach(([key, meta]) => rowStatus.appendChild(
+    mkBtn(meta.label, key === currentStatusFilter, () => { currentStatusFilter = key; render(); })));
+  tb.appendChild(rowStatus);
 }
 
 function renderCard(a) {
@@ -318,8 +336,16 @@ function render() {
       (a.source || "").toLowerCase().includes(t));
   }
 
-  const totalNouvelles = ANNONCES.filter(a => (statusMap[a.id] || "Nouvelle") === "Nouvelle").length;
-  badge.textContent = `${totalNouvelles} annonce(s) nouvelle(s) sur ${ANNONCES.length} affichées — ${items.length} correspondent aux filtres.`;
+  /* Une annonce déjà traitée disparaît du filtre « Nouvelles ». Sans explication,
+     l'écart entre le total publié et le nombre affiché est incompréhensible :
+     on le dit, et on indique comment revoir les annonces masquées. */
+  const traitees = ANNONCES.filter(a => (statusMap[a.id] || "Nouvelle") !== "Nouvelle").length;
+  badge.innerHTML =
+    `<strong>${items.length}</strong> annonce(s) affichée(s) · ` +
+    `<strong>${ANNONCES.length}</strong> retenue(s) au total — parues depuis moins d'un mois, hors États-Unis.` +
+    (traitees > 0 && currentStatusFilter === "Nouvelle"
+      ? `<div class="note">${traitees} annonce(s) que vous avez déjà traitée(s) sont masquées par le filtre « Nouvelles ». Cliquez « Toutes » dans la ligne « Mon statut » pour les revoir.</div>`
+      : "");
 
   list.innerHTML = items.length
     ? items.map(renderCard).join("")
