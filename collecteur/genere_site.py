@@ -12,15 +12,37 @@ Usage : python collecteur/genere_site.py
 
 from __future__ import annotations
 
+import base64
 import json
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 RACINE = Path(__file__).resolve().parent.parent
 FICHIER_DONNEES = RACINE / "data" / "annonces.json"
 FICHIER_SITE = RACINE / "docs" / "index.html"
+FICHIER_VISUEL = RACINE / "assets" / "cockpit.jpg"
 
 MAX_ANNONCES_PAGE = 500  # la base complète reste dans data/annonces.json
+
+# --- Règles d'affichage demandées ------------------------------------------
+# Elles s'appliquent à la GÉNÉRATION, pas à la collecte : data/annonces.json
+# continue d'historiser l'intégralité des annonces, rien n'est perdu. Seule la
+# page publique est restreinte.
+
+FENETRE_JOURS = 31  # n'afficher que les annonces parues depuis moins d'un mois
+
+# Le collecteur range États-Unis, Canada et Mexique dans « Amérique du Nord ».
+# Les États-Unis sont hors périmètre (pas d'autorisation de travail, pas de
+# sponsorship), le Canada et le Québec restent couverts. On sépare donc les deux
+# au moment de générer la page.
+REGION_AMNORD = "Amérique du Nord"
+REGION_CANADA = "Canada / Québec"
+
+INDICES_CANADA = [
+    "canada", "canadien", "canadian", "québec", "quebec", "montréal", "montreal",
+    "air canada", "westjet", "porter airlines", "radio-canada", "toronto",
+    "vancouver", "ottawa", "calgary", "winnipeg", "transat", "nolinor",
+]
 
 MODELE = """<!DOCTYPE html>
 <html lang="fr">
@@ -46,6 +68,7 @@ MODELE = """<!DOCTYPE html>
     --danger: #c26b5f;
     --success: #5f9e6e;
     --radius: 10px;
+    --cockpit-w: clamp(260px, 24vw, 440px);
   }
   * { box-sizing: border-box; }
   body {
@@ -109,16 +132,49 @@ MODELE = """<!DOCTYPE html>
   .actions button.undo { color: var(--text-dim); }
   .empty { color: var(--text-dim); text-align: center; padding: 40px 0; font-size: 14px; }
   footer { color: var(--text-dim); font-size: 12px; margin: 30px 0 10px; text-align: center; line-height: 1.6; }
+
+  /* Visuel cockpit : panneau fixe à droite, il ne défile pas avec les annonces.
+     Le masque en dégradé estompe ses bords pour qu'il se fonde dans le fond
+     sombre au lieu de former un rectangle collé sur la page. */
+  .cockpit {
+    display: none;
+    position: fixed;
+    top: 50%; right: 0;
+    transform: translateY(-50%);
+    width: var(--cockpit-w);
+    aspect-ratio: 734 / 446;
+    background-image: url("__COCKPIT__");
+    background-size: cover;
+    background-position: center;
+    -webkit-mask-image: radial-gradient(ellipse 72% 66% at 58% 50%,
+              #000 0%, #000 36%, rgba(0,0,0,.6) 64%, rgba(0,0,0,.2) 84%, transparent 100%);
+            mask-image: radial-gradient(ellipse 72% 66% at 58% 50%,
+              #000 0%, #000 36%, rgba(0,0,0,.6) 64%, rgba(0,0,0,.2) 84%, transparent 100%);
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;   mask-size: 100% 100%;
+    pointer-events: none;
+  }
+  /* Le visuel n'apparaît que si l'écran est assez large pour l'accueillir sans
+     empiéter sur la colonne de lecture : celle-ci est alors décalée vers la
+     gauche par la marge droite, jamais recouverte. */
+  @media (min-width: 1500px) {
+    .cockpit { display: block; }
+    body { margin-right: calc(var(--cockpit-w) + 40px); }
+  }
 </style>
 </head>
 <body>
 
+<div class="cockpit" aria-hidden="true"></div>
+
 <h1>✈️ Où et comment trouver un emploi de pilote d'avion</h1>
 <div class="subtitle">
 Veille mondiale automatique des offres d'emploi de pilote de ligne, copilote, cadet et instructeur —
-Europe, Amérique du Nord et du Sud, Asie, Moyen-Orient, Afrique, Océanie.
+Europe, Canada / Québec, Amérique du Sud, Asie, Moyen-Orient, Afrique, Océanie.
 Les annonces étrangères sont traduites en français. Vos décisions (pas intéressé / candidature envoyée / refus)
 sont mémorisées sur cet appareil : une annonce traitée ne réapparaît plus dans « Nouvelles ».<br>
+Seules les annonces parues <strong>depuis moins d'un mois</strong> sont affichées. Les offres situées
+aux <strong>États-Unis</strong> ne sont pas retenues.<br>
 <strong>Dernière mise à jour de la base : __DATE_MAJ__</strong>
 </div>
 
@@ -129,13 +185,14 @@ sont mémorisées sur cet appareil : une annonce traitée ne réapparaît plus d
 
 <footer>
 Page générée automatiquement deux fois par jour par un collecteur open source (flux publics gratuits : Google News multilingue, SNPI…).<br>
-Base historisée : aucune annonce n'est supprimée — __NB__ annonces collectées à ce jour.
+__NB_AFFICHEES__ annonce(s) affichée(s) : parues depuis moins d'un mois, hors États-Unis.<br>
+Base historisée : aucune annonce n'est supprimée — __NB__ annonces collectées à ce jour, consultables dans <code>data/annonces.json</code>.
 </footer>
 
 <script>
 const ANNONCES = __DATA__;
 
-const REGIONS = ["Toutes", "Europe", "Amérique du Nord", "Amérique du Sud", "Asie", "Moyen-Orient", "Océanie", "Afrique", "Monde"];
+const REGIONS = ["Toutes", "Europe", "Canada / Québec", "Amérique du Sud", "Asie", "Moyen-Orient", "Océanie", "Afrique", "Monde"];
 const STATUSES = {
   "Nouvelle": { label: "Nouvelles", cls: "status-Nouvelle" },
   "Ecartee": { label: "Écartées", cls: "status-Ecartee" },
@@ -287,13 +344,70 @@ render();
 """
 
 
+def _texte_annonce(annonce: dict) -> str:
+    """Concatène les champs où un indice de pays peut apparaître."""
+    champs = ("titre_fr", "titre_original", "extrait", "source", "lien")
+    return " ".join(str(annonce.get(c) or "") for c in champs).lower()
+
+
+def _date_reference(annonce: dict) -> datetime | None:
+    """Date servant à juger l'ancienneté : publication si connue, sinon collecte."""
+    for cle in ("date_publication", "premiere_collecte"):
+        brut = annonce.get(cle)
+        if not brut:
+            continue
+        try:
+            return datetime.fromisoformat(brut).astimezone(timezone.utc)
+        except ValueError:
+            continue
+    return None
+
+
+def appliquer_regles(annonces: list[dict]) -> tuple[list[dict], dict[str, int]]:
+    """Applique les deux règles d'affichage et reclasse le Canada.
+
+    Renvoie les annonces retenues et un compte-rendu chiffré des exclusions,
+    pour que la restriction ne soit jamais silencieuse.
+    """
+    limite = datetime.now(timezone.utc) - timedelta(days=FENETRE_JOURS)
+    retenues: list[dict] = []
+    stats = {"trop_anciennes": 0, "sans_date": 0, "etats_unis": 0, "canada": 0}
+
+    for annonce in annonces:
+        date_ref = _date_reference(annonce)
+        if date_ref is None:
+            # Sans date exploitable, impossible d'affirmer que l'annonce est
+            # récente : on l'écarte plutôt que de la présenter comme telle.
+            stats["sans_date"] += 1
+            continue
+        if date_ref < limite:
+            stats["trop_anciennes"] += 1
+            continue
+
+        if annonce.get("region") == REGION_AMNORD:
+            if any(indice in _texte_annonce(annonce) for indice in INDICES_CANADA):
+                annonce = {**annonce, "region": REGION_CANADA}
+                stats["canada"] += 1
+            else:
+                # Dans cette région, tout ce qui n'est pas identifié comme
+                # canadien relève des États-Unis : hors périmètre.
+                stats["etats_unis"] += 1
+                continue
+
+        retenues.append(annonce)
+
+    return retenues, stats
+
+
 def generer() -> None:
     base = json.loads(FICHIER_DONNEES.read_text(encoding="utf-8"))
     annonces = base["annonces"]
 
+    retenues, stats = appliquer_regles(annonces)
+
     # Les plus récentes d'abord (date de collecte puis date de publication).
     annonces_triees = sorted(
-        annonces,
+        retenues,
         key=lambda a: (a.get("premiere_collecte") or "", a.get("date_publication") or ""),
         reverse=True,
     )[:MAX_ANNONCES_PAGE]
@@ -308,15 +422,33 @@ def generer() -> None:
     else:
         date_maj = "initialisation en cours"
 
+    # Le visuel est intégré en base64 : la page reste autonome, sans requête
+    # externe ni fichier image à servir à côté.
+    if FICHIER_VISUEL.is_file():
+        octets = FICHIER_VISUEL.read_bytes()
+        cockpit = "data:image/jpeg;base64," + base64.b64encode(octets).decode("ascii")
+    else:
+        # Sans le visuel, la page reste parfaitement fonctionnelle.
+        print(f"Visuel absent ({FICHIER_VISUEL}) : page générée sans illustration.")
+        cockpit = ""
+
     page = (
         MODELE
         .replace("__DATA__", json.dumps(annonces_triees, ensure_ascii=False))
         .replace("__DATE_MAJ__", date_maj)
+        .replace("__NB_AFFICHEES__", str(len(annonces_triees)))
         .replace("__NB__", str(len(annonces)))
+        .replace("__COCKPIT__", cockpit)
     )
     FICHIER_SITE.parent.mkdir(parents=True, exist_ok=True)
     FICHIER_SITE.write_text(page, encoding="utf-8")
-    print(f"Site généré : {FICHIER_SITE} ({len(annonces_triees)} annonces affichées, {len(annonces)} dans la base)")
+    print(
+        f"Site généré : {FICHIER_SITE}\n"
+        f"  {len(annonces_triees)} annonce(s) affichée(s) sur {len(annonces)} en base\n"
+        f"  écartées : {stats['trop_anciennes']} de plus de {FENETRE_JOURS} jours, "
+        f"{stats['etats_unis']} aux États-Unis, {stats['sans_date']} sans date exploitable\n"
+        f"  reclassées « {REGION_CANADA} » : {stats['canada']}"
+    )
 
 
 if __name__ == "__main__":
