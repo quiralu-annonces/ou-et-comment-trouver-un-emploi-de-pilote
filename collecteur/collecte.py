@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Collecteur de la veille mondiale d'offres d'emploi de pilote.
 
-Interroge des sources gratuites (flux RSS Google News dans toutes les grandes
-langues + sites aéronautiques spécialisés), filtre les résultats pertinents,
+Interroge des bourses d'emploi aéronautiques (flux RSS du SNPI et de la FFVP,
+plan de site d'AllFlyingJobs), filtre les résultats pertinents,
 traduit les titres en français, et alimente la base append-only
 ``data/annonces.json`` : aucune annonce n'est jamais supprimée, seules les
 nouvelles sont ajoutées.
@@ -19,10 +19,9 @@ import re
 import sys
 import time
 import unicodedata
-import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 
@@ -47,104 +46,54 @@ REGIONS = [
 ]
 
 
-def url_google_news(requete: str, hl: str, gl: str, ceid: str) -> str:
-    return (
-        "https://news.google.com/rss/search?q="
-        + urllib.parse.quote(requete)
-        + f"&hl={hl}&gl={gl}&ceid={ceid}"
-    )
-
+# --- Sources ---------------------------------------------------------------
+#
+# Les flux Google News ont été retirés le 31 juillet 2026. Ils ne publiaient que
+# des articles de presse : sur 423 entrées accumulées, 410 étaient des
+# actualités, aucune n'était une offre à laquelle candidater. Un agrégateur de
+# presse ne peut pas, par nature, produire des offres d'emploi.
+#
+# Ne restent que des sources qui publient réellement des postes à pourvoir.
+#
+# Non retenues, et pourquoi :
+#   - FFA (ffa-aero.fr)  : son robots.txt interdit explicitement ClaudeBot et
+#                          signale « ai-train=no ». Source à consulter à la main.
+#   - Indeed             : renvoie 403 sur ses flux RSS.
+#   - AviationJobSearch, LatestPilotJobs, JSfirm, Climbto350 : plus aucun flux.
 
 # (nom, url, langue, région par défaut)
 SOURCES = [
     (
-        "SNPI (France)",
+        "SNPI — bourse à l'emploi (France)",
         "https://snpi.aero/offres-emploi/feed/",
         "fr",
         "Europe",
     ),
     (
-        "Google News France",
-        url_google_news(
-            'recrutement pilote avion OR copilote OR "instructeur avion"',
-            "fr", "FR", "FR:fr",
-        ),
+        "FFVP — bourse à l'emploi (France)",
+        "https://www.ffvp.fr/bourse-a-emploi/feed",
         "fr",
         "Europe",
     ),
-    (
-        "Google News États-Unis",
-        url_google_news('"pilot jobs" OR "hiring pilots" OR "pilot recruitment" airline', "en-US", "US", "US:en"),
-        "en",
-        "Amérique du Nord",
-    ),
-    (
-        "Google News Royaume-Uni",
-        url_google_news('airline pilot recruitment OR "first officer" vacancy OR "flight instructor" job', "en-GB", "GB", "GB:en"),
-        "en",
-        "Europe",
-    ),
-    (
-        "Google News Inde",
-        url_google_news("pilot recruitment airline hiring", "en-IN", "IN", "IN:en"),
-        "en",
-        "Asie",
-    ),
-    (
-        "Google News Australie",
-        url_google_news("pilot jobs airline recruitment", "en-AU", "AU", "AU:en"),
-        "en",
-        "Océanie",
-    ),
-    (
-        "Google News Afrique",
-        url_google_news("pilot vacancy OR pilot recruitment airline africa", "en-ZA", "ZA", "ZA:en"),
-        "en",
-        "Afrique",
-    ),
-    (
-        "Google News Amérique latine",
-        url_google_news("empleo piloto aviación OR contratación pilotos aerolínea", "es-419", "AR", "AR:es-419"),
-        "es",
-        "Amérique du Sud",
-    ),
-    (
-        "Google News Brésil",
-        url_google_news("vaga piloto aviação OR contratação pilotos companhia aérea", "pt-BR", "BR", "BR:pt-419"),
-        "pt",
-        "Amérique du Sud",
-    ),
-    (
-        "Google News Moyen-Orient",
-        url_google_news("وظائف طيارين OR توظيف طيار شركة طيران", "ar", "AE", "AE:ar"),
-        "ar",
-        "Moyen-Orient",
-    ),
-    (
-        "Google News Chine",
-        url_google_news("飞行员 招聘 航空公司", "zh-CN", "CN", "CN:zh-Hans"),
-        "zh",
-        "Asie",
-    ),
-    (
-        "Google News Japon",
-        url_google_news("パイロット 採用 航空会社", "ja", "JP", "JP:ja"),
-        "ja",
-        "Asie",
-    ),
-    (
-        "Google News Russie",
-        url_google_news("вакансия пилот авиакомпания", "ru", "RU", "RU:ru"),
-        "ru",
-        "Europe",
-    ),
-    (
-        "Google News Allemagne",
-        url_google_news("Pilot Stellenangebot Airline OR Fluglehrer gesucht", "de", "DE", "DE:de"),
-        "de",
-        "Europe",
-    ),
 ]
+
+# --- AllFlyingJobs : découverte par le plan du site ------------------------
+# Le site n'expose pas de flux RSS mais publie un sitemap.xml horodaté, et son
+# robots.txt l'annonce explicitement. On y lit les fiches de poste récentes,
+# en respectant le Crawl-delay de 3 secondes qu'il impose.
+
+AFJ_SITEMAP = "https://www.allflyingjobs.com/sitemap.xml"
+AFJ_DELAI = 3.0            # Crawl-delay impose par robots.txt — ne pas réduire
+AFJ_FENETRE_JOURS = 31     # inutile de lire ce que le filtre d'un mois écartera
+AFJ_MAX_FICHES = 120       # plafond par exécution ; le reste est signalé, pas masqué
+
+# Postes de pilotage repérables dans l'adresse de la fiche. Le site publie aussi
+# des postes de mécanicien, d'ingénierie ou de service client, hors périmètre.
+AFJ_SLUG_PILOTE = re.compile(
+    r"(?:^|-)(pilot|pilots|first-officer|captain|captains|cadet|cadets"
+    r"|instructor|instructors|copilot|copilots|fo|sic|pic)(?:-|$)",
+    re.IGNORECASE,
+)
 
 # --- Filtre de pertinence -----------------------------------------------
 # Une annonce est retenue si son titre contient un mot "pilote" ET un mot
@@ -259,9 +208,93 @@ def deviner_region(texte: str, region_defaut: str) -> str:
     return region_defaut
 
 
-def est_pertinent(titre: str, extrait: str) -> bool:
+def _balise(motif: str, texte: str) -> str:
+    trouve = re.search(motif, texte, re.IGNORECASE | re.DOTALL)
+    if not trouve:
+        return ""
+    return nettoyer_html(html.unescape(trouve.group(1)))
+
+
+def lire_sitemap_allflyingjobs() -> list[dict]:
+    """Liste les fiches de poste de pilotage récentes publiées par AllFlyingJobs.
+
+    Chaque fiche porte un bloc JSON-LD ``JobPosting`` : on y lit la date de
+    publication réelle et le lieu, ce qu'aucun flux de presse ne fournissait.
+    """
+    try:
+        plan = telecharger(AFJ_SITEMAP).decode("utf-8", "replace")
+    except Exception as erreur:  # noqa: BLE001
+        print(f"  ÉCHEC du plan de site ({erreur})", file=sys.stderr)
+        return []
+
+    limite = datetime.now(timezone.utc) - timedelta(days=AFJ_FENETRE_JOURS)
+    candidates: list[tuple[datetime, str]] = []
+    for lien, horodatage in re.findall(r"<loc>(.*?)</loc>\s*<lastmod>(.*?)</lastmod>", plan):
+        if "/jobs/" not in lien:
+            continue
+        if not AFJ_SLUG_PILOTE.search(lien.rsplit("/jobs/", 1)[-1]):
+            continue
+        try:
+            modifie = datetime.fromisoformat(horodatage)
+        except ValueError:
+            continue
+        if modifie >= limite:
+            candidates.append((modifie, lien))
+
+    candidates.sort(reverse=True)
+    total = len(candidates)
+    if total > AFJ_MAX_FICHES:
+        print(f"  {total} fiches récentes ; les {AFJ_MAX_FICHES} plus fraîches sont lues "
+              f"cette fois, {total - AFJ_MAX_FICHES} le seront à la prochaine exécution")
+        candidates = candidates[:AFJ_MAX_FICHES]
+    else:
+        print(f"  {total} fiche(s) de pilotage récente(s) à lire")
+
+    items = []
+    for modifie, lien in candidates:
+        try:
+            page = telecharger(lien).decode("utf-8", "replace")
+        except Exception:  # noqa: BLE001 — une fiche illisible ne bloque pas les autres
+            time.sleep(AFJ_DELAI)
+            continue
+
+        titre = _balise(r"<h1[^>]*>(.*?)</h1>", page)
+        if not titre:
+            time.sleep(AFJ_DELAI)
+            continue
+        lieu = _balise(r'"addressLocality"\s*:\s*"(.*?)"', page)
+        pays = _balise(r'"addressCountry"\s*:\s*"(.*?)"', page)
+        date_pub = _balise(r'"datePosted"\s*:\s*"(.*?)"', page) or modifie.isoformat()
+        extrait = _balise(r'name="description"\s+content="(.*?)"', page)
+        extrait = re.sub(r"^Pilot job vacancy details:\s*", "", extrait)[:400]
+
+        items.append(
+            {
+                "titre": f"{titre} — {lieu}" if lieu else titre,
+                "lien": lien,
+                "date_publication": date_pub,
+                "extrait": extrait,
+                "media": "",
+                "indice_region": f"{lieu} {pays}",
+            }
+        )
+        time.sleep(AFJ_DELAI)
+    return items
+
+
+def est_pertinent(titre: str, extrait: str, bourse_emploi: bool = False) -> bool:
+    """Le poste relève-t-il du pilotage ?
+
+    Sur une bourse d'emploi, chaque page EST une offre : exiger en plus un mot
+    de recrutement dans le titre n'a aucun sens et rejetait des offres valides
+    (« DIRECT ENTRY CAPTAIN A320 IN COPENHAGEN » n'en contient aucun). Le test
+    de recrutement ne sert qu'aux sources généralistes, pour distinguer une
+    offre d'un article — il reste donc appliqué à elles seules.
+    """
     champ = f"{titre} {extrait}"
-    return bool(MOTS_PILOTE.search(champ)) and bool(MOTS_RECRUTEMENT.search(champ))
+    if not MOTS_PILOTE.search(champ):
+        return False
+    return bourse_emploi or bool(MOTS_RECRUTEMENT.search(champ))
 
 
 def traduire_fr(texte: str) -> str:
@@ -299,27 +332,35 @@ def collecter() -> None:
     maintenant = datetime.now(timezone.utc).isoformat()
 
     nouvelles = []
+    lots: list[tuple[str, str, str, list[dict]]] = []
+
     for nom_source, url, langue, region_defaut in SOURCES:
         print(f"Source : {nom_source}")
         try:
-            items = lire_flux_rss(telecharger(url))
+            lots.append((nom_source, langue, region_defaut, lire_flux_rss(telecharger(url))))
         except Exception as erreur:  # noqa: BLE001 — une source en panne ne bloque pas les autres
             print(f"  ÉCHEC ({erreur})", file=sys.stderr)
-            continue
+        time.sleep(DELAI_ENTRE_REQUETES)
 
+    print("Source : AllFlyingJobs (plan du site)")
+    lots.append(("AllFlyingJobs", "en", "Monde", lire_sitemap_allflyingjobs()))
+
+    for nom_source, langue, region_defaut, items in lots:
+        # Toutes les sources retenues sont des bourses d'emploi.
+        bourse_emploi = True
         retenues = 0
-        ecartees_actu = 0
+        ecartees = 0
         for item in items:
-            if not est_pertinent(item["titre"], item["extrait"]):
+            if not est_pertinent(item["titre"], item["extrait"], bourse_emploi):
                 continue
-            # Seules les offres d'emploi entrent dans la base. Les flux Google
-            # News renvoient massivement des articles de presse qui parlent de
-            # recrutement sans en être : ils sont écartés ici, à la source.
+            # Garde-fou : seules les offres d'emploi entrent dans la base. Si une
+            # source de presse est réintroduite un jour, ses articles seront
+            # écartés ici plutôt que de polluer la base comme auparavant.
             motif = motif_exclusion(
                 {"lien": item["lien"], "titre_original": item["titre"], "extrait": item["extrait"]}
             )
             if motif:
-                ecartees_actu += 1
+                ecartees += 1
                 continue
             identifiant = hashlib.sha1(item["lien"].encode("utf-8")).hexdigest()[:16]
             cle_titre = normaliser_titre(item["titre"])
@@ -334,7 +375,12 @@ def collecter() -> None:
                 "lien": item["lien"],
                 "source": nom_source if not item["media"] else f"{item['media']} (via {nom_source})",
                 "langue": langue,
-                "region": deviner_region(f"{item['titre']} {item['extrait']}", region_defaut),
+                # Le lieu tiré du JSON-LD, quand il existe, est bien plus fiable
+                # pour situer l'offre que le seul texte du titre.
+                "region": deviner_region(
+                    f"{item.get('indice_region', '')} {item['titre']} {item['extrait']}",
+                    region_defaut,
+                ),
                 "date_publication": item["date_publication"],
                 "extrait": item["extrait"],
                 "premiere_collecte": maintenant,
@@ -343,8 +389,7 @@ def collecter() -> None:
             ids_connus.add(identifiant)
             titres_connus.add(cle_titre)
             retenues += 1
-        print(f"  {len(items)} éléments, {retenues} offre(s) retenue(s), {ecartees_actu} écartée(s) (actualité ou nationalité)")
-        time.sleep(DELAI_ENTRE_REQUETES)
+        print(f"  {len(items)} élément(s), {retenues} offre(s) retenue(s), {ecartees} écartée(s) (hors périmètre)")
 
     # Append-only : on ajoute, on ne supprime jamais.
     base["annonces"].extend(nouvelles)
