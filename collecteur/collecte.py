@@ -26,6 +26,9 @@ from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from filtres import motif_exclusion  # noqa: E402
+
 RACINE = Path(__file__).resolve().parent.parent
 FICHIER_DONNEES = RACINE / "data" / "annonces.json"
 
@@ -305,8 +308,18 @@ def collecter() -> None:
             continue
 
         retenues = 0
+        ecartees_actu = 0
         for item in items:
             if not est_pertinent(item["titre"], item["extrait"]):
+                continue
+            # Seules les offres d'emploi entrent dans la base. Les flux Google
+            # News renvoient massivement des articles de presse qui parlent de
+            # recrutement sans en être : ils sont écartés ici, à la source.
+            motif = motif_exclusion(
+                {"lien": item["lien"], "titre_original": item["titre"], "extrait": item["extrait"]}
+            )
+            if motif:
+                ecartees_actu += 1
                 continue
             identifiant = hashlib.sha1(item["lien"].encode("utf-8")).hexdigest()[:16]
             cle_titre = normaliser_titre(item["titre"])
@@ -330,7 +343,7 @@ def collecter() -> None:
             ids_connus.add(identifiant)
             titres_connus.add(cle_titre)
             retenues += 1
-        print(f"  {len(items)} éléments, {retenues} nouvelles annonces retenues")
+        print(f"  {len(items)} éléments, {retenues} offre(s) retenue(s), {ecartees_actu} écartée(s) (actualité ou nationalité)")
         time.sleep(DELAI_ENTRE_REQUETES)
 
     # Append-only : on ajoute, on ne supprime jamais.

@@ -14,8 +14,12 @@ from __future__ import annotations
 
 import base64
 import json
+import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from filtres import motif_exclusion  # noqa: E402
 
 RACINE = Path(__file__).resolve().parent.parent
 FICHIER_DONNEES = RACINE / "data" / "annonces.json"
@@ -401,9 +405,22 @@ def appliquer_regles(annonces: list[dict]) -> tuple[list[dict], dict[str, int]]:
     """
     limite = datetime.now(timezone.utc) - timedelta(days=FENETRE_JOURS)
     retenues: list[dict] = []
-    stats = {"trop_anciennes": 0, "sans_date": 0, "etats_unis": 0, "canada": 0}
+    stats = {
+        "actualites": 0, "nationalite": 0,
+        "trop_anciennes": 0, "sans_date": 0, "etats_unis": 0, "canada": 0,
+    }
 
     for annonce in annonces:
+        # Le tri le plus important d'abord : ce n'est une annonce que si c'est
+        # une offre d'emploi. Les articles de presse n'ont rien à faire ici.
+        motif = motif_exclusion(annonce)
+        if motif == "actualite":
+            stats["actualites"] += 1
+            continue
+        if motif == "nationalite":
+            stats["nationalite"] += 1
+            continue
+
         date_ref = _date_reference(annonce)
         if date_ref is None:
             # Sans date exploitable, impossible d'affirmer que l'annonce est
@@ -474,8 +491,10 @@ def generer() -> None:
     FICHIER_SITE.write_text(page, encoding="utf-8")
     print(
         f"Site généré : {FICHIER_SITE}\n"
-        f"  {len(annonces_triees)} annonce(s) affichée(s) sur {len(annonces)} en base\n"
-        f"  écartées : {stats['trop_anciennes']} de plus de {FENETRE_JOURS} jours, "
+        f"  {len(annonces_triees)} offre(s) affichée(s) sur {len(annonces)} entrées en base\n"
+        f"  écartées : {stats['actualites']} actualités (pas des offres), "
+        f"{stats['nationalite']} nationalité exigée non détenue,\n"
+        f"             {stats['trop_anciennes']} de plus de {FENETRE_JOURS} jours, "
         f"{stats['etats_unis']} aux États-Unis, {stats['sans_date']} sans date exploitable\n"
         f"  reclassées « {REGION_CANADA} » : {stats['canada']}"
     )
