@@ -43,10 +43,10 @@ COMPAGNIES: tuple[dict, ...] = (
     {
         "nom": "French bee",
         "region": "Europe",
-        "page": "https://www.frenchbee.com/fr",
+        "page": "https://recrutement.frenchbee.com/",
         "mode": "manuel",
         "contact": "cockpitrecruitement@frenchbee.com",
-        "note": "Site protégé (HTTP 403) : candidature pilote par courriel.",
+        "note": "Portail de recrutement rendu en JavaScript ; la page /fr/recrutement du site principal refuse le robot (HTTP 403).",
     },
     {
         "nom": "Corsair",
@@ -99,7 +99,11 @@ COMPAGNIES: tuple[dict, ...] = (
         "region": "Afrique",
         "page": "https://www.air-austral.com/a-propos-dair-austral/recrutement.html",
         "mode": "manuel",
-        "note": "Site protégé (HTTP 403) : consulter la page recrutement à la main.",
+        # Seul site de la liste à refuser jusqu'à sa page d'accueil. Son
+        # robots.txt autorise pourtant tout (« Allow: / ») : c'est un pare-feu
+        # qui filtre le client, pas une interdiction d'indexation. Rien à
+        # contourner ici — la page s'ouvre normalement dans un navigateur.
+        "note": "Site entièrement fermé au robot (HTTP 403, y compris l'accueil) : à ouvrir dans un navigateur.",
     },
     {
         "nom": "Aircalin",
@@ -172,9 +176,9 @@ COMPAGNIES: tuple[dict, ...] = (
     {
         "nom": "IXair",
         "region": "Europe",
-        "page": "https://ixair.com/",
+        "page": "https://ixair.com/nous-rejoindre/",
         "mode": "manuel",
-        "note": "Aucune section recrutement dans le plan du site.",
+        "note": "Page « nous rejoindre » rendue en JavaScript, absente du plan du site.",
     },
     {
         "nom": "Pan Européenne",
