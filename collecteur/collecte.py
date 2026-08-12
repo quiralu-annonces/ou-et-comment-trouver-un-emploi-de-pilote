@@ -24,7 +24,12 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from compagnies import compagnies_automatiques, offres_compagnie  # noqa: E402
+from compagnies import (  # noqa: E402
+    compagnies_a_compter,
+    compagnies_automatiques,
+    compter_offres,
+    offres_compagnie,
+)
 from filtres import motif_exclusion  # noqa: E402
 from reseau import lire_flux_rss, nettoyer_html, telecharger  # noqa: E402
 
@@ -270,7 +275,7 @@ def traduire_fr(texte: str) -> str:
 def charger_base() -> dict:
     if FICHIER_DONNEES.exists():
         return json.loads(FICHIER_DONNEES.read_text(encoding="utf-8"))
-    return {"annonces": [], "derniere_collecte": None}
+    return {"annonces": [], "compagnies": {}, "derniere_collecte": None}
 
 
 def sauvegarder_base(base: dict) -> None:
@@ -376,8 +381,24 @@ def collecter() -> None:
             f"{sum(ecartees.values())} écartée(s)" + (f" — {detail}" if detail else "")
         )
 
+    # Portails dont les intitulés sont illisibles : on relève au moins combien
+    # d'offres y sont ouvertes, pour que le site le dise à côté du lien.
+    print("Compteurs : portails à intitulés illisibles")
+    compteurs: dict[str, dict] = {}
+    for compagnie in compagnies_a_compter():
+        try:
+            nombre = compter_offres(compagnie)
+        except Exception as erreur:  # noqa: BLE001 — un portail en panne ne bloque pas la collecte
+            print(f"  ÉCHEC {compagnie['nom']} ({erreur})", file=sys.stderr)
+            continue
+        compteurs[compagnie["nom"]] = {"offres_ouvertes": nombre, "releve_le": maintenant}
+        print(f"  {compagnie['nom']} : {nombre} offre(s) ouverte(s)")
+        time.sleep(DELAI_ENTRE_REQUETES)
+
     # Append-only : on ajoute, on ne supprime jamais.
     base["annonces"].extend(nouvelles)
+    # Un relevé qui échoue ne doit pas effacer le précédent : on fusionne.
+    base["compagnies"] = {**base.get("compagnies", {}), **compteurs}
     base["derniere_collecte"] = maintenant
     sauvegarder_base(base)
     print(f"\nTotal : {len(nouvelles)} nouvelles annonces, {len(base['annonces'])} au total dans la base.")

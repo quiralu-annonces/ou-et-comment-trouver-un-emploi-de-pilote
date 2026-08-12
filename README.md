@@ -67,24 +67,41 @@ d'aviation d'affaires interrogées à chaque collecte. Toutes n'exposent pas leu
 offres de la même façon, et le registre le dit explicitement plutôt que de
 laisser croire à une couverture automatique complète :
 
-**Veille automatique (5)** — une offre publiée est collectée toute seule :
+**Veille automatique (6)** — une offre publiée est collectée toute seule :
 
 | Compagnie | Mode | Point d'entrée |
 | --- | --- | --- |
 | Groupe Air Tahiti | `rss` | flux Teamtailor `carrieres.airtahiti.com/jobs.rss` |
 | Aircalin | `liste` | `carrieres.aircalin.com` (liste d'offres HTML) |
 | Air Calédonie | `sitemap` | `air-caledonie.nc/recrutements-sitemap.xml` |
+| Air Tahiti Nui | `sitemap` | `us.airtahitinui.com/sitemap.xml` (pages Drupal) |
 | Amelia (Regourd Aviation) | `recruitee` | API JSON `career.flyamelia.com/api/offers/` |
 | La Compagnie | `liste` | `careers.werecruit.io/fr/la-compagnie` |
 
-**À consulter à la main (14)** — French bee, Corsair, Air Corsica, Finist'air,
-Air Caraïbes, Air Austral, Air Tahiti Nui, Air Moana, Air Saint-Pierre, Air
-Loyauté, VallJet, Astonjet, IXair, Pan Européenne. Leur page carrières est
-rendue en JavaScript, protégée (HTTP 403), ou se réduit à une adresse de
-candidature : aucun robot ne peut en tirer d'offre. Elles sont donc publiées sur
-le site dans un dépliant « compagnies suivies », avec le lien direct et
-l'adresse de candidature quand elle est connue — c'est la seule façon honnête de
-les intégrer à la recherche.
+**Décompte seul (2)** — French bee et Air Caraïbes tournent toutes deux sur
+CVCatcher (groupe HelloWork) : leur plan de site liste une URL par offre
+ouverte, mais chaque fiche est une coquille vide remplie par une API qui exige
+une authentification (`api.cvcatcher.io/v2/job-offers` → HTTP 401). Aucun
+intitulé n'est lisible. Le collecteur relève donc le **nombre d'offres
+ouvertes**, affiché à côté du lien : savoir qu'il y en a cinq plutôt qu'aucune
+est ce qui décide d'ouvrir le portail.
+
+**À consulter à la main (11)** — Corsair, Air Corsica, Finist'air, Air Austral,
+Air Moana, Air Saint-Pierre, Air Loyauté, VallJet, Astonjet, IXair, Pan
+Européenne. Aucune ne publie de liste de postes lisible : la plupart n'ont
+aucune liste du tout et renvoient vers une adresse de candidature ; Air Austral
+refuse le robot jusqu'à sa page d'accueil (HTTP 403, alors que son `robots.txt`
+autorise tout — c'est un pare-feu, pas une interdiction d'indexation). Elles
+sont publiées sur le site dans le dépliant « compagnies suivies », avec le lien
+direct et l'adresse de candidature quand elle est connue.
+
+**Facebook n'est pas exploitable.** Plusieurs de ces compagnies (Air
+Saint-Pierre notamment) publient leurs offres sur leur page Facebook. Ni
+`facebook.com` ni `mbasic.facebook.com` ne servent le contenu d'une page sans
+compte connecté : les deux renvoient un mur de connexion. L'API Graph, elle,
+exige un jeton d'accès délivré à l'administrateur de la page. Il n'existe donc
+pas de voie automatique, et les conditions d'utilisation de Facebook
+interdisent le moissonnage.
 
 Le classement a été établi en sondant chaque site le 12 août 2026. Une compagnie
 qui ouvrirait un vrai portail d'offres passe en veille automatique en changeant

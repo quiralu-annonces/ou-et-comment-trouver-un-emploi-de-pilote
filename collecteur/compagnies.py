@@ -14,6 +14,15 @@ Quatre modes de collecte automatique :
 ``sitemap``   plan de site dédié aux offres (Air Calédonie publie le sien).
 ``recruitee`` API JSON publique des sites carrières Recruitee.
 
+Un mode intermédiaire :
+
+``compteur``  le plan du site liste une URL par offre ouverte, mais les fiches
+              sont des coquilles vides remplies par une API authentifiée
+              (French bee et Air Caraïbes, tous deux sur CVCatcher/HelloWork).
+              Aucun intitulé n'est lisible : on relève le nombre d'offres
+              ouvertes, affiché à côté du lien. Savoir qu'il y en a cinq plutôt
+              qu'aucune est déjà ce qui décide d'ouvrir le portail ou non.
+
 Et un mode sans collecte automatique :
 
 ``manuel``    page carrières rendue en JavaScript, protégée (HTTP 403) ou
@@ -43,18 +52,24 @@ COMPAGNIES: tuple[dict, ...] = (
     {
         "nom": "French bee",
         "region": "Europe",
-        "page": "https://recrutement.frenchbee.com/",
-        "mode": "manuel",
+        "page": "https://recrutement.frenchbee.com/fr/search",
+        "mode": "compteur",
+        "source": "https://recrutement.frenchbee.com/sitemap.xml",
+        "motif_lien": "/offer/",
+        "langue_unique": "/fr/",  # le plan du site répète chaque offre en fr et en en
         "contact": "cockpitrecruitement@frenchbee.com",
-        "note": "Portail de recrutement rendu en JavaScript ; la page /fr/recrutement du site principal refuse le robot (HTTP 403).",
+        "note": "Titres illisibles par un robot (API authentifiée) : le nombre d'offres ouvertes est relevé, à vous de les ouvrir.",
     },
     {
         "nom": "Corsair",
         "region": "Europe",
         "page": "https://www.flycorsair.com/en/information/corsair/recruitment",
         "mode": "manuel",
-        "contact": "recrutementpilotecorsair@corsair.fr",
-        "note": "Page carrières rendue en JavaScript : aucune offre lisible par un robot.",
+        "contact": "recrutementpn@corsair.fr",
+        # Page parfaitement lisible par un robot : elle ne publie simplement
+        # aucune liste de postes, seulement deux adresses de candidature.
+        # Il n'y a donc rien à automatiser, ni maintenant ni plus tard.
+        "note": "Aucune liste de postes publiée : candidature spontanée par courriel uniquement.",
     },
     {
         "nom": "La Compagnie",
@@ -90,9 +105,11 @@ COMPAGNIES: tuple[dict, ...] = (
     {
         "nom": "Air Caraïbes",
         "region": "Amérique du Sud",
-        "page": "https://recrutement.aircaraibes.com/",
-        "mode": "manuel",
-        "note": "Portail de recrutement rendu en JavaScript, liste d'offres inaccessible au robot.",
+        "page": "https://recrutement.aircaraibes.com/search",
+        "mode": "compteur",
+        "source": "https://recrutement.aircaraibes.com/sitemap.xml",
+        "motif_lien": "/offer/",
+        "note": "Titres illisibles par un robot (API authentifiée) : le nombre d'offres ouvertes est relevé, à vous de les ouvrir.",
     },
     {
         "nom": "Air Austral",
@@ -124,9 +141,19 @@ COMPAGNIES: tuple[dict, ...] = (
     {
         "nom": "Air Tahiti Nui",
         "region": "Océanie",
-        "page": "https://us.airtahitinui.com/careers",
-        "mode": "manuel",
-        "note": "Page carrières rendue en JavaScript.",
+        "page": "https://us.airtahitinui.com/career/jobs",
+        "mode": "sitemap",
+        "source": "https://us.airtahitinui.com/sitemap.xml",
+        "motif_lien": "job",
+        # Site Drupal servi en HTML : sa page d'offres est lisible, elle affiche
+        # aujourd'hui « No job offers available at the moment ». Les offres, quand
+        # il y en a, deviennent des pages a part entiere et entrent dans le plan
+        # du site. On exclut les trois pages fixes qui contiennent deja « job ».
+        "exclure": (
+            "/our-jobs",
+            "/spontaneous-job-application",
+            "/career/jobs",
+        ),
     },
     {
         "nom": "Groupe Air Tahiti",
@@ -162,9 +189,11 @@ COMPAGNIES: tuple[dict, ...] = (
     {
         "nom": "VallJet",
         "region": "Europe",
-        "page": "https://www.valljet.com/les-offres/",
+        # « Les offres » du site sont des offres commerciales de vol, pas des
+        # emplois : le lien publie ici est bien la page recrutement.
+        "page": "https://www.valljet.com/recrutement/",
         "mode": "manuel",
-        "note": "Liste d'offres rendue en JavaScript.",
+        "note": "Page recrutement réduite à un formulaire ; les postes navigants passent par un QR code.",
     },
     {
         "nom": "Astonjet",
@@ -178,7 +207,7 @@ COMPAGNIES: tuple[dict, ...] = (
         "region": "Europe",
         "page": "https://ixair.com/nous-rejoindre/",
         "mode": "manuel",
-        "note": "Page « nous rejoindre » rendue en JavaScript, absente du plan du site.",
+        "note": "Page « nous rejoindre » réduite à une présentation du groupe : aucun poste listé.",
     },
     {
         "nom": "Pan Européenne",
@@ -240,15 +269,36 @@ def _offres_liste(compagnie: dict) -> list[dict]:
     return items
 
 
-def _offres_sitemap(compagnie: dict) -> list[dict]:
-    """Lit un plan de site dédié aux offres : une URL = une offre."""
+def _liens_du_plan(compagnie: dict) -> list[tuple[str, str]]:
+    """Liens (URL, date de modification) d'un plan de site retenus pour une compagnie.
+
+    ``motif_lien`` sélectionne, ``exclure`` retire : sur un plan de site complet,
+    les pages fixes du parcours candidat (« /our-jobs », « candidature
+    spontanée ») contiennent les mêmes mots que les offres elles-mêmes.
+    """
     plan = telecharger(compagnie["source"]).decode("utf-8", "replace")
     motif = re.compile(r"<url>\s*<loc>(.*?)</loc>(?:\s*<lastmod>(.*?)</lastmod>)?", re.DOTALL)
-    items = []
+    exclure = compagnie.get("exclure", ())
+    langue = compagnie.get("langue_unique")
+    retenus = []
     for lien, modifie in motif.findall(plan):
         lien = lien.strip()
         if compagnie["motif_lien"] not in lien:
             continue
+        if any(motif_exclu in lien for motif_exclu in exclure):
+            continue
+        # Certains portails publient chaque offre une fois par langue : sans ce
+        # filtre, cinq offres en compteraient dix.
+        if langue and langue not in lien:
+            continue
+        retenus.append((lien, (modifie or "").strip()))
+    return retenus
+
+
+def _offres_sitemap(compagnie: dict) -> list[dict]:
+    """Lit un plan de site dédié aux offres : une URL = une offre."""
+    items = []
+    for lien, modifie in _liens_du_plan(compagnie):
         titre = _titre_depuis_url(lien)
         if not titre:
             continue
@@ -256,7 +306,7 @@ def _offres_sitemap(compagnie: dict) -> list[dict]:
             {
                 "titre": titre,
                 "lien": lien,
-                "date_publication": (modifie or "").strip(),
+                "date_publication": modifie,
                 "extrait": "",
                 "media": "",
             }
@@ -300,13 +350,30 @@ _LECTEURS = {
 
 
 def offres_compagnie(compagnie: dict) -> list[dict]:
-    """Offres publiées par une compagnie ; liste vide si mode manuel."""
+    """Offres publiées par une compagnie ; liste vide si mode manuel ou compteur."""
     lecteur = _LECTEURS.get(compagnie["mode"])
     return lecteur(compagnie) if lecteur else []
 
 
+def compter_offres(compagnie: dict) -> int:
+    """Nombre d'offres ouvertes, pour les portails dont les titres sont illisibles.
+
+    French bee et Air Caraïbes tournent sur le même produit (CVCatcher, groupe
+    HelloWork) : leurs fiches sont des coquilles vides remplies par une API qui
+    exige une authentification. Impossible d'en tirer un intitulé — mais leur
+    plan de site liste une URL par offre ouverte. Ce simple décompte suffit à
+    savoir s'il vaut la peine d'ouvrir le portail : « 5 offres » ou « aucune
+    offre » est exactement l'information qui manquait.
+    """
+    return len(_liens_du_plan(compagnie))
+
+
 def compagnies_automatiques() -> list[dict]:
     return [c for c in COMPAGNIES if c["mode"] in MODES_AUTOMATIQUES]
+
+
+def compagnies_a_compter() -> list[dict]:
+    return [c for c in COMPAGNIES if c["mode"] == "compteur"]
 
 
 def compagnies_manuelles() -> list[dict]:

@@ -489,7 +489,7 @@ def _echapper(texte: str) -> str:
     )
 
 
-def bloc_compagnies() -> str:
+def bloc_compagnies(compteurs: dict | None = None) -> str:
     """Dépliant listant les compagnies suivies et le mode de veille de chacune.
 
     Les compagnies dont la page carrières n'est pas moissonnable (rendue en
@@ -497,6 +497,7 @@ def bloc_compagnies() -> str:
     candidature) figurent ici avec leur lien : c'est le seul moyen honnête de
     les « ajouter à la recherche » sans laisser croire qu'un robot s'en occupe.
     """
+    compteurs = compteurs or {}
     auto = [c for c in COMPAGNIES if c["mode"] in MODES_AUTOMATIQUES]
     lignes = []
     for compagnie in COMPAGNIES:
@@ -506,6 +507,16 @@ def bloc_compagnies() -> str:
             if automatique
             else '<span class="manuel">● à consulter vous-même</span>'
         )
+        # Portail à intitulés illisibles : le décompte relevé à la collecte
+        # remplace le badge, c'est lui qui dit s'il faut aller voir.
+        if compagnie["mode"] == "compteur":
+            releve = compteurs.get(compagnie["nom"], {}).get("offres_ouvertes")
+            if releve is None:
+                badge = '<span class="manuel">● à consulter vous-même</span>'
+            elif releve > 0:
+                badge = f'<span class="auto">● {releve} offre(s) ouverte(s) — titres non lisibles</span>'
+            else:
+                badge = '<span class="manuel">● aucune offre ouverte</span>'
         precisions = []
         if compagnie.get("note"):
             precisions.append(_echapper(compagnie["note"]))
@@ -520,14 +531,19 @@ def bloc_compagnies() -> str:
             f'{_echapper(compagnie["nom"])} ↗</a> {badge}{detail}</li>'
         )
 
+    comptees = [c for c in COMPAGNIES if c["mode"] == "compteur"]
+    manuelles = len(COMPAGNIES) - len(auto) - len(comptees)
     return (
         '<details class="compagnies">\n'
         f"<summary>✈️ {len(COMPAGNIES)} compagnies suivies nommément "
-        f"({len(auto)} en veille automatique, {len(COMPAGNIES) - len(auto)} à consulter vous-même)</summary>\n"
+        f"({len(auto)} en veille automatique, {len(comptees)} en décompte, "
+        f"{manuelles} à consulter vous-même)</summary>\n"
         "<p>Les pages carrières marquées « veille automatique » sont interrogées à chaque "
-        "collecte : leurs offres de pilotage apparaissent dans la liste ci-dessous. Les autres "
-        "publient leurs offres d'une manière qu'aucun robot ne peut lire (page en JavaScript, "
-        "site protégé, candidature par courriel) : ouvrez-les vous-même, le lien est direct.</p>\n"
+        "collecte : leurs offres de pilotage apparaissent dans la liste ci-dessous. Pour deux "
+        "portails, seul le nombre d'offres ouvertes est lisible, pas leur intitulé : le décompte "
+        "vous dit s'il vaut la peine d'aller voir. Les dernières ne publient aucune liste "
+        "exploitable (candidature par courriel, ou site fermé aux robots) : ouvrez-les "
+        "vous-même, le lien est direct.</p>\n"
         f'<ul class="compagnies">{"".join(lignes)}</ul>\n'
         "</details>"
     )
@@ -572,7 +588,7 @@ def generer() -> None:
         .replace("__DATE_MAJ__", date_maj)
         .replace("__NB_AFFICHEES__", str(len(annonces_triees)))
         .replace("__NB__", str(len(annonces)))
-        .replace("__COMPAGNIES__", bloc_compagnies())
+        .replace("__COMPAGNIES__", bloc_compagnies(base.get("compagnies")))
         .replace("__COCKPIT__", cockpit)
     )
     FICHIER_SITE.parent.mkdir(parents=True, exist_ok=True)

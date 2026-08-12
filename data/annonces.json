@@ -6801,7 +6801,29 @@
    "date_publication": "",
    "extrait": "",
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00"
+  },
+  {
+   "id": "b86fe0514c7b4fce",
+   "titre_original": "Gulfstream G650 Captain - Burbank, CA — US-CA-Burbank",
+   "titre_fr": "Gulfstream G650 Captain - Burbank, Californie — US-CA-Burbank",
+   "lien": "https://www.allflyingjobs.com/jobs/gulfstream-g650-captain-burbank-ca",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-12T17:05:02+00:00",
+   "extrait": "Gulfstream G650 Captain - Burbank, CA Location US-CA-Burbank ID 2026-1978 Category Pilot Position Type Full-Time Remote No",
+   "premiere_collecte": "2026-08-12T19:10:34.510888+00:00"
   }
  ],
- "derniere_collecte": "2026-08-12T13:47:05.979095+00:00"
+ "derniere_collecte": "2026-08-12T19:10:34.510888+00:00",
+ "compagnies": {
+  "French bee": {
+   "offres_ouvertes": 5,
+   "releve_le": "2026-08-12T19:10:34.510888+00:00"
+  },
+  "Air Caraïbes": {
+   "offres_ouvertes": 6,
+   "releve_le": "2026-08-12T19:10:34.510888+00:00"
+  }
+ }
 }
