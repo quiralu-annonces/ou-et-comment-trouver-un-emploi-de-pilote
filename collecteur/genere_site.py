@@ -19,7 +19,8 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from filtres import motif_exclusion  # noqa: E402
+from compagnies import COMPAGNIES, MODES_AUTOMATIQUES  # noqa: E402
+from filtres import criteres_presents, motif_exclusion, texte_annonce  # noqa: E402
 
 RACINE = Path(__file__).resolve().parent.parent
 FICHIER_DONNEES = RACINE / "data" / "annonces.json"
@@ -122,6 +123,9 @@ MODELE = """<!DOCTYPE html>
     font-size: 11px; padding: 3px 9px; border-radius: 20px; border: 1px solid var(--border);
     color: var(--text-dim);
   }
+  /* Marqueurs du profil recherché : mis en avant, ce sont eux qui justifient
+     la présence de l'annonce dans la liste. */
+  .tag.critere { color: var(--accent-2); border-color: var(--accent-2); }
   .tag.status-Nouvelle { color: var(--accent); border-color: var(--accent); }
   .tag.status-Ecartee { color: var(--danger); border-color: var(--danger); }
   .tag.status-Postule { color: var(--success); border-color: var(--success); }
@@ -141,6 +145,22 @@ MODELE = """<!DOCTYPE html>
   .actions button.refused { color: var(--danger); border-color: var(--danger); }
   .actions button.undo { color: var(--text-dim); }
   .empty { color: var(--text-dim); text-align: center; padding: 40px 0; font-size: 14px; }
+
+  /* Compagnies suivies : dépliant fermé par défaut, il ne doit pas repousser
+     les annonces — c'est un aide-mémoire, pas le contenu principal. */
+  details.compagnies {
+    background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 12px 16px; margin-bottom: 16px;
+  }
+  details.compagnies > summary { cursor: pointer; font-size: 14px; font-weight: 600; }
+  details.compagnies p { font-size: 12px; color: var(--text-dim); line-height: 1.6; }
+  ul.compagnies { list-style: none; padding: 0; margin: 10px 0 0; }
+  ul.compagnies li { padding: 7px 0; border-top: 1px solid var(--border); font-size: 13px; }
+  ul.compagnies a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  ul.compagnies a:hover { text-decoration: underline; }
+  ul.compagnies .auto { color: var(--success); font-size: 11px; }
+  ul.compagnies .manuel { color: var(--accent-2); font-size: 11px; }
+  ul.compagnies .detail { color: var(--text-dim); font-size: 12px; display: block; margin-top: 2px; }
   footer { color: var(--text-dim); font-size: 12px; margin: 30px 0 10px; text-align: center; line-height: 1.6; }
 
   /* Visuel cockpit : panneau fixe à droite, il ne défile pas avec les annonces.
@@ -183,14 +203,19 @@ MODELE = """<!DOCTYPE html>
 
 <h1>✈️ Où et comment trouver un emploi de pilote d'avion</h1>
 <div class="subtitle">
-Veille mondiale automatique des offres d'emploi de pilote de ligne, copilote, cadet et instructeur —
+Veille mondiale automatique des offres d'emploi de pilote de ligne, copilote et cadet —
 Europe, Canada / Québec, Amérique du Sud, Asie, Moyen-Orient, Afrique, Océanie.
 Les annonces étrangères sont traduites en français. Vos décisions (pas intéressé / candidature envoyée / refus)
 sont mémorisées sur cet appareil : une annonce traitée ne réapparaît plus dans « Nouvelles ».<br>
 Seules les annonces parues <strong>depuis moins d'un mois</strong> sont affichées. Les offres situées
 aux <strong>États-Unis</strong> ne sont pas retenues.<br>
+Chaque annonce publiée porte au moins un des marqueurs du profil recherché — <strong>pilote ou copilote,
+entry level, minimum 300 heures de vol, anglais niveau 4, non type rated, EASA ATPL, first officer</strong> —
+signalés en jaune sur la fiche.<br>
 <strong>Dernière mise à jour de la base : __DATE_MAJ__</strong>
 </div>
+
+__COMPAGNIES__
 
 <div id="toolbar" class="toolbar"></div>
 <div class="searchbar"><input id="search" type="search" placeholder="Rechercher (compagnie, appareil, pays…)" aria-label="Rechercher dans les annonces"></div>
@@ -198,8 +223,8 @@ aux <strong>États-Unis</strong> ne sont pas retenues.<br>
 <div id="list"></div>
 
 <footer>
-Page générée automatiquement deux fois par jour par un collecteur open source (flux publics gratuits : Google News multilingue, SNPI…).<br>
-__NB_AFFICHEES__ annonce(s) affichée(s) : parues depuis moins d'un mois, hors États-Unis.<br>
+Page générée automatiquement deux fois par jour par un collecteur open source (bourses d'emploi publiques : SNPI, FFVP, AllFlyingJobs…).<br>
+__NB_AFFICHEES__ annonce(s) affichée(s) : parues depuis moins d'un mois, hors États-Unis, portant au moins un marqueur du profil recherché.<br>
 Base historisée : aucune annonce n'est supprimée — __NB__ annonces collectées à ce jour, consultables dans <code>data/annonces.json</code>.
 </footer>
 
@@ -301,6 +326,8 @@ function renderCard(a) {
     details = `<div class="table-wrap"><table class="details">${lignes}</table></div>`;
   }
   const datePub = a.date_publication ? ` — publiée le ${dateCourte(a.date_publication)}` : "";
+  const criteres = (a.criteres || [])
+    .map(c => `<span class="tag critere">✓ ${echap(c)}</span>`).join("");
   return `
   <div class="card ${dismissedCls}">
     <div class="card-title">${echap(a.titre_fr)}</div>
@@ -310,6 +337,7 @@ function renderCard(a) {
       <span class="tag">${echap(a.region)}</span>
       <span class="tag">${echap((a.langue || "").toUpperCase())}</span>
       <span class="tag ${statusMeta.cls}">${statusMeta.label === "Nouvelles" ? "Nouvelle" : statusMeta.label}</span>
+      ${criteres}
     </div>
     ${extrait}
     ${details}
@@ -350,7 +378,8 @@ function render() {
   const traitees = ANNONCES.filter(a => (statusMap[a.id] || "Nouvelle") !== "Nouvelle").length;
   badge.innerHTML =
     `<strong>${items.length}</strong> annonce(s) affichée(s) · ` +
-    `<strong>${ANNONCES.length}</strong> retenue(s) au total — parues depuis moins d'un mois, hors États-Unis.` +
+    `<strong>${ANNONCES.length}</strong> retenue(s) au total — parues depuis moins d'un mois, hors États-Unis, ` +
+    `portant au moins un marqueur du profil recherché.` +
     (traitees > 0 && currentStatusFilter === "Nouvelle"
       ? `<div class="note">${traitees} annonce(s) que vous avez déjà traitée(s) sont masquées par le filtre « Nouvelles ». Cliquez « Toutes » dans la ligne « Mon statut » pour les revoir.</div>`
       : "");
@@ -406,7 +435,7 @@ def appliquer_regles(annonces: list[dict]) -> tuple[list[dict], dict[str, int]]:
     limite = datetime.now(timezone.utc) - timedelta(days=FENETRE_JOURS)
     retenues: list[dict] = []
     stats = {
-        "actualites": 0, "nationalite": 0,
+        "actualites": 0, "nationalite": 0, "criteres": 0,
         "trop_anciennes": 0, "sans_date": 0, "etats_unis": 0, "canada": 0,
     }
 
@@ -419,6 +448,11 @@ def appliquer_regles(annonces: list[dict]) -> tuple[list[dict], dict[str, int]]:
             continue
         if motif == "nationalite":
             stats["nationalite"] += 1
+            continue
+        if motif == "criteres":
+            # Aucun des sept marqueurs du profil : l'annonce ne s'adresse pas
+            # au candidat, quelle que soit sa fraîcheur.
+            stats["criteres"] += 1
             continue
 
         date_ref = _date_reference(annonce)
@@ -441,9 +475,62 @@ def appliquer_regles(annonces: list[dict]) -> tuple[list[dict], dict[str, int]]:
                 stats["etats_unis"] += 1
                 continue
 
-        retenues.append(annonce)
+        # Chaque annonce porte les marqueurs qui lui ont valu d'être retenue :
+        # affichés sur la fiche, ils disent en un coup d'œil pourquoi elle est là.
+        retenues.append({**annonce, "criteres": criteres_presents(texte_annonce(annonce))})
 
     return retenues, stats
+
+
+def _echapper(texte: str) -> str:
+    return (
+        str(texte or "")
+        .replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+    )
+
+
+def bloc_compagnies() -> str:
+    """Dépliant listant les compagnies suivies et le mode de veille de chacune.
+
+    Les compagnies dont la page carrières n'est pas moissonnable (rendue en
+    JavaScript, protégée, ou sans autre porte d'entrée qu'une adresse de
+    candidature) figurent ici avec leur lien : c'est le seul moyen honnête de
+    les « ajouter à la recherche » sans laisser croire qu'un robot s'en occupe.
+    """
+    auto = [c for c in COMPAGNIES if c["mode"] in MODES_AUTOMATIQUES]
+    lignes = []
+    for compagnie in COMPAGNIES:
+        automatique = compagnie["mode"] in MODES_AUTOMATIQUES
+        badge = (
+            '<span class="auto">● veille automatique</span>'
+            if automatique
+            else '<span class="manuel">● à consulter vous-même</span>'
+        )
+        precisions = []
+        if compagnie.get("note"):
+            precisions.append(_echapper(compagnie["note"]))
+        if compagnie.get("contact"):
+            adresse = _echapper(compagnie["contact"])
+            precisions.append(f'Candidature : <a href="mailto:{adresse}">{adresse}</a>')
+        detail = (
+            f'<span class="detail">{" — ".join(precisions)}</span>' if precisions else ""
+        )
+        lignes.append(
+            f'<li><a href="{_echapper(compagnie["page"])}" target="_blank" rel="noopener">'
+            f'{_echapper(compagnie["nom"])} ↗</a> {badge}{detail}</li>'
+        )
+
+    return (
+        '<details class="compagnies">\n'
+        f"<summary>✈️ {len(COMPAGNIES)} compagnies suivies nommément "
+        f"({len(auto)} en veille automatique, {len(COMPAGNIES) - len(auto)} à consulter vous-même)</summary>\n"
+        "<p>Les pages carrières marquées « veille automatique » sont interrogées à chaque "
+        "collecte : leurs offres de pilotage apparaissent dans la liste ci-dessous. Les autres "
+        "publient leurs offres d'une manière qu'aucun robot ne peut lire (page en JavaScript, "
+        "site protégé, candidature par courriel) : ouvrez-les vous-même, le lien est direct.</p>\n"
+        f'<ul class="compagnies">{"".join(lignes)}</ul>\n'
+        "</details>"
+    )
 
 
 def generer() -> None:
@@ -485,6 +572,7 @@ def generer() -> None:
         .replace("__DATE_MAJ__", date_maj)
         .replace("__NB_AFFICHEES__", str(len(annonces_triees)))
         .replace("__NB__", str(len(annonces)))
+        .replace("__COMPAGNIES__", bloc_compagnies())
         .replace("__COCKPIT__", cockpit)
     )
     FICHIER_SITE.parent.mkdir(parents=True, exist_ok=True)
@@ -494,7 +582,8 @@ def generer() -> None:
         f"  {len(annonces_triees)} offre(s) affichée(s) sur {len(annonces)} entrées en base\n"
         f"  écartées : {stats['actualites']} actualités (pas des offres), "
         f"{stats['nationalite']} nationalité exigée non détenue,\n"
-        f"             {stats['trop_anciennes']} de plus de {FENETRE_JOURS} jours, "
+        f"             {stats['criteres']} sans aucun marqueur du profil recherché, "
+        f"{stats['trop_anciennes']} de plus de {FENETRE_JOURS} jours, "
         f"{stats['etats_unis']} aux États-Unis, {stats['sans_date']} sans date exploitable\n"
         f"  reclassées « {REGION_CANADA} » : {stats['canada']}"
     )

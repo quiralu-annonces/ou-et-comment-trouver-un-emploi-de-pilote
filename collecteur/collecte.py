@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Collecteur de la veille mondiale d'offres d'emploi de pilote.
 
-Interroge des bourses d'emploi aéronautiques (flux RSS du SNPI et de la FFVP,
-plan de site d'AllFlyingJobs), filtre les résultats pertinents,
-traduit les titres en français, et alimente la base append-only
+Interroge trois familles de sources — bourses d'emploi aéronautiques (flux RSS
+du SNPI et de la FFVP), plan de site d'AllFlyingJobs, et les pages carrières des
+compagnies suivies nommément (voir ``compagnies.py``) —, filtre les résultats
+pertinents, traduit les titres en français, et alimente la base append-only
 ``data/annonces.json`` : aucune annonce n'est jamais supprimée, seules les
 nouvelles sont ajoutées.
 
@@ -19,19 +20,17 @@ import re
 import sys
 import time
 import unicodedata
-import urllib.request
-import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta, timezone
-from email.utils import parsedate_to_datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from compagnies import compagnies_automatiques, offres_compagnie  # noqa: E402
 from filtres import motif_exclusion  # noqa: E402
+from reseau import lire_flux_rss, nettoyer_html, telecharger  # noqa: E402
 
 RACINE = Path(__file__).resolve().parent.parent
 FICHIER_DONNEES = RACINE / "data" / "annonces.json"
 
-ENTETES = {"User-Agent": "Mozilla/5.0 (compatible; veille-emploi-pilote-perso/1.0)"}
 DELAI_ENTRE_REQUETES = 1.0  # secondes — rester respectueux des serveurs
 
 REGIONS = [
@@ -157,47 +156,6 @@ def normaliser_titre(titre: str) -> str:
     titre = "".join(c for c in titre if not unicodedata.combining(c))
     titre = re.sub(r"[^\w\s]", " ", titre.lower())
     return re.sub(r"\s+", " ", titre).strip()
-
-
-def telecharger(url: str) -> bytes:
-    requete = urllib.request.Request(url, headers=ENTETES)
-    with urllib.request.urlopen(requete, timeout=30) as reponse:
-        return reponse.read()
-
-
-def nettoyer_html(texte: str) -> str:
-    texte = re.sub(r"<[^>]+>", " ", texte or "")
-    texte = html.unescape(texte)
-    return re.sub(r"\s+", " ", texte).strip()
-
-
-def lire_flux_rss(contenu: bytes) -> list[dict]:
-    """Extrait les items d'un flux RSS (titre, lien, date, description)."""
-    racine = ET.fromstring(contenu)
-    items = []
-    for item in racine.findall(".//item"):
-        titre = nettoyer_html(item.findtext("title") or "")
-        lien = (item.findtext("link") or "").strip()
-        if not titre or not lien:
-            continue
-        date_pub = ""
-        brut = item.findtext("pubDate") or ""
-        if brut:
-            try:
-                date_pub = parsedate_to_datetime(brut).astimezone(timezone.utc).isoformat()
-            except (TypeError, ValueError):
-                date_pub = brut
-        source_media = item.findtext("source") or ""
-        items.append(
-            {
-                "titre": titre,
-                "lien": lien,
-                "date_publication": date_pub,
-                "extrait": nettoyer_html(item.findtext("description") or "")[:400],
-                "media": nettoyer_html(source_media),
-            }
-        )
-    return items
 
 
 def deviner_region(texte: str, region_defaut: str) -> str:
@@ -345,22 +303,38 @@ def collecter() -> None:
     print("Source : AllFlyingJobs (plan du site)")
     lots.append(("AllFlyingJobs", "en", "Monde", lire_sitemap_allflyingjobs()))
 
+    # Les compagnies suivies nommément. Celles dont la page carrières n'est pas
+    # moissonnable (mode « manuel ») ne sont pas interrogées ici : elles sont
+    # publiées sur le site comme liste à consulter à la main.
+    print("Sources : pages carrières des compagnies suivies")
+    for compagnie in compagnies_automatiques():
+        try:
+            offres = offres_compagnie(compagnie)
+        except Exception as erreur:  # noqa: BLE001 — un site en panne ne bloque pas les autres
+            print(f"  ÉCHEC {compagnie['nom']} ({erreur})", file=sys.stderr)
+            offres = []
+        lots.append((compagnie["nom"], "fr", compagnie["region"], offres))
+        time.sleep(DELAI_ENTRE_REQUETES)
+
     for nom_source, langue, region_defaut, items in lots:
         # Toutes les sources retenues sont des bourses d'emploi.
         bourse_emploi = True
         retenues = 0
-        ecartees = 0
+        ecartees: dict[str, int] = {}
         for item in items:
             if not est_pertinent(item["titre"], item["extrait"], bourse_emploi):
                 continue
-            # Garde-fou : seules les offres d'emploi entrent dans la base. Si une
-            # source de presse est réintroduite un jour, ses articles seront
-            # écartés ici plutôt que de polluer la base comme auparavant.
+            # Garde-fou : seules les offres d'emploi correspondant au profil
+            # recherché entrent dans la base — au moins un des sept marqueurs
+            # (pilote/copilote, entry level, 300 h de vol, anglais niveau 4,
+            # non type rated, EASA ATPL, first officer). Si une source de presse
+            # est réintroduite un jour, ses articles seront écartés ici plutôt
+            # que de polluer la base comme auparavant.
             motif = motif_exclusion(
                 {"lien": item["lien"], "titre_original": item["titre"], "extrait": item["extrait"]}
             )
             if motif:
-                ecartees += 1
+                ecartees[motif] = ecartees.get(motif, 0) + 1
                 continue
             identifiant = hashlib.sha1(item["lien"].encode("utf-8")).hexdigest()[:16]
             cle_titre = normaliser_titre(item["titre"])
@@ -389,7 +363,18 @@ def collecter() -> None:
             ids_connus.add(identifiant)
             titres_connus.add(cle_titre)
             retenues += 1
-        print(f"  {len(items)} élément(s), {retenues} offre(s) retenue(s), {ecartees} écartée(s) (hors périmètre)")
+        motifs = {
+            "actualite": "pas une offre",
+            "nationalite": "nationalité exigée non détenue",
+            "criteres": "aucun marqueur du profil recherché",
+        }
+        detail = ", ".join(f"{n} {motifs.get(m, m)}" for m, n in sorted(ecartees.items()))
+        # Le nom de la source figure sur la ligne : avec une vingtaine de lots,
+        # un simple décompte ne disait plus de quoi il parlait.
+        print(
+            f"  {nom_source} : {len(items)} élément(s), {retenues} offre(s) retenue(s), "
+            f"{sum(ecartees.values())} écartée(s)" + (f" — {detail}" if detail else "")
+        )
 
     # Append-only : on ajoute, on ne supprime jamais.
     base["annonces"].extend(nouvelles)

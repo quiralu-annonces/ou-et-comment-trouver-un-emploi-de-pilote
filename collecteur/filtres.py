@@ -20,6 +20,13 @@ Deux exigences que le collecteur d'origine n'appliquait pas :
 2. **Règle A du §5.1 de l'addendum — nationalité.** Une annonce exigeant une
    nationalité autre que française est écartée, quels que soient ses autres
    mérites.
+
+3. **Critères requis (addendum du 12 août 2026).** Une annonce n'est retenue
+   que si elle porte au moins un des huit marqueurs du profil recherché
+   (pilote/copilote, entry level, minimum 300 heures de vol, anglais niveau 4,
+   non type rated, EASA ATPL, first officer, instructeur/FI). Un poste de
+   commandant de bord expérimenté ne porte aucun de ces marqueurs : il est
+   écarté.
 """
 
 from __future__ import annotations
@@ -55,7 +62,10 @@ CHEMINS_EMPLOI = (
     "/candidature", "/apply", "/opportunities", "/vacatures",
 )
 
-SOUS_DOMAINES_EMPLOI = ("careers.", "career.", "jobs.", "job.", "recruitment.", "emploi.")
+SOUS_DOMAINES_EMPLOI = (
+    "careers.", "career.", "jobs.", "job.", "recruitment.", "emploi.",
+    "carrieres.", "carrières.", "recrutement.",
+)
 
 # Agrégateurs de presse : une URL Google News ne pointe jamais vers une offre.
 DOMAINES_PRESSE_CERTAINS = ("news.google.com", "nabdapp.com", "flipboard.com", "msn.com")
@@ -132,12 +142,140 @@ def nationalite_bloquante(texte: str) -> bool:
     return not NATIONALITE_ACCEPTEE.search(texte)
 
 
+# --- 3. Critères requis : au moins un doit figurer dans l'annonce -----------
+#
+# Sept marqueurs décrivent le profil visé. Chacun est reconnu par ses
+# formulations courantes en anglais comme en français, l'annonce d'origine
+# n'étant pas toujours traduite au moment du filtrage.
+#
+# Le rôle de ce filtre est d'écarter ce qui ne s'adresse pas à un pilote en
+# début de carrière : commandant de bord expérimenté, mécanicien navigant,
+# poste au sol. Un seul marqueur suffit — les annonces les plus succinctes
+# n'énoncent que le titre du poste.
+
+# Un plafond est nécessaire pour le critère « minimum 300 heures de vol » :
+# sans lui, « minimum 5000 hours total time » — l'exact opposé du profil —
+# satisferait le critère. 500 h laisse la marge des annonces qui demandent
+# « 300 to 500 hours » sans laisser passer les postes expérimentés.
+SEUIL_HEURES_VOL = 500
+
+# Un nombre d'heures n'est un critère de vol que s'il est adossé à un mot de
+# vol : sans cela, « 40 hours per week » serait compté comme expérience.
+HEURES_DE_VOL = re.compile(
+    r"(?:flight|flying|total|vol|heures\s+de)\s*(?:time|hours?|heures?)?\s*[:\-–]?\s*(\d{2,5})\s*(?:\+\s*)?"
+    r"(?:h\b|hrs?\b|hours?\b|heures?\b)"
+    r"|(\d{2,5})\s*(?:\+\s*)?(?:h\b|hrs?\b|hours?\b|heures?\b)\s*(?:of\s+)?(?:total\s+)?"
+    r"(?:flight|flying|vol|total\s+time)",
+    re.IGNORECASE,
+)
+
+
+def _heures_de_vol_accessibles(texte: str) -> bool:
+    """Vrai si l'annonce annonce une expérience exigée de l'ordre de 300 heures."""
+    for trouve in HEURES_DE_VOL.finditer(texte):
+        brut = trouve.group(1) or trouve.group(2)
+        try:
+            heures = int(brut)
+        except (TypeError, ValueError):
+            continue
+        if heures <= SEUIL_HEURES_VOL:
+            return True
+    return False
+
+
+CRITERES_REQUIS: tuple[tuple[str, object], ...] = (
+    (
+        "Pilote / copilote",
+        re.compile(r"\b(?:pilote?s?|co-?pilote?s?|piloto)\b", re.IGNORECASE),
+    ),
+    (
+        "Entry level",
+        re.compile(
+            r"entry[\s-]*level|ab[\s-]*initio|low[\s-]*hours?|no\s+experience|"
+            r"d[ée]butants?|cadets?|self[\s-]*sponsored|type\s+rating\s+(?:course|training)\s+provided",
+            re.IGNORECASE,
+        ),
+    ),
+    ("Minimum 300 heures de vol", _heures_de_vol_accessibles),
+    (
+        "Anglais niveau 4",
+        re.compile(
+            r"(?:english|anglais)[^.;\n]{0,40}(?:level|niveau)\s*(?:4|5|6|iv)|"
+            r"(?:icao|oaci)[^.;\n]{0,20}(?:level|niveau)\s*(?:4|5|6|iv)|"
+            r"\belp\s*(?:level\s*)?[456]\b|language\s+proficiency|fcl\.?\s*055",
+            re.IGNORECASE,
+        ),
+    ),
+    (
+        "Non type rated",
+        re.compile(
+            r"non[\s-]*type[\s-]*rated|un[\s-]*type[\s-]*rated|no\s+type[\s-]*rating|"
+            r"type[\s-]*rating\s+(?:is\s+)?not\s+(?:required|needed)|without\s+(?:a\s+)?type[\s-]*rating|"
+            r"sans\s+qualification\s+de\s+type|qt\s+non\s+requise",
+            re.IGNORECASE,
+        ),
+    ),
+    (
+        "EASA ATPL",
+        re.compile(
+            r"easa[\s\-/]*(?:part[\s-]*fcl\s*)?atpl|atpl[^.;\n]{0,20}easa|"
+            r"frozen\s*atpl|atpl\s*(?:gel[ée]e?|th[ée]orique)|atpl\s*\(\s*a\s*\)",
+            re.IGNORECASE,
+        ),
+    ),
+    (
+        "First officer",
+        re.compile(
+            r"first[\s-]*officers?|second[\s-]*officers?|\bf\s*/\s*o\b|"
+            r"officier\s+pilote\s+de\s+ligne|\bopl\b",
+            re.IGNORECASE,
+        ),
+    ),
+    (
+        # Les aéroclubs annoncent « recherche FI saisonnier » sans jamais écrire
+        # « pilote » : sans ce marqueur, ces postes — pourtant recherchés —
+        # étaient tous écartés.
+        "Instructeur / FI",
+        re.compile(
+            r"instructeur|instructrice|instructors?|flight\s+instructor|fluglehrer|"
+            r"\bfi\s*\(?\s*[as]\s*\)?|\bfi\b(?=\s+(?:saisonnier|b[ée]n[ée]vole|planeur|avion|ulm))|"
+            r"\bfe\b|\bfcl\.?\s*9\d\d|type\s+rating\s+instructor|\btri\b|\btre\b|\bsfi\b",
+            re.IGNORECASE,
+        ),
+    ),
+)
+
+
+def criteres_presents(texte: str) -> list[str]:
+    """Liste les critères requis effectivement présents dans le texte de l'annonce."""
+    if not texte:
+        return []
+    trouves = []
+    for libelle, test in CRITERES_REQUIS:
+        satisfait = test(texte) if callable(test) else bool(test.search(texte))
+        if satisfait:
+            trouves.append(libelle)
+    return trouves
+
+
+def texte_annonce(annonce: dict) -> str:
+    """Texte sur lequel les filtres travaillent : titres, extrait et adresse.
+
+    L'adresse est incluse à dessein : sur les bourses d'emploi, l'intitulé exact
+    du poste figure dans l'URL (« /jobs/first-officer-non-type-rated ») alors que
+    l'extrait peut être vide.
+    """
+    champs = ("titre_fr", "titre_original", "extrait", "lien")
+    return " ".join(str(annonce.get(c) or "") for c in champs)
+
+
 def motif_exclusion(annonce: dict) -> str | None:
     """Renvoie le motif d'exclusion d'une annonce, ou None si elle est retenue."""
     if not est_offre_emploi(annonce.get("lien") or ""):
         return "actualite"
-    champs = ("titre_fr", "titre_original", "extrait")
-    texte = " ".join(str(annonce.get(c) or "") for c in champs)
+    texte = texte_annonce(annonce)
     if nationalite_bloquante(texte):
         return "nationalite"
+    if not criteres_presents(texte):
+        return "criteres"
     return None
