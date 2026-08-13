@@ -6813,17 +6813,29 @@
    "date_publication": "2026-08-12T17:05:02+00:00",
    "extrait": "Gulfstream G650 Captain - Burbank, CA Location US-CA-Burbank ID 2026-1978 Category Pilot Position Type Full-Time Remote No",
    "premiere_collecte": "2026-08-12T19:10:34.510888+00:00"
+  },
+  {
+   "id": "32107569fd012d8f",
+   "titre_original": "Un officier pilote de ligne h f",
+   "titre_fr": "Un officier pilote de ligne h f",
+   "lien": "https://www.air-caledonie.nc/recrutements/un-officier-pilote-de-ligne-h-f/",
+   "source": "Air Calédonie",
+   "langue": "fr",
+   "region": "Océanie",
+   "date_publication": "2026-08-13T04:59:34+00:00",
+   "extrait": "",
+   "premiere_collecte": "2026-08-13T06:42:35.413527+00:00"
   }
  ],
- "derniere_collecte": "2026-08-12T19:10:34.510888+00:00",
+ "derniere_collecte": "2026-08-13T06:42:35.413527+00:00",
  "compagnies": {
   "French bee": {
    "offres_ouvertes": 5,
-   "releve_le": "2026-08-12T19:10:34.510888+00:00"
+   "releve_le": "2026-08-13T06:42:35.413527+00:00"
   },
   "Air Caraïbes": {
-   "offres_ouvertes": 6,
-   "releve_le": "2026-08-12T19:10:34.510888+00:00"
+   "offres_ouvertes": 7,
+   "releve_le": "2026-08-13T06:42:35.413527+00:00"
   }
  }
 }
