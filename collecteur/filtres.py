@@ -142,7 +142,130 @@ def nationalite_bloquante(texte: str) -> bool:
     return not NATIONALITE_ACCEPTEE.search(texte)
 
 
-# --- 3. Critères requis : au moins un doit figurer dans l'annonce -----------
+# --- 3. Langue de travail autre que le français ou l'anglais ---------------
+#
+# Le candidat maîtrise le français et l'anglais, pas d'autre langue. Une
+# annonce qui demande une troisième langue est écartée.
+#
+# Deux formulations bien différentes coexistent dans les annonces :
+#
+#   exigence : « fluent Arabic required », « Thai language mandatory »
+#   atout    : « la maîtrise d'autres langues locales du pays d'emploi est un
+#              atout », « German is a plus »
+#
+# La règle demandée écarte les deux. Le second cas est le plus discutable —
+# un simple bonus ne disqualifie personne — d'où l'interrupteur ci-dessous :
+# le passer à False ne conserve que les exigences fermes, sans autre
+# changement.
+ECARTER_SUR_LANGUE_ATOUT = True
+
+# Langues que le candidat maîtrise : leur mention ne bloque jamais.
+LANGUES_MAITRISEES = r"fran[çc]ais|french|anglais|english|british|american"
+
+# Langues dont la mention, en contexte linguistique, écarte l'annonce.
+# Écrites en français, en anglais et dans leur propre langue quand l'annonce
+# d'origine n'est pas traduite.
+LANGUES_ETRANGERES = (
+    r"allemand|german|deutsch|espagnol|spanish|espa[ñn]ol|italien|italian|italiano|"
+    r"portugais|portuguese|portugu[êe]s|n[ée]erlandais|dutch|nederlands|"
+    r"russe|russian|русский|arabe|arabic|العربية|chinois|chinese|mandarin|cantonais|"
+    r"cantonese|中文|普通话|japonais|japanese|日本語|cor[ée]en|korean|한국어|"
+    r"tha[ïi]|thai|vietnamien|vietnamese|indon[ée]sien|indonesian|bahasa|"
+    r"malais|malay|tagalog|filipino|hindi|ourdou|urdu|bengali|tamoul|tamil|"
+    r"turc|turkish|t[üu]rk[çc]e|grec|greek|polonais|polish|polski|"
+    r"tch[èe]que|czech|hongrois|hungarian|roumain|romanian|bulgare|bulgarian|"
+    r"serbe|serbian|croate|croatian|slovaque|slovak|slov[èe]ne|slovenian|"
+    r"ukrainien|ukrainian|su[ée]dois|swedish|norv[ée]gien|norwegian|"
+    r"danois|danish|finnois|finnish|islandais|icelandic|"
+    r"h[ée]breu|hebrew|persan|persian|farsi|kazakh|ouzbek|uzbek|mongol|mongolian|"
+    r"khmer|lao|birman|burmese|n[ée]palais|nepali|cinghalais|sinhala|"
+    r"swahili|amharique|amharic|afrikaans|malgache|malagasy|cr[ée]ole|creole|"
+    r"tahitien|tahitian|reo m[āa]ohi|wallisien|dreh[uû]|nengone|paic[îi]"
+)
+
+# Mots qui signalent qu'on parle bien de compétence linguistique, et non d'une
+# nationalité ou d'une destination : « Spanish airline » ne doit rien déclencher.
+CONTEXTE_LANGUE = (
+    r"langues?|language|linguistique|ma[îi]tris|parl[ée]?|speak|spoken|speaker|"
+    r"fluent|courant|bilingue|bilingual|trilingue|proficien|niveau|level|"
+    r"lu\s+[ée]crit|written|oral|communiquer|communicate|"
+    # « La connaissance du tahitien est appréciée » : sans ces mots-là, la
+    # formulation la plus courante en français passait au travers.
+    r"connaissances?|knowledge|notions?|comprendre|understand"
+)
+
+# Formulations qui font de la langue une exigence ferme.
+EXIGENCE = (
+    r"requis|required|require|mandatory|obligatoire|exig[ée]|essential|must|"
+    r"n[ée]cessaire|necessary|imp[ée]ratif|indispensable|minimum|demand[ée]"
+)
+
+# Formulations qui n'en font qu'un avantage.
+ATOUT = r"atout|asset|plus|avantage|advantage|appr[ée]ci|souhait|desirable|preferred|bonus"
+
+
+def _fenetre(motif_a: str, motif_b: str, largeur: int = 70) -> re.Pattern[str]:
+    """Motif : A puis B, ou B puis A, séparés d'au plus ``largeur`` caractères.
+
+    Une compétence linguistique s'énonce dans les deux ordres — « fluent in
+    Arabic » comme « Arabic (fluent) » — et le mot qualifiant peut précéder ou
+    suivre. Chercher les deux sens évite d'en manquer la moitié.
+    """
+    return re.compile(
+        rf"(?:{motif_a})[^.;\n]{{0,{largeur}}}?(?:{motif_b})"
+        rf"|(?:{motif_b})[^.;\n]{{0,{largeur}}}?(?:{motif_a})",
+        re.IGNORECASE,
+    )
+
+
+# Une langue étrangère nommée, dans un contexte de compétence linguistique.
+LANGUE_ETRANGERE_CITEE = _fenetre(LANGUES_ETRANGERES, CONTEXTE_LANGUE)
+
+# La formulation générique, qui ne nomme aucune langue mais en désigne une
+# autre par construction : « autres langues locales du pays d'emploi ».
+LANGUE_LOCALE = re.compile(
+    r"(?:autres?\s+)?langues?\s+(?:locales?|du\s+pays|r[ée]gionales?|vernaculaires?)|"
+    r"local\s+languages?|language\s+of\s+the\s+country|native\s+language|"
+    r"langue\s+maternelle\s+(?!fran)",
+    re.IGNORECASE,
+)
+
+
+def langue_bloquante(texte: str) -> tuple[str, str] | None:
+    """Renvoie (extrait, nature) si l'annonce réclame une troisième langue.
+
+    ``nature`` vaut « exigence » ou « atout ». Renvoie None si l'annonce ne
+    demande que du français, de l'anglais, ou rien de particulier.
+    """
+    if not texte:
+        return None
+
+    trouve = LANGUE_ETRANGERE_CITEE.search(texte) or LANGUE_LOCALE.search(texte)
+    if not trouve:
+        return None
+
+    extrait = trouve.group(0)
+    # Une phrase peut citer plusieurs langues : « English and French required,
+    # Spanish is a plus » ne doit pas être écartée sur son seul « English ».
+    if re.fullmatch(rf"[^a-zA-Zà-üÀ-Ü]*(?:{LANGUES_MAITRISEES})[^a-zA-Zà-üÀ-Ü]*", extrait, re.IGNORECASE):
+        return None
+
+    # La nature se lit dans la phrase entière autour de la trouvaille, pas dans
+    # le seul fragment : « atout » est souvent rejeté en fin de phrase.
+    debut = max(0, trouve.start() - 120)
+    phrase = texte[debut:trouve.end() + 120]
+    if re.search(ATOUT, phrase, re.IGNORECASE):
+        nature = "atout"
+    else:
+        # Sans qualificatif, c'est une exigence : « Flight Simulator Instructor
+        # – Chinese Speaking » ne présente pas le chinois comme un bonus, il
+        # définit le poste. Classer ces cas en « atout » les aurait laissés
+        # passer dès que l'interrupteur ci-dessus serait désactivé.
+        nature = "exigence"
+    return extrait.strip(), nature
+
+
+# --- 4. Critères requis : au moins un doit figurer dans l'annonce -----------
 #
 # Sept marqueurs décrivent le profil visé. Chacun est reconnu par ses
 # formulations courantes en anglais comme en français, l'annonce d'origine
@@ -276,6 +399,9 @@ def motif_exclusion(annonce: dict) -> str | None:
     texte = texte_annonce(annonce)
     if nationalite_bloquante(texte):
         return "nationalite"
+    verdict = langue_bloquante(texte)
+    if verdict and (verdict[1] == "exigence" or ECARTER_SUR_LANGUE_ATOUT):
+        return "langue"
     if not criteres_presents(texte):
         return "criteres"
     return None

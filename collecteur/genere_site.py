@@ -208,7 +208,8 @@ Europe, Canada / Québec, Amérique du Sud, Asie, Moyen-Orient, Afrique, Océani
 Les annonces étrangères sont traduites en français. Vos décisions (pas intéressé / candidature envoyée / refus)
 sont mémorisées sur cet appareil : une annonce traitée ne réapparaît plus dans « Nouvelles ».<br>
 Seules les annonces parues <strong>depuis moins d'un mois</strong> sont affichées. Les offres situées
-aux <strong>États-Unis</strong> ne sont pas retenues.<br>
+aux <strong>États-Unis</strong> ne sont pas retenues, ni celles qui réclament une <strong>troisième
+langue</strong> au-delà du français et de l'anglais.<br>
 Chaque annonce publiée porte au moins un des marqueurs du profil recherché — <strong>pilote ou copilote,
 entry level, minimum 300 heures de vol, anglais niveau 4, non type rated, EASA ATPL, first officer</strong> —
 signalés en jaune sur la fiche.<br>
@@ -435,7 +436,7 @@ def appliquer_regles(annonces: list[dict]) -> tuple[list[dict], dict[str, int]]:
     limite = datetime.now(timezone.utc) - timedelta(days=FENETRE_JOURS)
     retenues: list[dict] = []
     stats = {
-        "actualites": 0, "nationalite": 0, "criteres": 0,
+        "actualites": 0, "nationalite": 0, "langue": 0, "criteres": 0,
         "trop_anciennes": 0, "sans_date": 0, "etats_unis": 0, "canada": 0,
     }
 
@@ -448,6 +449,10 @@ def appliquer_regles(annonces: list[dict]) -> tuple[list[dict], dict[str, int]]:
             continue
         if motif == "nationalite":
             stats["nationalite"] += 1
+            continue
+        if motif == "langue":
+            # Une troisième langue est réclamée : le candidat ne l'a pas.
+            stats["langue"] += 1
             continue
         if motif == "criteres":
             # Aucun des sept marqueurs du profil : l'annonce ne s'adresse pas
@@ -598,7 +603,8 @@ def generer() -> None:
         f"  {len(annonces_triees)} offre(s) affichée(s) sur {len(annonces)} entrées en base\n"
         f"  écartées : {stats['actualites']} actualités (pas des offres), "
         f"{stats['nationalite']} nationalité exigée non détenue,\n"
-        f"             {stats['criteres']} sans aucun marqueur du profil recherché, "
+        f"             {stats['langue']} exigeant une 3e langue, "
+        f"{stats['criteres']} sans aucun marqueur du profil recherché, "
         f"{stats['trop_anciennes']} de plus de {FENETRE_JOURS} jours, "
         f"{stats['etats_unis']} aux États-Unis, {stats['sans_date']} sans date exploitable\n"
         f"  reclassées « {REGION_CANADA} » : {stats['canada']}"

@@ -371,6 +371,7 @@ def collecter() -> None:
         motifs = {
             "actualite": "pas une offre",
             "nationalite": "nationalité exigée non détenue",
+            "langue": "3e langue réclamée",
             "criteres": "aucun marqueur du profil recherché",
         }
         detail = ", ".join(f"{n} {motifs.get(m, m)}" for m, n in sorted(ecartees.items()))

@@ -60,6 +60,32 @@ règles déjà en place : offre d'emploi uniquement (jamais un article de presse
 parution de moins d'un mois, hors États-Unis, hors nationalité exigée non
 détenue.
 
+### Troisième langue
+
+Le candidat maîtrise le français et l'anglais. Une annonce qui réclame une
+autre langue est écartée (`langue_bloquante` dans `collecteur/filtres.py`), que
+ce soit une langue nommée (« fluent Arabic required », « Chinese speaking ») ou
+la formule générique (« la maîtrise d'autres langues locales du pays d'emploi
+est un atout »).
+
+Le filtre distingue deux natures, et n'écarte que si le contexte est bien
+linguistique — « Spanish airline », « German operator » ou « Dutch carrier » ne
+déclenchent rien :
+
+| Nature | Exemple | Écartée ? |
+| --- | --- | --- |
+| exigence | « Thai language is mandatory », « Espagnol courant exigé » | oui |
+| atout | « German is a plus », « connaissance du tahitien appréciée » | oui, sauf si `ECARTER_SUR_LANGUE_ATOUT = False` |
+
+Sans qualificatif, la mention compte comme une exigence : « Flight Simulator
+Instructor – Chinese Speaking » ne présente pas le chinois comme un bonus, il
+définit le poste.
+
+**Portée réelle du filtre** : il ne lit que le titre et l'extrait de 400
+caractères stockés en base, jamais le corps complet de l'annonce. Une exigence
+linguistique enfouie au milieu d'une fiche de poste lui échappe — il attrape ce
+qui est annoncé en vitrine, pas ce qui est écrit en page trois.
+
 ## Compagnies suivies nommément
 
 `collecteur/compagnies.py` recense 19 compagnies françaises, ultramarines et
