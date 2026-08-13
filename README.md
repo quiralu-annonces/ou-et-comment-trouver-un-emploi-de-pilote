@@ -138,6 +138,56 @@ progressivement par `relire_annonces` : à chaque exécution, jusqu'à
 `RELECTURE_MAX` fiches encore affichables sont relues. La veille tournant deux
 fois par jour, le retard se résorbe en quelques passages.
 
+## Apprentissage des refus
+
+Le site ajuste sa sélection à partir des annonces que vous écartez.
+
+**Le pont indispensable.** Vos décisions vivent dans le `localStorage` de votre
+navigateur ; le collecteur tourne sur GitHub Actions et ne peut pas les lire.
+Le bouton **« ⬇ Exporter mes décisions »**, sur la ligne « Mon statut »,
+produit un fichier `decisions.json` à déposer dans `data/`. Il ne contient que
+des identifiants et des statuts — le texte des annonces est déjà en base.
+Le fichier accepte aussi une liste d'exports, le lien pouvant être partagé.
+
+```bash
+# après avoir déposé le fichier téléchargé dans data/
+python collecteur/genere_site.py    # affiche le rapport d'ajustement
+```
+
+**Ce qui est déduit.** Chaque annonce est décrite par des traits structurés —
+région, appareil, type de poste, contrat, marqueurs du profil, mentions
+linguistiques — plus quelques mots de son titre. Un trait fréquent chez les
+annonces refusées et rare ailleurs devient une règle.
+
+| Seuil | Conséquence |
+| --- | --- |
+| ≥ 3 refus **et** ≥ 75 % des annonces portant le trait | exclusion automatique, sans confirmation |
+| ≥ 2 refus **et** ≥ 50 % | pénalité de score : l'annonce descend en bas de liste, jamais masquée |
+
+**Trois garde-fous contre le surapprentissage.** Sur trois refus, une machine
+conclut n'importe quoi : si vos trois premiers rejets sont des postes en
+Afrique, elle décide d'exclure l'Afrique, alors que c'était peut-être le type
+d'appareil qui déplaisait.
+
+1. *Seuil de présence* — un refus isolé ne fait jamais loi.
+2. *Taux de refus* — un trait doit être **rare ailleurs**. « Copilote » figure
+   dans presque toutes les annonces, refusées comprises : c'est le métier, pas
+   un motif de rejet.
+3. *Veto des candidatures* — un trait présent dans une annonce à laquelle vous
+   avez postulé ne peut jamais devenir une exclusion, quelle que soit sa
+   statistique. Ce que vous avez voulu ne peut pas être ce que vous rejetez.
+
+**L'apprentissage n'observe que le vivier visible.** Mesurer un trait sur la
+base entière le diluerait dans 400 articles de presse jamais affichés : « région
+Moyen-Orient », refusée huit fois sur huit, semblait n'être refusée qu'une fois
+sur dix.
+
+**Le filtrage est silencieux mais pas invisible.** Un dépliant « 🧠 Règles
+apprises de vos refus » liste chaque règle active, le nombre d'annonces qu'elle
+masque et la statistique qui l'a produite. Une règle tirée de quelques clics
+peut se tromper ; on ne la corrige que si l'on sait qu'elle existe. Les seuils
+se règlent en tête d'`apprentissage.py`.
+
 ## Compagnies suivies nommément
 
 `collecteur/compagnies.py` recense 19 compagnies françaises, ultramarines et

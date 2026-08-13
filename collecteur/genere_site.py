@@ -19,6 +19,13 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from apprentissage import (  # noqa: E402
+    charger_decisions,
+    deduire_regles,
+    motif_appris,
+    resume,
+    score,
+)
 from compagnies import COMPAGNIES, MODES_AUTOMATIQUES  # noqa: E402
 from filtres import criteres_presents, motif_exclusion, texte_annonce  # noqa: E402
 
@@ -219,6 +226,7 @@ signalés en jaune sur la fiche.<br>
 </div>
 
 __COMPAGNIES__
+__APPRENTISSAGE__
 
 <div id="toolbar" class="toolbar"></div>
 <div class="searchbar"><input id="search" type="search" placeholder="Rechercher (compagnie, appareil, pays…)" aria-label="Rechercher dans les annonces"></div>
@@ -312,6 +320,11 @@ function renderToolbar() {
     mkBtn("Toutes", currentStatusFilter === "Toutes", () => { currentStatusFilter = "Toutes"; render(); }));
   Object.entries(STATUSES).forEach(([key, meta]) => rowStatus.appendChild(
     mkBtn(meta.label, key === currentStatusFilter, () => { currentStatusFilter = key; render(); })));
+  const exporter = mkBtn("⬇ Exporter mes décisions", false, exporterDecisions);
+  exporter.title = "Produit un fichier decisions.json à déposer dans data/ du dépôt : "
+    + "le collecteur y apprend ce que vous écartez.";
+  exporter.style.marginLeft = "auto";
+  rowStatus.appendChild(exporter);
   tb.appendChild(rowStatus);
 }
 
@@ -355,6 +368,30 @@ function renderCard(a) {
       `}
     </div>
   </div>`;
+}
+
+/* Les décisions vivent dans ce navigateur : le collecteur, qui tourne sur un
+   serveur distant deux fois par jour, ne peut pas les lire. Cet export est le
+   seul pont entre les deux. Il ne contient que des identifiants et des statuts
+   — le texte des annonces est déjà en base, inutile de le renvoyer. */
+function exporterDecisions() {
+  const decisions = {};
+  for (const a of ANNONCES) {
+    const s = statusMap[a.id];
+    if (s && s !== "Nouvelle") decisions[a.id] = s;
+  }
+  const nb = Object.keys(decisions).length;
+  if (!nb) {
+    alert("Aucune décision à exporter.\n\nMarquez d'abord des annonces « Pas intéressé » ou « Candidature envoyée ».");
+    return;
+  }
+  const contenu = JSON.stringify(
+    { version: 1, exporte_le: new Date().toISOString(), decisions }, null, 1);
+  const lien = document.createElement("a");
+  lien.href = URL.createObjectURL(new Blob([contenu], { type: "application/json" }));
+  lien.download = "decisions.json";
+  lien.click();
+  URL.revokeObjectURL(lien.href);
 }
 
 function render() {
@@ -429,7 +466,7 @@ def _date_reference(annonce: dict) -> datetime | None:
     return None
 
 
-def appliquer_regles(annonces: list[dict]) -> tuple[list[dict], dict[str, int]]:
+def appliquer_regles(annonces: list[dict], regles: dict | None = None) -> tuple[list[dict], dict[str, int]]:
     """Applique les deux règles d'affichage et reclasse le Canada.
 
     Renvoie les annonces retenues et un compte-rendu chiffré des exclusions,
@@ -437,9 +474,11 @@ def appliquer_regles(annonces: list[dict]) -> tuple[list[dict], dict[str, int]]:
     """
     limite = datetime.now(timezone.utc) - timedelta(days=FENETRE_JOURS)
     retenues: list[dict] = []
+    regles = regles or {}
     stats = {
         "actualites": 0, "nationalite": 0, "langue": 0, "criteres": 0,
         "trop_anciennes": 0, "sans_date": 0, "etats_unis": 0, "canada": 0,
+        "appris": 0,
     }
 
     for annonce in annonces:
@@ -482,9 +521,21 @@ def appliquer_regles(annonces: list[dict]) -> tuple[list[dict], dict[str, int]]:
                 stats["etats_unis"] += 1
                 continue
 
+        # Règles apprises des refus : elles s'appliquent en dernier, après les
+        # règles fixes, pour qu'un motif appris ne masque jamais la vraie raison
+        # d'une exclusion dans le compte-rendu.
+        appris = motif_appris(annonce, regles)
+        if appris:
+            stats["appris"] += 1
+            continue
+
         # Chaque annonce porte les marqueurs qui lui ont valu d'être retenue :
         # affichés sur la fiche, ils disent en un coup d'œil pourquoi elle est là.
-        retenues.append({**annonce, "criteres": criteres_presents(texte_annonce(annonce))})
+        retenues.append({
+            **annonce,
+            "criteres": criteres_presents(texte_annonce(annonce)),
+            "score": score(annonce, regles),
+        })
 
     return retenues, stats
 
@@ -556,16 +607,73 @@ def bloc_compagnies(compteurs: dict | None = None) -> str:
     )
 
 
+def bloc_apprentissage(regles: dict, nb_ecartees: int) -> str:
+    """Dépliant listant les règles déduites des refus, et ce qu'elles coûtent.
+
+    Le filtrage est silencieux — l'utilisateur l'a demandé — mais il ne doit pas
+    être invisible : une règle tirée de quelques clics peut se tromper, et on ne
+    peut la corriger que si l'on sait qu'elle existe.
+    """
+    if not regles.get("nb_refus"):
+        return ""
+
+    def lignes(motifs: dict) -> str:
+        return "".join(
+            f'<li><code>{_echapper(motif)}</code> '
+            f'<span class="detail">refusée {p["refus"]} fois sur {p["total"]} '
+            f'annonces qui la portent ({p["taux"]:.0%})</span></li>'
+            for motif, p in sorted(motifs.items(), key=lambda x: -x[1]["refus"])
+        )
+
+    corps = ""
+    if regles["exclusions"]:
+        corps += (
+            f"<p><strong>{len(regles['exclusions'])} motif(s) écartent automatiquement une annonce</strong> "
+            f"— {nb_ecartees} annonce(s) masquée(s) à ce titre :</p>"
+            f'<ul class="compagnies">{lignes(regles["exclusions"])}</ul>'
+        )
+    else:
+        corps += "<p>Aucun motif ne franchit encore les seuils d'exclusion automatique.</p>"
+    if regles["penalites"]:
+        corps += (
+            "<p>Motifs simplement <strong>pénalisés</strong> : les annonces concernées "
+            "descendent en bas de liste, elles restent consultables.</p>"
+            f'<ul class="compagnies">{lignes(regles["penalites"])}</ul>'
+        )
+
+    return (
+        '<details class="compagnies">\n'
+        f"<summary>🧠 Règles apprises de vos refus "
+        f"({len(regles['exclusions'])} exclusion(s), {len(regles['penalites'])} pénalité(s))</summary>\n"
+        f"<p>Déduites de {regles['nb_refus']} annonce(s) que vous avez écartée(s) et de "
+        f"{regles['nb_candidatures']} candidature(s) envoyée(s). Un motif présent dans une annonce "
+        f"à laquelle vous avez postulé ne peut jamais devenir une exclusion.</p>\n"
+        f"{corps}\n</details>"
+    )
+
+
 def generer() -> None:
     base = json.loads(FICHIER_DONNEES.read_text(encoding="utf-8"))
     annonces = base["annonces"]
 
-    retenues, stats = appliquer_regles(annonces)
+    decisions = charger_decisions()
+    # L'apprentissage ne compare qu'aux annonces que l'utilisateur a pu voir.
+    # Mesurer un motif sur la base entière le dilue dans 400 articles de presse
+    # jamais affichés : « région Moyen-Orient », refusée huit fois sur huit,
+    # semblait alors n'être refusée qu'une fois sur dix.
+    corpus = [a for a in annonces if motif_exclusion(a) is None]
+    regles = deduire_regles(corpus, decisions)
+    retenues, stats = appliquer_regles(annonces, regles)
 
-    # Les plus récentes d'abord (date de collecte puis date de publication).
+    # Score d'abord, fraîcheur ensuite : une annonce proche de ce que
+    # l'utilisateur a déjà refusé descend, sans jamais disparaître.
     annonces_triees = sorted(
         retenues,
-        key=lambda a: (a.get("premiere_collecte") or "", a.get("date_publication") or ""),
+        key=lambda a: (
+            a.get("score", 0),
+            a.get("premiere_collecte") or "",
+            a.get("date_publication") or "",
+        ),
         reverse=True,
     )[:MAX_ANNONCES_PAGE]
 
@@ -596,6 +704,7 @@ def generer() -> None:
         .replace("__NB_AFFICHEES__", str(len(annonces_triees)))
         .replace("__NB__", str(len(annonces)))
         .replace("__COMPAGNIES__", bloc_compagnies(base.get("compagnies")))
+        .replace("__APPRENTISSAGE__", bloc_apprentissage(regles, stats["appris"]))
         .replace("__COCKPIT__", cockpit)
     )
     FICHIER_SITE.parent.mkdir(parents=True, exist_ok=True)
@@ -609,7 +718,9 @@ def generer() -> None:
         f"{stats['criteres']} sans aucun marqueur du profil recherché, "
         f"{stats['trop_anciennes']} de plus de {FENETRE_JOURS} jours, "
         f"{stats['etats_unis']} aux États-Unis, {stats['sans_date']} sans date exploitable\n"
-        f"  reclassées « {REGION_CANADA} » : {stats['canada']}"
+        f"             {stats['appris']} sur une règle apprise des refus\n"
+        f"  reclassées « {REGION_CANADA} » : {stats['canada']}\n"
+        f"\n--- Rapport d'ajustement ---\n{resume(regles)}"
     )
 
 
