@@ -30,7 +30,12 @@ from compagnies import (  # noqa: E402
     compter_offres,
     offres_compagnie,
 )
-from filtres import langue_bloquante, motif_exclusion  # noqa: E402
+from filtres import (  # noqa: E402
+    VERSION_ANALYSE_LANGUE,
+    langue_bloquante,
+    langue_ecarte,
+    motif_exclusion,
+)
 from reseau import (  # noqa: E402
     lire_flux_rss,
     nettoyer_html,
@@ -330,7 +335,8 @@ def relire_annonces(base: dict, maintenant: str) -> None:
     limite = datetime.now(timezone.utc) - timedelta(days=FENETRE_RELECTURE_JOURS)
     a_relire = []
     for annonce in base["annonces"]:
-        if annonce.get("texte_lu"):
+        # Jamais lue, ou lue par une version antérieure des motifs.
+        if annonce.get("analyse_langue", 0) >= VERSION_ANALYSE_LANGUE:
             continue
         brut = annonce.get("date_publication") or annonce.get("premiere_collecte") or ""
         try:
@@ -361,11 +367,18 @@ def relire_annonces(base: dict, maintenant: str) -> None:
             continue
         annonce["langue_exigee"] = verdict
         annonce["texte_lu"] = True
+        annonce["analyse_langue"] = VERSION_ANALYSE_LANGUE
         annonce["relue_le"] = maintenant
         if verdict:
-            ecartees += 1
-            print(f"  écartée — {verdict['nature']} « {verdict['extrait'][:60]} » : "
-                  f"{annonce['titre_fr'][:60]}")
+            # Le sort dépend de la nature ET du réglage : dire « écartée » pour
+            # un simple atout conservé rendrait le journal trompeur.
+            if langue_ecarte(verdict):
+                ecartees += 1
+                sort = "ÉCARTÉE"
+            else:
+                sort = "conservée"
+            print(f"  {sort} — {verdict['nature']} « {verdict['extrait'][:55]} » : "
+                  f"{annonce['titre_fr'][:55]}")
         time.sleep(DELAI_ENTRE_REQUETES)
     print(f"  {ecartees} annonce(s) écartée(s) sur la langue, {illisibles} page(s) inaccessible(s)")
 
@@ -458,6 +471,7 @@ def collecter() -> None:
                 "premiere_collecte": maintenant,
                 "langue_exigee": verdict_langue,
                 "texte_lu": texte_lu,
+                "analyse_langue": VERSION_ANALYSE_LANGUE if texte_lu else 0,
             }
             nouvelles.append(annonce)
             ids_connus.add(identifiant)

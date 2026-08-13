@@ -68,18 +68,36 @@ ce soit une langue nommée (« fluent Arabic required », « Chinese speaking »
 la formule générique (« la maîtrise d'autres langues locales du pays d'emploi
 est un atout »).
 
-Le filtre distingue deux natures, et n'écarte que si le contexte est bien
-linguistique — « Spanish airline », « German operator » ou « Dutch carrier » ne
-déclenchent rien :
+Le filtre distingue deux natures, et **seule l'exigence ferme écarte** :
 
 | Nature | Exemple | Écartée ? |
 | --- | --- | --- |
-| exigence | « Thai language is mandatory », « Espagnol courant exigé » | oui |
-| atout | « German is a plus », « connaissance du tahitien appréciée » | oui, sauf si `ECARTER_SUR_LANGUE_ATOUT = False` |
+| exigence | « Thai language is mandatory », « Deutsch in Wort und Schrift erforderlich » | oui |
+| atout | « Spanish would be a plus », « connaissance du tahitien appréciée » | non |
+
+Un simple bonus ne disqualifie personne : « Spanish ICAO Level Proficiency ≥ 4
+would be a plus » sur un copilote A330 basé à Madrid laisse le candidat
+éligible, l'anglais niveau 4 suffisant. Écarter ces annonces faisait perdre des
+postes candidatables. `ECARTER_SUR_LANGUE_ATOUT = True` rétablit l'exclusion
+des atouts.
 
 Sans qualificatif, la mention compte comme une exigence : « Flight Simulator
 Instructor – Chinese Speaking » ne présente pas le chinois comme un bonus, il
 définit le poste.
+
+Le déclenchement exige un mot de contexte linguistique à moins de 70 caractères
+du nom de la langue — sans quoi « Spanish airline », « German operator » ou
+« Dutch carrier » seraient écartés à tort, le nom d'une langue et l'adjectif de
+nationalité étant le même mot en anglais. Ces mots de contexte existent en
+français, en anglais, mais aussi **en allemand, espagnol, italien, portugais et
+néerlandais** : une annonce qui exige une langue locale est souvent rédigée dans
+cette langue, et « Deutsch und Englisch in Wort und Schrift » passait au
+travers faute d'un seul mot de contexte allemand.
+
+`VERSION_ANALYSE_LANGUE` versionne ces motifs. L'incrémenter fait relire les
+annonces analysées par une version antérieure : sans ce numéro, une annonce
+examinée par une version qui ne savait pas encore lire l'allemand resterait
+marquée « aucune exigence » à jamais.
 
 **L'annonce est lue en entier.** Le titre et l'extrait de 400 caractères ne
 suffisaient pas : une exigence linguistique se trouve presque toujours sous

@@ -153,11 +153,20 @@ def nationalite_bloquante(texte: str) -> bool:
 #   atout    : « la maîtrise d'autres langues locales du pays d'emploi est un
 #              atout », « German is a plus »
 #
-# La règle demandée écarte les deux. Le second cas est le plus discutable —
-# un simple bonus ne disqualifie personne — d'où l'interrupteur ci-dessous :
-# le passer à False ne conserve que les exigences fermes, sans autre
-# changement.
-ECARTER_SUR_LANGUE_ATOUT = True
+# Seules les exigences fermes écartent. Un simple bonus ne disqualifie
+# personne : « Spanish ICAO Level Proficiency >= 4 would be a plus » sur un
+# poste de copilote A330 à Madrid laisse le candidat parfaitement éligible,
+# l'anglais niveau 4 suffisant à remplir les exigences. Écarter ces annonces
+# faisait perdre des postes candidatables.
+#
+# Passer cet interrupteur à True écarte aussi les simples atouts.
+ECARTER_SUR_LANGUE_ATOUT = False
+
+# Version des motifs linguistiques. À incrémenter dès qu'ils changent : le
+# collecteur relit alors les annonces analysées par une version antérieure.
+# Sans ce numéro, une annonce examinée par une version qui ne savait pas encore
+# lire l'allemand resterait marquée « aucune exigence » à jamais.
+VERSION_ANALYSE_LANGUE = 2
 
 # Langues que le candidat maîtrise : leur mention ne bloque jamais.
 LANGUES_MAITRISEES = r"fran[çc]ais|french|anglais|english|british|american"
@@ -191,17 +200,32 @@ CONTEXTE_LANGUE = (
     r"lu\s+[ée]crit|written|oral|communiquer|communicate|"
     # « La connaissance du tahitien est appréciée » : sans ces mots-là, la
     # formulation la plus courante en français passait au travers.
-    r"connaissances?|knowledge|notions?|comprendre|understand"
+    r"connaissances?|knowledge|notions?|comprendre|understand|"
+    # Une annonce qui exige une langue locale est souvent rédigée dans cette
+    # langue : « Deutsch und Englisch in Wort und Schrift » n'était pas
+    # détecté, faute d'un seul mot de contexte allemand.
+    r"sprache|kenntnisse|flie[ßs]end|verhandlungssicher|wort\s+und\s+schrift|muttersprache|"
+    r"idioma|nivel|dominio|conocimientos|hablado|"
+    r"lingua|livello|conoscenz|"
+    r"l[íi]ngua|n[íi]vel|conhecimentos|fluente|"
+    r"taal|vloeiend|beheersing"
 )
 
 # Formulations qui font de la langue une exigence ferme.
 EXIGENCE = (
     r"requis|required|require|mandatory|obligatoire|exig[ée]|essential|must|"
-    r"n[ée]cessaire|necessary|imp[ée]ratif|indispensable|minimum|demand[ée]"
+    r"n[ée]cessaire|necessary|imp[ée]ratif|indispensable|minimum|demand[ée]|"
+    r"erforderlich|vorausgesetzt|zwingend|ben[öo]tigt|"
+    r"requerido|obligatorio|imprescindible|richiesto|obrigat[óo]rio|vereist"
 )
 
-# Formulations qui n'en font qu'un avantage.
-ATOUT = r"atout|asset|plus|avantage|advantage|appr[ée]ci|souhait|desirable|preferred|bonus"
+# Formulations qui n'en font qu'un avantage. Cette liste prime sur la
+# précédente : « would be a plus » contient « plus », et c'est ce mot-là qui
+# décide, même si la phrase parle par ailleurs d'exigences.
+ATOUT = (
+    r"atout|asset|plus|avantage|advantage|appr[ée]ci|souhait|desirable|preferred|bonus|"
+    r"not\s+a\s+requirement|von\s+vorteil|w[üu]nschenswert|deseable|valorable|gradito|pluspunt"
+)
 
 
 def _fenetre(motif_a: str, motif_b: str, largeur: int = 70) -> re.Pattern[str]:
