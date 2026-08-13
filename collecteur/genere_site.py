@@ -209,8 +209,9 @@ Les annonces étrangères sont traduites en français. Vos décisions (pas inté
 sont mémorisées sur cet appareil : une annonce traitée ne réapparaît plus dans « Nouvelles ».<br>
 Seules les annonces parues <strong>depuis moins d'un mois</strong> sont affichées. Les offres situées
 aux <strong>États-Unis</strong> ne sont pas retenues, ni celles qui <strong>exigent une troisième
-langue</strong> au-delà du français et de l'anglais. Une langue simplement présentée comme un
-atout n'écarte pas l'annonce : le poste reste accessible.<br>
+langue</strong> au-delà du français et de l'anglais, ni celles qui réclament « la maîtrise des
+langues locales du pays d'emploi ». Une langue précise citée comme simple atout n'écarte pas
+l'annonce : le poste reste accessible.<br>
 Chaque annonce publiée porte au moins un des marqueurs du profil recherché — <strong>pilote ou copilote,
 entry level, minimum 300 heures de vol, anglais niveau 4, non type rated, EASA ATPL, first officer</strong> —
 signalés en jaune sur la fiche.<br>

@@ -153,20 +153,30 @@ def nationalite_bloquante(texte: str) -> bool:
 #   atout    : « la maîtrise d'autres langues locales du pays d'emploi est un
 #              atout », « German is a plus »
 #
-# Seules les exigences fermes écartent. Un simple bonus ne disqualifie
-# personne : « Spanish ICAO Level Proficiency >= 4 would be a plus » sur un
-# poste de copilote A330 à Madrid laisse le candidat parfaitement éligible,
-# l'anglais niveau 4 suffisant à remplir les exigences. Écarter ces annonces
-# faisait perdre des postes candidatables.
+# Trois niveaux de sévérité, du plus permissif au plus strict :
 #
-# Passer cet interrupteur à True écarte aussi les simples atouts.
-ECARTER_SUR_LANGUE_ATOUT = False
+#   "exigence"      seules les exigences fermes écartent.
+#   "langue_locale" + la formule générique « la maîtrise d'autres langues
+#                   locales du pays d'emploi est un atout », même présentée
+#                   comme un simple avantage.
+#   "atout"         + toute langue nommée citée comme simple avantage.
+#
+# Le niveau retenu distingue ce que les deux consignes reçues visaient
+# séparément. La formule générique ne nomme aucune langue : elle dit que le
+# poste s'exerce dans un pays dont le candidat ne parle pas la langue, et
+# l'« atout » y est souvent une politesse. Une langue nommée en simple bonus,
+# à l'inverse, ne disqualifie personne — « Spanish ICAO Level >= 4 would be a
+# plus » sur un copilote A330 basé à Madrid laisse le candidat éligible,
+# l'anglais niveau 4 suffisant à remplir les exigences.
+NIVEAU_EXCLUSION_LANGUE = "langue_locale"
 
 # Version des motifs linguistiques. À incrémenter dès qu'ils changent : le
 # collecteur relit alors les annonces analysées par une version antérieure.
 # Sans ce numéro, une annonce examinée par une version qui ne savait pas encore
 # lire l'allemand resterait marquée « aucune exigence » à jamais.
-VERSION_ANALYSE_LANGUE = 2
+#
+# v3 : le verdict distingue désormais la formule générique d'une langue nommée.
+VERSION_ANALYSE_LANGUE = 3
 
 # Langues que le candidat maîtrise : leur mention ne bloque jamais.
 LANGUES_MAITRISEES = r"fran[çc]ais|french|anglais|english|british|american"
@@ -255,16 +265,28 @@ LANGUE_LOCALE = re.compile(
 )
 
 
-def langue_bloquante(texte: str) -> tuple[str, str] | None:
-    """Renvoie (extrait, nature) si l'annonce réclame une troisième langue.
+def langue_bloquante(texte: str) -> tuple[str, str, str] | None:
+    """Renvoie (extrait, nature, source) si l'annonce réclame une troisième langue.
 
-    ``nature`` vaut « exigence » ou « atout ». Renvoie None si l'annonce ne
-    demande que du français, de l'anglais, ou rien de particulier.
+    ``nature`` vaut « exigence » ou « atout ». ``source`` vaut « citee » quand
+    une langue est nommée, « locale » pour la formule générique « autres
+    langues locales du pays d'emploi » — les deux n'ont pas la même portée et
+    le réglage ci-dessus les traite séparément.
+
+    Renvoie None si l'annonce ne demande que du français, de l'anglais, ou rien
+    de particulier.
     """
     if not texte:
         return None
 
-    trouve = LANGUE_ETRANGERE_CITEE.search(texte) or LANGUE_LOCALE.search(texte)
+    # La formule générique est cherchée en premier : quand une annonce dit
+    # « français, anglais, et la maîtrise des langues locales est un atout »,
+    # c'est bien cette clause-là qui la caractérise.
+    trouve = LANGUE_LOCALE.search(texte)
+    source = "locale"
+    if not trouve:
+        trouve = LANGUE_ETRANGERE_CITEE.search(texte)
+        source = "citee"
     if not trouve:
         return None
 
@@ -284,9 +306,9 @@ def langue_bloquante(texte: str) -> tuple[str, str] | None:
         # Sans qualificatif, c'est une exigence : « Flight Simulator Instructor
         # – Chinese Speaking » ne présente pas le chinois comme un bonus, il
         # définit le poste. Classer ces cas en « atout » les aurait laissés
-        # passer dès que l'interrupteur ci-dessus serait désactivé.
+        # passer dès que le réglage cesserait d'écarter les atouts.
         nature = "exigence"
-    return extrait.strip(), nature
+    return extrait.strip(), nature, source
 
 
 # --- 4. Critères requis : au moins un doit figurer dans l'annonce -----------
@@ -405,7 +427,7 @@ def criteres_presents(texte: str) -> list[str]:
     return trouves
 
 
-def langue_ecarte(verdict: tuple[str, str] | dict | None) -> bool:
+def langue_ecarte(verdict: tuple[str, str, str] | dict | None) -> bool:
     """Ce verdict linguistique justifie-t-il d'écarter l'annonce ?
 
     Accepte le tuple renvoyé par ``langue_bloquante`` comme le dictionnaire
@@ -413,8 +435,20 @@ def langue_ecarte(verdict: tuple[str, str] | dict | None) -> bool:
     """
     if not verdict:
         return False
-    nature = verdict[1] if isinstance(verdict, tuple) else verdict.get("nature")
-    return nature == "exigence" or ECARTER_SUR_LANGUE_ATOUT
+    if isinstance(verdict, tuple):
+        nature, source = verdict[1], verdict[2]
+    else:
+        nature = verdict.get("nature")
+        # Verdict enregistré par une version antérieure, sans origine connue :
+        # on le traite comme une langue nommée, le cas le moins sévère. La
+        # relecture déclenchée par VERSION_ANALYSE_LANGUE le complétera.
+        source = verdict.get("source", "citee")
+
+    if nature == "exigence":
+        return True
+    if NIVEAU_EXCLUSION_LANGUE == "atout":
+        return True
+    return NIVEAU_EXCLUSION_LANGUE == "langue_locale" and source == "locale"
 
 
 def texte_annonce(annonce: dict) -> str:

@@ -293,7 +293,7 @@ def examiner_langue(lien: str, texte_deja_lu: str = "") -> tuple[dict | None, bo
     verdict = langue_bloquante(texte)
     if not verdict:
         return None, True
-    return {"extrait": verdict[0], "nature": verdict[1]}, True
+    return {"extrait": verdict[0], "nature": verdict[1], "source": verdict[2]}, True
 
 
 def traduire_fr(texte: str) -> str:

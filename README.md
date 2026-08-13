@@ -68,18 +68,31 @@ ce soit une langue nommée (« fluent Arabic required », « Chinese speaking »
 la formule générique (« la maîtrise d'autres langues locales du pays d'emploi
 est un atout »).
 
-Le filtre distingue deux natures, et **seule l'exigence ferme écarte** :
+Chaque verdict porte deux qualités : sa **nature** (exigence ferme ou simple
+atout) et sa **source** — une langue nommée, ou la formule générique « autres
+langues locales du pays d'emploi », qui n'en nomme aucune.
 
-| Nature | Exemple | Écartée ? |
+`NIVEAU_EXCLUSION_LANGUE` décide de la sévérité :
+
+| Réglage | Ce qui est écarté |
+| --- | --- |
+| `exigence` | les seules exigences fermes |
+| **`langue_locale`** *(actuel)* | + la formule générique, même en simple atout |
+| `atout` | + toute langue nommée citée comme simple avantage |
+
+Le niveau retenu sépare ce que les consignes visaient distinctement. La formule
+générique ne nomme aucune langue : elle dit que le poste s'exerce dans un pays
+dont le candidat ne parle pas la langue, et l'« atout » y est souvent une
+politesse. Une langue nommée en simple bonus, à l'inverse, ne disqualifie
+personne — « Spanish ICAO Level Proficiency ≥ 4 would be a plus » sur un
+copilote A330 basé à Madrid laisse le candidat éligible, l'anglais niveau 4
+suffisant à remplir les exigences.
+
+| Annonce | Verdict | Sort |
 | --- | --- | --- |
-| exigence | « Thai language is mandatory », « Deutsch in Wort und Schrift erforderlich » | oui |
-| atout | « Spanish would be a plus », « connaissance du tahitien appréciée » | non |
-
-Un simple bonus ne disqualifie personne : « Spanish ICAO Level Proficiency ≥ 4
-would be a plus » sur un copilote A330 basé à Madrid laisse le candidat
-éligible, l'anglais niveau 4 suffisant. Écarter ces annonces faisait perdre des
-postes candidatables. `ECARTER_SUR_LANGUE_ATOUT = True` rétablit l'exclusion
-des atouts.
+| « la maîtrise d'autres langues locales du pays d'emploi est un atout » | atout / locale | écartée |
+| « Deutsch und Englisch in Wort und Schrift erforderlich » | exigence / citée | écartée |
+| « Spanish ICAO Level ≥ 4 would be a plus » | atout / citée | conservée |
 
 Sans qualificatif, la mention compte comme une exigence : « Flight Simulator
 Instructor – Chinese Speaking » ne présente pas le chinois comme un bonus, il
