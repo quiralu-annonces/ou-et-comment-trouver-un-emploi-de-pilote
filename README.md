@@ -81,10 +81,31 @@ Sans qualificatif, la mention compte comme une exigence : « Flight Simulator
 Instructor – Chinese Speaking » ne présente pas le chinois comme un bonus, il
 définit le poste.
 
-**Portée réelle du filtre** : il ne lit que le titre et l'extrait de 400
-caractères stockés en base, jamais le corps complet de l'annonce. Une exigence
-linguistique enfouie au milieu d'une fiche de poste lui échappe — il attrape ce
-qui est annoncé en vitrine, pas ce qui est écrit en page trois.
+**L'annonce est lue en entier.** Le titre et l'extrait de 400 caractères ne
+suffisaient pas : une exigence linguistique se trouve presque toujours sous
+« Profil recherché », jamais en vitrine. Le collecteur télécharge donc la fiche
+complète, en retire code, navigation, en-tête et pied de page — un sélecteur de
+langue « Deutsch / Español » en haut de page ferait croire à une exigence sur
+chaque annonce du site — puis examine le texte restant.
+
+Le verdict est enregistré une fois pour toutes sur l'annonce :
+
+```json
+"langue_exigee": {"extrait": "fluent Arabic", "nature": "exigence"},
+"texte_lu": true
+```
+
+Deux économies rendent la chose supportable. Les fiches AllFlyingJobs sont déjà
+téléchargées pour en extraire le lieu et la date : leur texte est réutilisé sans
+seconde requête. Et une page inaccessible n'est pas comptée comme « lue » —
+`texte_lu` reste faux et la fiche sera reprise à l'exécution suivante, plutôt
+que d'être tenue pour vierge d'exigence linguistique sur la foi d'un échec
+réseau.
+
+Les annonces entrées en base avant cette lecture sont rattrapées
+progressivement par `relire_annonces` : à chaque exécution, jusqu'à
+`RELECTURE_MAX` fiches encore affichables sont relues. La veille tournant deux
+fois par jour, le retard se résorbe en quelques passages.
 
 ## Compagnies suivies nommément
 

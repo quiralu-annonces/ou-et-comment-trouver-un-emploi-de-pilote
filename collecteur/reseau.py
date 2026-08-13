@@ -32,6 +32,37 @@ def nettoyer_html(texte: str) -> str:
     return re.sub(r"\s+", " ", texte).strip()
 
 
+def texte_visible(page: str, plafond: int = 40000) -> str:
+    """Texte lisible d'une page HTML, débarrassé du code et de la navigation.
+
+    Sert à examiner une annonce **en entier** et non le seul extrait de 400
+    caractères conservé en base : une exigence linguistique est souvent enfouie
+    au milieu d'une fiche de poste, sous « Profil recherché ».
+
+    Les blocs de navigation, d'en-tête et de pied de page sont retirés : ils
+    répètent sur toutes les fiches d'un site des mots qui fausseraient l'analyse
+    (un sélecteur de langue « Deutsch / Español » en haut de page ferait croire
+    à une exigence linguistique sur chaque annonce).
+    """
+    sans_code = re.sub(
+        r"<(script|style|noscript|svg|head|nav|header|footer|form|select)\b[^>]*>.*?</\1>",
+        " ",
+        page or "",
+        flags=re.DOTALL | re.IGNORECASE,
+    )
+    texte = re.sub(r"<[^>]+>", " ", sans_code)
+    texte = html.unescape(texte)
+    return re.sub(r"\s+", " ", texte).strip()[:plafond]
+
+
+def telecharger_texte(url: str, timeout: int = 20) -> str:
+    """Texte lisible d'une page distante ; chaîne vide si elle est inaccessible."""
+    try:
+        return texte_visible(telecharger(url, timeout).decode("utf-8", "replace"))
+    except Exception:  # noqa: BLE001 — une fiche illisible ne bloque pas les autres
+        return ""
+
+
 def date_iso(brut: str) -> str:
     """Normalise une date RFC 822 (flux RSS) en ISO 8601 UTC.
 

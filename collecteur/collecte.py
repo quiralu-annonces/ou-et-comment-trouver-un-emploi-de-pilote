@@ -30,13 +30,23 @@ from compagnies import (  # noqa: E402
     compter_offres,
     offres_compagnie,
 )
-from filtres import motif_exclusion  # noqa: E402
-from reseau import lire_flux_rss, nettoyer_html, telecharger  # noqa: E402
+from filtres import langue_bloquante, motif_exclusion  # noqa: E402
+from reseau import (  # noqa: E402
+    lire_flux_rss,
+    nettoyer_html,
+    telecharger,
+    telecharger_texte,
+    texte_visible,
+)
 
 RACINE = Path(__file__).resolve().parent.parent
 FICHIER_DONNEES = RACINE / "data" / "annonces.json"
 
 DELAI_ENTRE_REQUETES = 1.0  # secondes — rester respectueux des serveurs
+
+# Fenêtre de relecture : elle doit couvrir celle du générateur (31 jours), sans
+# quoi une annonce serait publiée avant d'avoir été lue en entier.
+FENETRE_RELECTURE_JOURS = 32
 
 REGIONS = [
     "Europe",
@@ -239,6 +249,9 @@ def lire_sitemap_allflyingjobs() -> list[dict]:
                 "extrait": extrait,
                 "media": "",
                 "indice_region": f"{lieu} {pays}",
+                # La fiche est déjà téléchargée : on garde son texte entier pour
+                # l'examen linguistique plutôt que de la redemander au serveur.
+                "texte_integral": texte_visible(page),
             }
         )
         time.sleep(AFJ_DELAI)
@@ -258,6 +271,24 @@ def est_pertinent(titre: str, extrait: str, bourse_emploi: bool = False) -> bool
     if not MOTS_PILOTE.search(champ):
         return False
     return bourse_emploi or bool(MOTS_RECRUTEMENT.search(champ))
+
+
+def examiner_langue(lien: str, texte_deja_lu: str = "") -> tuple[dict | None, bool]:
+    """Lit l'annonce en entier et y cherche l'exigence d'une troisième langue.
+
+    Renvoie ``(verdict, lue)`` où ``verdict`` décrit la langue réclamée — ou
+    None s'il n'y en a pas — et ``lue`` dit si le texte intégral a pu être
+    obtenu. La distinction compte : « aucune langue trouvée » et « page
+    inaccessible » ne se valent pas, et seule la première est définitive. Une
+    page inaccessible sera relue à la prochaine exécution.
+    """
+    texte = texte_deja_lu or telecharger_texte(lien)
+    if not texte:
+        return None, False
+    verdict = langue_bloquante(texte)
+    if not verdict:
+        return None, True
+    return {"extrait": verdict[0], "nature": verdict[1]}, True
 
 
 def traduire_fr(texte: str) -> str:
@@ -283,6 +314,60 @@ def sauvegarder_base(base: dict) -> None:
     FICHIER_DONNEES.write_text(
         json.dumps(base, ensure_ascii=False, indent=1), encoding="utf-8"
     )
+
+
+RELECTURE_MAX = 60  # fiches relues par exécution ; le reste suit à la prochaine
+
+
+def relire_annonces(base: dict, maintenant: str) -> None:
+    """Lit en entier les annonces entrées en base avant la lecture intégrale.
+
+    Modifie ``base`` sur place. Seules les annonces encore affichables sont
+    relues — inutile de solliciter les serveurs pour des offres que la fenêtre
+    d'un mois écarte déjà. Le travail est plafonné par exécution : la veille
+    tourne deux fois par jour, le retard se résorbe en quelques passages.
+    """
+    limite = datetime.now(timezone.utc) - timedelta(days=FENETRE_RELECTURE_JOURS)
+    a_relire = []
+    for annonce in base["annonces"]:
+        if annonce.get("texte_lu"):
+            continue
+        brut = annonce.get("date_publication") or annonce.get("premiere_collecte") or ""
+        try:
+            date = datetime.fromisoformat(brut).astimezone(timezone.utc)
+        except ValueError:
+            continue
+        if date >= limite:
+            a_relire.append(annonce)
+
+    if not a_relire:
+        print("Relecture intégrale : rien à relire")
+        return
+
+    a_relire.sort(key=lambda a: a.get("date_publication") or "", reverse=True)
+    reste = max(0, len(a_relire) - RELECTURE_MAX)
+    print(
+        f"Relecture intégrale : {len(a_relire)} annonce(s) jamais lues en entier"
+        + (f" ; {RELECTURE_MAX} cette fois, {reste} à la prochaine exécution" if reste else "")
+    )
+
+    ecartees = 0
+    illisibles = 0
+    for annonce in a_relire[:RELECTURE_MAX]:
+        verdict, lue = examiner_langue(annonce["lien"])
+        if not lue:
+            illisibles += 1
+            time.sleep(DELAI_ENTRE_REQUETES)
+            continue
+        annonce["langue_exigee"] = verdict
+        annonce["texte_lu"] = True
+        annonce["relue_le"] = maintenant
+        if verdict:
+            ecartees += 1
+            print(f"  écartée — {verdict['nature']} « {verdict['extrait'][:60]} » : "
+                  f"{annonce['titre_fr'][:60]}")
+        time.sleep(DELAI_ENTRE_REQUETES)
+    print(f"  {ecartees} annonce(s) écartée(s) sur la langue, {illisibles} page(s) inaccessible(s)")
 
 
 def collecter() -> None:
@@ -346,6 +431,14 @@ def collecter() -> None:
             if identifiant in ids_connus or cle_titre in titres_connus:
                 continue
 
+            # Lecture intégrale : une exigence linguistique se cache presque
+            # toujours sous « Profil recherché », jamais dans le titre.
+            verdict_langue, texte_lu = examiner_langue(
+                item["lien"], item.get("texte_integral", "")
+            )
+            if not item.get("texte_integral"):
+                time.sleep(DELAI_ENTRE_REQUETES)
+
             titre_fr = item["titre"] if langue == "fr" else traduire_fr(item["titre"])
             annonce = {
                 "id": identifiant,
@@ -363,6 +456,8 @@ def collecter() -> None:
                 "date_publication": item["date_publication"],
                 "extrait": item["extrait"],
                 "premiere_collecte": maintenant,
+                "langue_exigee": verdict_langue,
+                "texte_lu": texte_lu,
             }
             nouvelles.append(annonce)
             ids_connus.add(identifiant)
@@ -398,6 +493,10 @@ def collecter() -> None:
 
     # Append-only : on ajoute, on ne supprime jamais.
     base["annonces"].extend(nouvelles)
+
+    # Les annonces entrées en base avant la lecture intégrale n'ont jamais été
+    # examinées au-delà de leur extrait : on rattrape ce retard.
+    relire_annonces(base, maintenant)
     # Un relevé qui échoue ne doit pas effacer le précédent : on fusionne.
     base["compagnies"] = {**base.get("compagnies", {}), **compteurs}
     base["derniere_collecte"] = maintenant

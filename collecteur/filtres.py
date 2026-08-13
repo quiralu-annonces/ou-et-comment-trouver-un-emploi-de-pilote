@@ -381,6 +381,18 @@ def criteres_presents(texte: str) -> list[str]:
     return trouves
 
 
+def langue_ecarte(verdict: tuple[str, str] | dict | None) -> bool:
+    """Ce verdict linguistique justifie-t-il d'écarter l'annonce ?
+
+    Accepte le tuple renvoyé par ``langue_bloquante`` comme le dictionnaire
+    enregistré en base après lecture intégrale de l'annonce.
+    """
+    if not verdict:
+        return False
+    nature = verdict[1] if isinstance(verdict, tuple) else verdict.get("nature")
+    return nature == "exigence" or ECARTER_SUR_LANGUE_ATOUT
+
+
 def texte_annonce(annonce: dict) -> str:
     """Texte sur lequel les filtres travaillent : titres, extrait et adresse.
 
@@ -399,8 +411,12 @@ def motif_exclusion(annonce: dict) -> str | None:
     texte = texte_annonce(annonce)
     if nationalite_bloquante(texte):
         return "nationalite"
-    verdict = langue_bloquante(texte)
-    if verdict and (verdict[1] == "exigence" or ECARTER_SUR_LANGUE_ATOUT):
+    # Verdict issu de la lecture intégrale de l'annonce, quand elle a eu lieu :
+    # il l'emporte, car il a vu la fiche entière là où le titre et l'extrait ne
+    # montrent que la vitrine.
+    if langue_ecarte(annonce.get("langue_exigee")):
+        return "langue"
+    if langue_ecarte(langue_bloquante(texte)):
         return "langue"
     if not criteres_presents(texte):
         return "criteres"
