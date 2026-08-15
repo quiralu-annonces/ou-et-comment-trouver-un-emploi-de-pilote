@@ -14,7 +14,11 @@ from __future__ import annotations
 
 import base64
 import json
+import re
+import shutil
+import subprocess
 import sys
+import tempfile
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -56,7 +60,12 @@ INDICES_CANADA = [
     "vancouver", "ottawa", "calgary", "winnipeg", "transat", "nolinor",
 ]
 
-MODELE = """<!DOCTYPE html>
+# Chaîne BRUTE (r"""). Sans le préfixe r, Python interprète les séquences
+# d'échappement du gabarit : un « \n » écrit dans un message JavaScript
+# devenait une vraie fin de ligne, coupait la chaîne en deux et rendait tout
+# le script invalide — donc la page muette, sans filtres ni annonces. Le
+# préfixe r supprime cette classe d'erreur à la racine.
+MODELE = r"""<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -225,13 +234,16 @@ signalés en jaune sur la fiche.<br>
 <strong>Dernière mise à jour de la base : __DATE_MAJ__</strong>
 </div>
 
-__COMPAGNIES__
-__APPRENTISSAGE__
-
 <div id="toolbar" class="toolbar"></div>
 <div class="searchbar"><input id="search" type="search" placeholder="Rechercher (compagnie, appareil, pays…)" aria-label="Rechercher dans les annonces"></div>
 <div id="countBadge" class="count-badge"></div>
 <div id="list"></div>
+
+<!-- Les dépliants viennent APRÈS les annonces : ce sont des aide-mémoire, pas
+     le contenu principal. Placés avant, ils repoussaient la liste hors de
+     l'écran dès qu'on les ouvrait. -->
+__COMPAGNIES__
+__APPRENTISSAGE__
 
 <footer>
 Page générée automatiquement deux fois par jour par un collecteur open source (bourses d'emploi publiques : SNPI, FFVP, AllFlyingJobs…).<br>
@@ -382,7 +394,7 @@ function exporterDecisions() {
   }
   const nb = Object.keys(decisions).length;
   if (!nb) {
-    alert("Aucune décision à exporter.\n\nMarquez d'abord des annonces « Pas intéressé » ou « Candidature envoyée ».");
+    alert("Aucune décision à exporter. Marquez d'abord des annonces « Pas intéressé » ou « Candidature envoyée ».");
     return;
   }
   const contenu = JSON.stringify(
@@ -668,6 +680,43 @@ def bloc_apprentissage(regles: dict, nb_ecartees: int) -> str:
     )
 
 
+def verifier_javascript(page: str) -> None:
+    """Refuse de publier une page dont le script ne compile pas.
+
+    Toute l'interface — filtres, liste, boutons de décision — est construite
+    par ce script. Une seule erreur de syntaxe et la page ne montre plus que
+    son HTML statique : ni annonces, ni boutons. C'est arrivé, et rien ne le
+    signalait puisque le fichier était généré sans erreur côté Python.
+
+    Le contrôle s'appuie sur Node quand il est disponible — c'est le cas sur
+    GitHub Actions. Sinon il est passé : mieux vaut une vérification parfois
+    absente qu'une génération impossible sur un poste sans Node.
+    """
+    script = re.search(r"<script>(.*?)</script>", page, re.DOTALL)
+    if not script:
+        raise SystemExit("Page générée sans bloc <script> : génération interrompue.")
+    if not shutil.which("node"):
+        print("  (Node absent : syntaxe du script non vérifiée)")
+        return
+
+    with tempfile.NamedTemporaryFile("w", suffix=".js", delete=False, encoding="utf-8") as f:
+        f.write(script.group(1))
+        chemin = f.name
+    try:
+        resultat = subprocess.run(
+            ["node", "--check", chemin], capture_output=True, text=True, timeout=30
+        )
+    finally:
+        Path(chemin).unlink(missing_ok=True)
+
+    if resultat.returncode != 0:
+        raise SystemExit(
+            "Le script de la page ne compile pas — publication interrompue.\n"
+            f"{resultat.stderr.strip()}"
+        )
+    print("  script vérifié : syntaxe valide")
+
+
 def generer() -> None:
     base = json.loads(FICHIER_DONNEES.read_text(encoding="utf-8"))
     annonces = base["annonces"]
@@ -723,6 +772,10 @@ def generer() -> None:
         .replace("__APPRENTISSAGE__", bloc_apprentissage(regles, stats["appris"]))
         .replace("__COCKPIT__", cockpit)
     )
+    # Vérifier AVANT d'écrire : une page cassée ne doit pas remplacer la
+    # précédente, qui elle fonctionnait.
+    verifier_javascript(page)
+
     FICHIER_SITE.parent.mkdir(parents=True, exist_ok=True)
     FICHIER_SITE.write_text(page, encoding="utf-8")
     print(
