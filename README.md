@@ -168,9 +168,20 @@ recherché. Cette garantie ne repose pas sur une liste de noms à écarter — u
 telle liste ignorerait toujours les petits employeurs, et refuser quatre
 annonces de l'« Aéroclub du Pontreau » aurait produit la règle `pontreau` —
 mais sur l'inverse : seul le vocabulaire de `THEMES` et les traits structurés
-sont appris. Aucun nom propre ne peut devenir un motif, connu ou non. Le prix
-est réel : un thème absent de `THEMES` n'est pas appris ; il s'y ajoute en une
-ligne le jour où il apparaît.
+sont appris. Aucun nom propre ne peut devenir un motif, connu ou non.
+
+**Ce qui décide et ce qui alerte sont séparés.** Une liste blanche a un défaut :
+un thème qu'elle ignore — des rotations de nuit, un rythme particulier — reste
+invisible. `signaux_non_appris` compte donc *tous* les mots surreprésentés chez
+vos refus, mais **uniquement pour les afficher** : aucun ne peut créer de règle.
+Le rapport dit « le mot *nuit* revient dans 5 de vos 6 refus » ; vous jugez s'il
+décrit un poste ou nomme une compagnie, et il rejoint `THEMES` en une ligne.
+
+La dissymétrie est délibérée : une règle qui masque une annonce peut coûter un
+poste sans qu'on le sache, elle mérite un vocabulaire contrôlé ; signaler un mot
+ne coûte rien. Un nom d'employeur peut apparaître dans cette liste — c'est sans
+danger, elle n'agit pas — et il s'y montre rarement, un nom propre ne se
+répétant presque jamais d'une annonce à l'autre.
 
 | Seuil | Conséquence |
 | --- | --- |

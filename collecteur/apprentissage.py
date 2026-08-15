@@ -118,6 +118,13 @@ THEMES = {
     "essais": r"essais\s+en\s+vol|test\s+pilot|flight\s+test|r[ée]ception",
     "encadrement": r"chef\s+pilote|chief\s+pilot|responsable|manager|directeur|head\s+of|"
                    r"postholder|\bCDO\b|\bDGO\b",
+    "nuit": r"\bde\s+nuit\b|night\s+(?:flight|duty|operation|shift)|nachtflug|vols?\s+de\s+nuit",
+    "rotation": r"rotation|roster|\b\d{1,2}\s*/\s*\d{1,2}\b\s*(?:jours|days|pattern)?|"
+                r"pattern\s+de\s+vol|bloc\s+de\s+jours",
+    "expatriation": r"expatri|relocation|permis\s+de\s+travail|work\s+permit|visa\s+sponsor|"
+                    r"logement\s+fourni|accommodation\s+provided",
+    "commuting": r"commut|navette\s+[ée]quipage|base\s+libre|home\s+base\s+flexible",
+    "astreinte": r"astreinte|standby|on[\s-]?call|r[ée]serve\s+op[ée]rationnelle",
 }
 
 POSTES = {
@@ -129,9 +136,72 @@ POSTES = {
 }
 
 
+# Mots trop courants pour signaler quoi que ce soit. Ne servent qu'au rapport
+# de signaux ci-dessous, jamais à une règle.
+MOTS_COURANTS = {
+    "pour", "avec", "dans", "des", "les", "une", "sur", "aux", "par", "chez", "sont",
+    "the", "and", "for", "with", "our", "you", "your", "are", "job", "jobs", "from",
+    "emploi", "poste", "postes", "recherche", "recrute", "offre", "offres", "aeroport",
+    "aviation", "avion", "aircraft", "airlines", "airline", "flight", "vol", "vols",
+    "pilote", "pilotes", "pilot", "pilots", "copilote", "officer", "temps", "plein",
+    "full", "time", "type", "rated", "rating", "based", "base", "experience",
+}
+
+
 def _sans_accent(texte: str) -> str:
     texte = unicodedata.normalize("NFKD", texte)
     return "".join(c for c in texte if not unicodedata.combining(c))
+
+
+def signaux_non_appris(refusees: list[dict], retenues: list[dict], limite: int = 12) -> list[dict]:
+    """Mots surreprésentés chez les annonces refusées, **sans aucun effet**.
+
+    C'est la réponse au défaut de la liste blanche : un thème qu'elle ne
+    contient pas — des rotations de nuit, un rythme particulier — reste
+    invisible à l'apprentissage. Ce rapport le rend visible sans lui donner le
+    droit d'écarter quoi que ce soit.
+
+    La séparation est délibérée. Une règle qui masque une annonce peut coûter
+    un poste sans qu'on le sache : elle mérite un vocabulaire contrôlé. Signaler
+    qu'un mot revient souvent ne coûte rien — au pire, on aura montré un mot
+    inutile. Rien ne justifie la même prudence des deux côtés.
+
+    Les noms d'employeurs figureront dans cette liste : c'est sans danger,
+    puisqu'elle n'agit pas. C'est au lecteur de distinguer ce qui décrit un
+    poste de ce qui nomme une compagnie — jugement qu'aucune liste ne peut
+    rendre à sa place.
+    """
+    if not refusees:
+        return []
+
+    def mots(annonce: dict) -> set[str]:
+        titre = _sans_accent(
+            f"{annonce.get('titre_fr', '')} {annonce.get('titre_original', '')}"
+        ).lower()
+        return {m for m in re.findall(r"[a-z]{4,}", titre) if m not in MOTS_COURANTS}
+
+    compte_refus: Counter[str] = Counter()
+    for annonce in refusees:
+        compte_refus.update(mots(annonce))
+    compte_reste: Counter[str] = Counter()
+    for annonce in retenues:
+        compte_reste.update(mots(annonce))
+
+    # Ce qui est déjà couvert par le vocabulaire appris n'a rien à signaler.
+    deja_couvert = set()
+    for annonce in refusees:
+        deja_couvert |= {t.split(":", 1)[1].lower() for t in caracteristiques(annonce)}
+
+    signaux = []
+    for mot, refus in compte_refus.items():
+        if refus < MIN_REFUS_PENALITE or mot in deja_couvert:
+            continue
+        total = refus + compte_reste.get(mot, 0)
+        taux = refus / total if total else 0.0
+        if taux >= TAUX_REFUS_PENALITE:
+            signaux.append({"mot": mot, "refus": refus, "total": total, "taux": round(taux, 2)})
+    signaux.sort(key=lambda s: (-s["refus"], -s["taux"]))
+    return signaux[:limite]
 
 
 def caracteristiques(annonce: dict) -> set[str]:
@@ -260,6 +330,7 @@ def deduire_regles(annonces: list[dict], decisions: dict[str, str]) -> dict:
         "bonus": proteges,
         "nb_refus": len(refusees),
         "nb_candidatures": len(candidatees),
+        "signaux": signaux_non_appris(refusees, retenues),
     }
 
 
@@ -304,4 +375,10 @@ def resume(regles: dict) -> str:
         lignes.append("Motifs pénalisés (descendus dans la liste, jamais masqués) :")
         for motif, p in sorted(regles["penalites"].items(), key=lambda x: -x[1]["refus"]):
             lignes.append(f"  – {motif} (refusée {p['refus']} fois sur {p['total']}, {p['taux']:.0%})")
+    if regles.get("signaux"):
+        lignes.append("Signaux NON appris — aucun effet, à examiner :")
+        for s in regles["signaux"]:
+            lignes.append(f"  ? « {s['mot']} » ({s['refus']} de vos refus sur {s['total']}, {s['taux']:.0%})")
+        lignes.append("    Si l'un décrit un contenu de poste et non une compagnie, il peut")
+        lignes.append("    rejoindre THEMES et devenir un critère à part entière.")
     return "\n".join(lignes)

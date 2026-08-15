@@ -640,6 +640,22 @@ def bloc_apprentissage(regles: dict, nb_ecartees: int) -> str:
             "descendent en bas de liste, elles restent consultables.</p>"
             f'<ul class="compagnies">{lignes(regles["penalites"])}</ul>'
         )
+    if regles.get("signaux"):
+        corps += (
+            "<p><strong>Signaux repérés mais non appris</strong> — ils n'écartent rien et ne "
+            "pénalisent rien. Le tri n'apprend que sur un vocabulaire décrivant le poste, "
+            "jamais sur un nom d'employeur ; ces mots-là reviennent pourtant dans vos refus. "
+            "Si l'un d'eux décrit un contenu (un rythme, une mission, une contrainte) plutôt "
+            "qu'une compagnie, signalez-le : il deviendra un critère.</p>"
+            '<ul class="compagnies">'
+            + "".join(
+                f'<li><code>{_echapper(s["mot"])}</code> '
+                f'<span class="detail">{s["refus"]} de vos refus sur {s["total"]} '
+                f'annonces contenant ce mot ({s["taux"]:.0%})</span></li>'
+                for s in regles["signaux"]
+            )
+            + "</ul>"
+        )
 
     return (
         '<details class="compagnies">\n'
