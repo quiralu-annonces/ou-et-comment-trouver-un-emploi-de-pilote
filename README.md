@@ -154,10 +154,23 @@ Le fichier accepte aussi une liste d'exports, le lien pouvant être partagé.
 python collecteur/genere_site.py    # affiche le rapport d'ajustement
 ```
 
-**Ce qui est déduit.** Chaque annonce est décrite par des traits structurés —
-région, appareil, type de poste, contrat, marqueurs du profil, mentions
-linguistiques — plus quelques mots de son titre. Un trait fréquent chez les
-annonces refusées et rare ailleurs devient une règle.
+**Ce qui est déduit.** Chaque annonce est décrite par des traits qui décrivent
+son **contenu** : région, appareil, type de poste, nature de la mission (fret,
+médical, offshore, travail aérien, affaires, école…), contrat, marqueurs du
+profil, mentions linguistiques. Un trait fréquent chez les annonces refusées et
+rare ailleurs devient une règle.
+
+**Ni la compagnie ni la source ne sont jamais des motifs.** Écarter une annonce
+juge son contenu, pas l'employeur qui la publie ni la bourse d'emploi où elle a
+été trouvée : refuser quatre annonces d'un transporteur ne veut pas dire qu'on
+refuse ce transporteur, sa cinquième offre peut être exactement le poste
+recherché. Cette garantie ne repose pas sur une liste de noms à écarter — une
+telle liste ignorerait toujours les petits employeurs, et refuser quatre
+annonces de l'« Aéroclub du Pontreau » aurait produit la règle `pontreau` —
+mais sur l'inverse : seul le vocabulaire de `THEMES` et les traits structurés
+sont appris. Aucun nom propre ne peut devenir un motif, connu ou non. Le prix
+est réel : un thème absent de `THEMES` n'est pas appris ; il s'y ajoute en une
+ligne le jour où il apparaît.
 
 | Seuil | Conséquence |
 | --- | --- |

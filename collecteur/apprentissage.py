@@ -27,6 +27,17 @@ type d'appareil qui déplaisait. Trois garde-fous l'en empêchent :
 
 Les motifs qui franchissent les trois seuils écartent l'annonce. Ceux qui n'en
 franchissent qu'une partie ne font que la faire descendre dans la liste.
+
+**Ni la compagnie ni la source ne sont jamais des motifs.** Écarter une annonce
+juge son contenu — le poste, l'appareil, la mission, l'expérience exigée —, pas
+l'employeur qui la publie ni la bourse d'emploi où elle a été trouvée. Refuser
+quatre annonces d'un transporteur ne veut pas dire qu'on refuse ce transporteur :
+sa cinquième offre peut être exactement le poste recherché.
+
+Cette garantie ne repose pas sur une liste de noms à écarter — une telle liste
+ignorerait toujours les petits employeurs — mais sur l'inverse : **seul un
+vocabulaire décrivant le contenu du poste est appris**. Aucun nom propre ne peut
+donc devenir un motif, qu'il soit connu ou non.
 """
 
 from __future__ import annotations
@@ -71,21 +82,50 @@ CONTRATS = {
     "temps_partiel": r"temps\s+partiel|part[\s-]?time|\b\d{2}\s?-\s?\d{2}\s?%",
 }
 
+# Nature de la mission. Ce vocabulaire est une **liste blanche** : seuls ces
+# thèmes sont appris, jamais un mot quelconque de l'intitulé.
+#
+# Une liste noire de noms de compagnies ne suffisait pas. Elle ne peut pas
+# connaître les petits employeurs : refuser quatre annonces de l'« Aéroclub du
+# Pontreau » aurait produit la règle « pontreau », c'est-à-dire précisément le
+# nom d'un employeur. En n'apprenant que sur un vocabulaire de contenu, aucun
+# nom propre ne peut devenir un motif, connu ou non.
+#
+# Le prix à payer est réel : un thème absent de cette liste n'est pas appris.
+# Il s'ajoute ici en une ligne le jour où il apparaît.
+THEMES = {
+    "fret": r"\bfret\b|cargo|freight|colis|courrier\s+postal",
+    "medical": r"m[ée]dical|\bEVASAN\b|\bHEMS\b|ambulance|air\s+ambulance|sanitaire|"
+               r"[ée]vacuation|medevac|patient",
+    "secours": r"\bSAR\b|search\s+and\s+rescue|sauvetage|secours|recherche\s+et\s+sauvetage",
+    "offshore": r"offshore|plateforme\s+p[ée]troli|oil\s+and\s+gas",
+    "incendie": r"incendie|firefight|bombardier\s+d'eau|water\s+bomb|lutte\s+contre\s+le\s+feu",
+    "travail_aerien": r"[ée]pandage|agricole|spraying|photo\s?grammetri|surveillance\s+a[ée]rienne|"
+                      r"calibration|banderole|largage|parachut|remorquage",
+    "charter": r"\bcharter\b|\bACMI\b|wet[\s-]?lease|affr[êe]tement",
+    "affaires": r"affaires|business\s+aviation|corporate|\bVIP\b|jet\s+priv|private\s+jet|"
+                r"executive\s+aviation",
+    "regional": r"r[ée]gional|regional|court[\s-]?courrier|short[\s-]?haul|commuter",
+    "long_courrier": r"long[\s-]?courrier|long[\s-]?haul|widebody|gros[\s-]?porteur",
+    "helicoptere": r"h[ée]licopt[èe]re|helicopter|rotorcraft|voilure\s+tournante",
+    "planeur": r"planeur|glider|vol\s+[àa]\s+voile|remorqueur",
+    "ulm": r"\bULM\b|microlight|ultralight",
+    "hydravion": r"hydravion|seaplane|floatplane|amphibie",
+    "brousse": r"brousse|bush\s+pilot|piste\s+sommaire|unpaved|humanitaire|humanitarian|"
+               r"\bONU\b|\bUN\b\s+mission",
+    "militaire": r"militaire|military|d[ée]fense|defence|arm[ée]e",
+    "ecole": r"[ée]cole|school|\bATO\b|\bFTO\b|acad[ée]mie|academy|formation\s+ab\s?initio",
+    "essais": r"essais\s+en\s+vol|test\s+pilot|flight\s+test|r[ée]ception",
+    "encadrement": r"chef\s+pilote|chief\s+pilot|responsable|manager|directeur|head\s+of|"
+                   r"postholder|\bCDO\b|\bDGO\b",
+}
+
 POSTES = {
     "commandant": r"\bcapitaine|captain|commandant\b|\bPIC\b|\bCDB\b",
     "copilote": r"copilot|co-?pilote|first\s+officer|\bOPL\b|\bSIC\b",
     "instructeur": r"instructeur|instructor|\bTRI\b|\bTRE\b|\bSFI\b|\bFI\b",
     "simulateur": r"simulateur|simulator|\bFFS\b|synth[ée]tique|synthetic",
     "cadet": r"cadet|ab[\s-]?initio|entry[\s-]?level",
-}
-
-# Mots vides : trop fréquents pour caractériser quoi que ce soit.
-MOTS_VIDES = {
-    "pour", "avec", "dans", "des", "les", "une", "les", "sur", "aux", "par", "chez",
-    "the", "and", "for", "with", "our", "you", "your", "are", "job", "jobs",
-    "emploi", "poste", "recherche", "recrute", "offre", "aeroport", "airport",
-    "aviation", "avion", "aircraft", "airlines", "airline", "air", "flight", "vol",
-    "hf", "mfd", "mwd", "temps", "plein", "full", "time",
 }
 
 
@@ -100,9 +140,13 @@ def caracteristiques(annonce: dict) -> set[str]:
     On privilégie des traits structurés — région, appareil, type de poste,
     contrat — aux simples mots du titre. Sur quelques dizaines de décisions,
     un motif structuré se vérifie ; un mot isolé se retrouve par hasard.
+
+    Ni la compagnie ni la bourse d'emploi n'y figurent : écarter une annonce
+    juge son contenu, pas l'employeur qui la publie ni le site où elle a été
+    trouvée.
     """
     texte = texte_annonce(annonce)
-    traits = {f"region:{annonce.get('region', '?')}", f"source:{annonce.get('source', '?')}"}
+    traits = {f"region:{annonce.get('region', '?')}"}
 
     for appareil in APPAREILS.findall(texte):
         traits.add(f"appareil:{_sans_accent(appareil).upper().replace(' ', '').replace('-', '')}")
@@ -122,12 +166,9 @@ def caracteristiques(annonce: dict) -> set[str]:
     if verdict:
         traits.add(f"langue:{verdict.get('nature')}/{verdict.get('source', 'citee')}")
 
-    # Quelques mots du titre, en dernier recours : ils rattrapent ce que les
-    # traits structurés ne prévoient pas (« fret », « médical », « offshore »).
-    titre = _sans_accent(f"{annonce.get('titre_fr', '')} {annonce.get('titre_original', '')}").lower()
-    for mot in re.findall(r"[a-z]{4,}", titre):
-        if mot not in MOTS_VIDES:
-            traits.add(f"mot:{mot}")
+    for nom, motif in THEMES.items():
+        if re.search(motif, texte, re.IGNORECASE):
+            traits.add(f"theme:{nom}")
 
     return traits
 
