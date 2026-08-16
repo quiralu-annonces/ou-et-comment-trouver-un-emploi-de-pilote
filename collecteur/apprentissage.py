@@ -288,7 +288,11 @@ def deduire_regles(annonces: list[dict], decisions: dict[str, str]) -> dict:
         statut = decisions.get(annonce["id"])
         if statut == "Ecartee":
             refusees.append(annonce)
-        elif statut == "Postule":
+        elif statut in ("Postule", "Refus"):
+            # « Refus reçu » signale une candidature envoyée, donc un intérêt
+            # manifeste : c'est l'employeur qui a dit non, pas l'utilisateur.
+            # Ranger ces annonces ailleurs qu'avec les candidatures aurait privé
+            # le veto de la moitié de ses preuves d'intérêt.
             candidatees.append(annonce)
         else:
             retenues.append(annonce)

@@ -324,16 +324,30 @@ function renderCard(a) {
    seul pont entre les deux. Il ne contient que des identifiants et des statuts
    — le texte des annonces est déjà en base, inutile de le renvoyer. */
 function exporterDecisions() {
+  /* On lit le stockage du navigateur, PAS la liste affichée. Une annonce
+     quitte la page au bout d'un mois, mais la décision prise dessus reste
+     mémorisée : parcourir ANNONCES perdait tout l'historique, c'est-à-dire
+     justement ce dont l'apprentissage a le plus besoin. Le collecteur, lui,
+     retrouve ces annonces — sa base ne supprime jamais rien. */
   const decisions = {};
-  for (const a of ANNONCES) {
-    const s = statusMap[a.id];
-    if (s && s !== "Nouvelle") decisions[a.id] = s;
+  let horsPage = 0;
+  const affichees = new Set(ANNONCES.map(a => a.id));
+  for (let i = 0; i < localStorage.length; i++) {
+    const cle = localStorage.key(i);
+    if (!cle || cle.indexOf(CLE) !== 0) continue;
+    const statut = localStorage.getItem(cle);
+    if (!statut || statut === "Nouvelle") continue;
+    const id = cle.slice(CLE.length);
+    decisions[id] = statut;
+    if (!affichees.has(id)) horsPage++;
   }
   const nb = Object.keys(decisions).length;
   if (!nb) {
     alert("Aucune décision à exporter. Marquez d'abord des annonces « Pas intéressé » ou « Candidature envoyée ».");
     return;
   }
+  alert(nb + " décision(s) exportée(s), dont " + horsPage
+    + " sur des annonces qui ne sont plus affichées. Déposez le fichier dans data/decisions.json du dépôt.");
   const contenu = JSON.stringify(
     { version: 1, exporte_le: new Date().toISOString(), decisions }, null, 1);
   const lien = document.createElement("a");
