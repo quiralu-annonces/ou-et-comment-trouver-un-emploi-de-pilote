@@ -26,10 +26,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from apprentissage import (  # noqa: E402
     charger_decisions,
     deduire_regles,
-    motif_appris,
+    evaluer,
     resume,
-    score,
 )
+from criteres import libelle as libelle_critere  # noqa: E402
 from compagnies import COMPAGNIES, MODES_AUTOMATIQUES  # noqa: E402
 from filtres import criteres_presents, motif_exclusion, texte_annonce  # noqa: E402
 
@@ -142,6 +142,11 @@ MODELE = r"""<!DOCTYPE html>
   /* Marqueurs du profil recherché : mis en avant, ce sont eux qui justifient
      la présence de l'annonce dans la liste. */
   .tag.critere { color: var(--accent-2); border-color: var(--accent-2); }
+  /* Critères appris des décisions : le vert dit « proche de ce que vous avez
+     retenu », le rouge « proche de ce que vous avez écarté ». */
+  .tag.favorable { color: var(--success); border-color: var(--success); }
+  .tag.defavorable { color: var(--danger); border-color: var(--danger); }
+  .tag.examen { color: #0f1416; background: var(--accent-2); border-color: var(--accent-2); font-weight: 700; }
   .tag.status-Nouvelle { color: var(--accent); border-color: var(--accent); }
   .tag.status-Ecartee { color: var(--danger); border-color: var(--danger); }
   .tag.status-Postule { color: var(--success); border-color: var(--success); }
@@ -356,6 +361,15 @@ function renderCard(a) {
   const datePub = a.date_publication ? ` — publiée le ${dateCourte(a.date_publication)}` : "";
   const criteres = (a.criteres || [])
     .map(c => `<span class="tag critere">✓ ${echap(c)}</span>`).join("");
+  /* Critères appris de VOS décisions, distincts des marqueurs du profil :
+     les favorables viennent de vos candidatures, les défavorables de vos
+     refus. Les deux ensembles ne se mélangent jamais. */
+  const favorables = (a.favorables || [])
+    .map(c => `<span class="tag favorable">▲ ${echap(c)}</span>`).join("");
+  const defavorables = (a.defavorables || [])
+    .map(c => `<span class="tag defavorable">▼ ${echap(c)}</span>`).join("");
+  const examen = a.issue === "examiner"
+    ? `<span class="tag examen">⚠ À examiner — ressemble à vos refus (score ${a.score})</span>` : "";
   return `
   <div class="card ${dismissedCls}">
     <div class="card-title">${echap(a.titre_fr)}</div>
@@ -365,7 +379,7 @@ function renderCard(a) {
       <span class="tag">${echap(a.region)}</span>
       <span class="tag">${echap((a.langue || "").toUpperCase())}</span>
       <span class="tag ${statusMeta.cls}">${statusMeta.label === "Nouvelles" ? "Nouvelle" : statusMeta.label}</span>
-      ${criteres}
+      ${criteres}${favorables}${defavorables}${examen}
     </div>
     ${extrait}
     ${details}
@@ -504,7 +518,7 @@ def appliquer_regles(annonces: list[dict], regles: dict | None = None) -> tuple[
     stats = {
         "actualites": 0, "nationalite": 0, "langue": 0, "criteres": 0,
         "trop_anciennes": 0, "sans_date": 0, "etats_unis": 0, "canada": 0,
-        "appris": 0,
+        "appris": 0, "a_examiner": 0,
     }
 
     for annonce in annonces:
@@ -547,20 +561,25 @@ def appliquer_regles(annonces: list[dict], regles: dict | None = None) -> tuple[
                 stats["etats_unis"] += 1
                 continue
 
-        # Règles apprises des refus : elles s'appliquent en dernier, après les
-        # règles fixes, pour qu'un motif appris ne masque jamais la vraie raison
-        # d'une exclusion dans le compte-rendu.
-        appris = motif_appris(annonce, regles)
-        if appris:
+        # Règles apprises des décisions : elles s'appliquent en dernier, après
+        # les règles fixes, pour qu'un motif appris ne masque jamais la vraie
+        # raison d'une exclusion dans le compte-rendu.
+        verdict = evaluer(annonce, regles)
+        if verdict["issue"] == "ecarter":
             stats["appris"] += 1
             continue
+        if verdict["issue"] == "examiner":
+            stats["a_examiner"] += 1
 
         # Chaque annonce porte les marqueurs qui lui ont valu d'être retenue :
         # affichés sur la fiche, ils disent en un coup d'œil pourquoi elle est là.
         retenues.append({
             **annonce,
             "criteres": criteres_presents(texte_annonce(annonce)),
-            "score": score(annonce, regles),
+            "score": verdict["score"],
+            "issue": verdict["issue"],
+            "favorables": [libelle_critere(m) for m in verdict["favorables"]],
+            "defavorables": [libelle_critere(m) for m in verdict["defavorables"]],
         })
 
     return retenues, stats
@@ -640,7 +659,7 @@ def bloc_apprentissage(regles: dict, nb_ecartees: int) -> str:
     être invisible : une règle tirée de quelques clics peut se tromper, et on ne
     peut la corriger que si l'on sait qu'elle existe.
     """
-    if not regles.get("nb_refus"):
+    if not regles.get("nb_refus") and not regles.get("nb_candidatures"):
         return ""
 
     def lignes(motifs: dict) -> str:
@@ -651,7 +670,26 @@ def bloc_apprentissage(regles: dict, nb_ecartees: int) -> str:
             for motif, p in sorted(motifs.items(), key=lambda x: -x[1]["refus"])
         )
 
+    def lignes_favorables(motifs: dict) -> str:
+        return "".join(
+            f'<li><code>{_echapper(libelle_critere(motif))}</code> '
+            f'<span class="detail">retenu {p["candidatures"]} fois sur {p["total"]} '
+            f'annonces qui le portent ({p["taux"]:.0%}) — poids +{p["poids"]}</span></li>'
+            for motif, p in sorted(motifs.items(), key=lambda x: -x[1]["candidatures"])
+        )
+
     corps = ""
+    if regles.get("favorables"):
+        corps += (
+            f"<p><strong>{len(regles['favorables'])} critère(s) favorable(s)</strong>, déduits de vos "
+            f"candidatures envoyées. Une annonce qui les porte remonte dans la liste :</p>"
+            f'<ul class="compagnies">{lignes_favorables(regles["favorables"])}</ul>'
+        )
+    elif regles["nb_candidatures"]:
+        corps += (
+            "<p>Aucun critère favorable pour l'instant : aucun ne se répète assez d'une "
+            "candidature à l'autre pour être tenu pour représentatif.</p>"
+        )
     if regles["exclusions"]:
         corps += (
             f"<p><strong>{len(regles['exclusions'])} motif(s) écartent automatiquement une annonce</strong> "
@@ -801,7 +839,8 @@ def generer() -> None:
         f"{stats['criteres']} sans aucun marqueur du profil recherché, "
         f"{stats['trop_anciennes']} de plus de {FENETRE_JOURS} jours, "
         f"{stats['etats_unis']} aux États-Unis, {stats['sans_date']} sans date exploitable\n"
-        f"             {stats['appris']} sur une règle apprise des refus\n"
+        f"             {stats['appris']} sur une règle apprise des refus "
+        f"({stats['a_examiner']} signalée(s) « à examiner », affichée(s))\n"
         f"  reclassées « {REGION_CANADA} » : {stats['canada']}\n"
         f"\n--- Rapport d'ajustement ---\n{resume(regles)}"
     )

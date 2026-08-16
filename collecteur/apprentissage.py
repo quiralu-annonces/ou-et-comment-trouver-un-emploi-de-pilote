@@ -60,8 +60,22 @@ TAUX_REFUS_EXCLUSION = 0.75  # part des annonces portant ce motif qui ont été 
 MIN_REFUS_PENALITE = 2
 TAUX_REFUS_PENALITE = 0.50
 
-POIDS_PENALITE = -2   # points retirés par motif pénalisé
-POIDS_BONUS = 1       # points ajoutés par motif présent dans une candidature
+# Versant positif, aux mêmes seuils que le négatif. Il n'y en avait aucun :
+# une seule candidature suffisait à installer un critère favorable définitif,
+# ce qui est exactement le travers que l'on refuse au versant négatif.
+MIN_CANDIDATURES_FORT = 3
+TAUX_CANDIDATURES_FORT = 0.75
+MIN_CANDIDATURES_FAIBLE = 2
+TAUX_CANDIDATURES_FAIBLE = 0.50
+
+POIDS_PENALITE = -2       # motif proche des refus
+POIDS_FAVORABLE_FAIBLE = 2
+POIDS_FAVORABLE_FORT = 4
+
+# En dessous de ce score, l'annonce n'est pas masquée mais signalée : c'est la
+# troisième issue, celle qui évite de trancher sur un faisceau d'indices encore
+# mince. Seules les règles d'exclusion, elles, masquent vraiment.
+SEUIL_A_EXAMINER = -4
 
 # --- Extraction des caractéristiques ---------------------------------------
 
@@ -73,59 +87,6 @@ APPAREILS = re.compile(
     r"EC\d{3}|H1\d{2}|AW1\d{2}|S-?76|B(?:ell)?\s?4\d{2})\b",
     re.IGNORECASE,
 )
-
-CONTRATS = {
-    "cdi": r"\bCDI\b|permanent\b|full[\s-]?time\s+permanent",
-    "cdd": r"\bCDD\b|fixed[\s-]?term|temporary|saisonnier|seasonal",
-    "freelance": r"freelance|contractor|self[\s-]?employed|ind[ée]pendant",
-    "benevole": r"b[ée]n[ée]vole|volunteer|non\s+r[ée]mun[ée]r|unpaid",
-    "temps_partiel": r"temps\s+partiel|part[\s-]?time|\b\d{2}\s?-\s?\d{2}\s?%",
-}
-
-# Nature de la mission. Ce vocabulaire est une **liste blanche** : seuls ces
-# thèmes sont appris, jamais un mot quelconque de l'intitulé.
-#
-# Une liste noire de noms de compagnies ne suffisait pas. Elle ne peut pas
-# connaître les petits employeurs : refuser quatre annonces de l'« Aéroclub du
-# Pontreau » aurait produit la règle « pontreau », c'est-à-dire précisément le
-# nom d'un employeur. En n'apprenant que sur un vocabulaire de contenu, aucun
-# nom propre ne peut devenir un motif, connu ou non.
-#
-# Le prix à payer est réel : un thème absent de cette liste n'est pas appris.
-# Il s'ajoute ici en une ligne le jour où il apparaît.
-THEMES = {
-    "fret": r"\bfret\b|cargo|freight|colis|courrier\s+postal",
-    "medical": r"m[ée]dical|\bEVASAN\b|\bHEMS\b|ambulance|air\s+ambulance|sanitaire|"
-               r"[ée]vacuation|medevac|patient",
-    "secours": r"\bSAR\b|search\s+and\s+rescue|sauvetage|secours|recherche\s+et\s+sauvetage",
-    "offshore": r"offshore|plateforme\s+p[ée]troli|oil\s+and\s+gas",
-    "incendie": r"incendie|firefight|bombardier\s+d'eau|water\s+bomb|lutte\s+contre\s+le\s+feu",
-    "travail_aerien": r"[ée]pandage|agricole|spraying|photo\s?grammetri|surveillance\s+a[ée]rienne|"
-                      r"calibration|banderole|largage|parachut|remorquage",
-    "charter": r"\bcharter\b|\bACMI\b|wet[\s-]?lease|affr[êe]tement",
-    "affaires": r"affaires|business\s+aviation|corporate|\bVIP\b|jet\s+priv|private\s+jet|"
-                r"executive\s+aviation",
-    "regional": r"r[ée]gional|regional|court[\s-]?courrier|short[\s-]?haul|commuter",
-    "long_courrier": r"long[\s-]?courrier|long[\s-]?haul|widebody|gros[\s-]?porteur",
-    "helicoptere": r"h[ée]licopt[èe]re|helicopter|rotorcraft|voilure\s+tournante",
-    "planeur": r"planeur|glider|vol\s+[àa]\s+voile|remorqueur",
-    "ulm": r"\bULM\b|microlight|ultralight",
-    "hydravion": r"hydravion|seaplane|floatplane|amphibie",
-    "brousse": r"brousse|bush\s+pilot|piste\s+sommaire|unpaved|humanitaire|humanitarian|"
-               r"\bONU\b|\bUN\b\s+mission",
-    "militaire": r"militaire|military|d[ée]fense|defence|arm[ée]e",
-    "ecole": r"[ée]cole|school|\bATO\b|\bFTO\b|acad[ée]mie|academy|formation\s+ab\s?initio",
-    "essais": r"essais\s+en\s+vol|test\s+pilot|flight\s+test|r[ée]ception",
-    "encadrement": r"chef\s+pilote|chief\s+pilot|responsable|manager|directeur|head\s+of|"
-                   r"postholder|\bCDO\b|\bDGO\b",
-    "nuit": r"\bde\s+nuit\b|night\s+(?:flight|duty|operation|shift)|nachtflug|vols?\s+de\s+nuit",
-    "rotation": r"rotation|roster|\b\d{1,2}\s*/\s*\d{1,2}\b\s*(?:jours|days|pattern)?|"
-                r"pattern\s+de\s+vol|bloc\s+de\s+jours",
-    "expatriation": r"expatri|relocation|permis\s+de\s+travail|work\s+permit|visa\s+sponsor|"
-                    r"logement\s+fourni|accommodation\s+provided",
-    "commuting": r"commut|navette\s+[ée]quipage|base\s+libre|home\s+base\s+flexible",
-    "astreinte": r"astreinte|standby|on[\s-]?call|r[ée]serve\s+op[ée]rationnelle",
-}
 
 POSTES = {
     "commandant": r"\bcapitaine|captain|commandant\b|\bPIC\b|\bCDB\b",
@@ -225,20 +186,20 @@ def caracteristiques(annonce: dict) -> set[str]:
         if re.search(motif, texte, re.IGNORECASE):
             traits.add(f"poste:{nom}")
 
-    for nom, motif in CONTRATS.items():
-        if re.search(motif, texte, re.IGNORECASE):
-            traits.add(f"contrat:{nom}")
 
     for critere in criteres_presents(texte):
         traits.add(f"marqueur:{critere}")
+
+    # Critères extraits de la fiche complète lors de la collecte : expérience
+    # exigée, licences, certificats, séniorité, contrat, secteur… C'est là que
+    # se trouve l'essentiel de ce qui distingue deux annonces, le titre et
+    # l'extrait n'en montrant qu'une vitrine.
+    traits.update(annonce.get("criteres") or [])
 
     verdict = annonce.get("langue_exigee")
     if verdict:
         traits.add(f"langue:{verdict.get('nature')}/{verdict.get('source', 'citee')}")
 
-    for nom, motif in THEMES.items():
-        if re.search(motif, texte, re.IGNORECASE):
-            traits.add(f"theme:{nom}")
 
     return traits
 
@@ -297,12 +258,10 @@ def deduire_regles(annonces: list[dict], decisions: dict[str, str]) -> dict:
         else:
             retenues.append(annonce)
 
-    if not refusees:
-        return {
-            "exclusions": {}, "penalites": {}, "bonus": set(),
-            "nb_refus": 0, "nb_candidatures": len(candidatees),
-        }
-
+    # Aucune sortie anticipée sur l'absence de refus : les deux versants sont
+    # indépendants. Un utilisateur qui ne marque que des candidatures doit voir
+    # ses critères favorables se construire, sans avoir à écarter quoi que ce
+    # soit d'abord.
     compte_refus: Counter[str] = Counter()
     for annonce in refusees:
         compte_refus.update(caracteristiques(annonce))
@@ -328,9 +287,32 @@ def deduire_regles(annonces: list[dict], decisions: dict[str, str]) -> dict:
         elif refus >= MIN_REFUS_PENALITE and taux >= TAUX_REFUS_PENALITE:
             penalites[motif] = preuve
 
+    # --- Versant positif, construit exactement comme le négatif -------------
+    #
+    # Deux ensembles distincts, jamais mélangés : un critère favorable naît des
+    # candidatures, un critère défavorable des refus. Ils ne se compensent pas
+    # à la construction — seul le score final les additionne.
+    compte_candidatures: Counter[str] = Counter()
+    for annonce in candidatees:
+        compte_candidatures.update(caracteristiques(annonce))
+
+    favorables: dict[str, dict] = {}
+    for motif, retenu in compte_candidatures.items():
+        total = retenu + compte_reste.get(motif, 0) + compte_refus.get(motif, 0)
+        taux = retenu / total if total else 0.0
+        preuve = {"candidatures": retenu, "total": total, "taux": round(taux, 2)}
+        if retenu >= MIN_CANDIDATURES_FORT and taux >= TAUX_CANDIDATURES_FORT:
+            favorables[motif] = {**preuve, "poids": POIDS_FAVORABLE_FORT}
+        elif retenu >= MIN_CANDIDATURES_FAIBLE and taux >= TAUX_CANDIDATURES_FAIBLE:
+            favorables[motif] = {**preuve, "poids": POIDS_FAVORABLE_FAIBLE}
+
     return {
         "exclusions": exclusions,
         "penalites": penalites,
+        "favorables": favorables,
+        # Le veto reste distinct des critères favorables : il protège dès la
+        # première candidature, alors qu'un critère favorable exige d'être
+        # confirmé. Protéger et valoriser ne demandent pas la même preuve.
         "bonus": proteges,
         "nb_refus": len(refusees),
         "nb_candidatures": len(candidatees),
@@ -347,28 +329,65 @@ def motif_appris(annonce: dict, regles: dict) -> str | None:
     return None
 
 
-def score(annonce: dict, regles: dict) -> int:
-    """Score de pertinence : négatif si l'annonce ressemble aux refus passés."""
+def evaluer(annonce: dict, regles: dict) -> dict:
+    """Confronte une annonce aux deux ensembles de critères appris.
+
+    Renvoie le détail de la correspondance — quels critères favorables et
+    défavorables sont présents, leur cumul, et l'issue qui en découle :
+    « conserver », « examiner » ou « ecarter ». La troisième issue existe pour
+    ne pas trancher sur un faisceau d'indices encore mince : l'annonce reste
+    visible, simplement signalée.
+    """
     traits = caracteristiques(annonce)
-    total = 0
-    for motif in regles.get("penalites", {}):
-        if motif in traits:
-            total += POIDS_PENALITE
-    for motif in regles.get("bonus", set()):
-        if motif in traits:
-            total += POIDS_BONUS
-    return total
+
+    exclusion = next((m for m in regles.get("exclusions", {}) if m in traits), None)
+    positifs = [m for m in regles.get("favorables", {}) if m in traits]
+    negatifs = [m for m in regles.get("penalites", {}) if m in traits]
+
+    points = sum(regles["favorables"][m]["poids"] for m in positifs)
+    points += POIDS_PENALITE * len(negatifs)
+
+    if exclusion:
+        issue = "ecarter"
+    elif points <= SEUIL_A_EXAMINER:
+        issue = "examiner"
+    else:
+        issue = "conserver"
+
+    return {
+        "issue": issue,
+        "score": points,
+        "exclusion": exclusion,
+        "favorables": positifs,
+        "defavorables": negatifs,
+    }
+
+
+def score(annonce: dict, regles: dict) -> int:
+    """Score de pertinence seul, pour le tri."""
+    return evaluer(annonce, regles)["score"]
 
 
 def resume(regles: dict) -> str:
     """Rapport d'ajustement : quelles règles ont été déduites, et sur quelles preuves."""
-    if not regles.get("nb_refus"):
+    # Une seule candidature suffit à faire vivre le rapport : c'est l'absence
+    # de toute décision qui le rend vide, pas l'absence de refus.
+    if not regles.get("nb_refus") and not regles.get("nb_candidatures"):
         return "Aucune décision exportée : aucune règle apprise."
 
     lignes = [
         f"{regles['nb_refus']} annonce(s) refusée(s), "
         f"{regles['nb_candidatures']} candidature(s) analysée(s)."
     ]
+    if regles.get("favorables"):
+        lignes.append("CRITÈRES FAVORABLES (issus des candidatures envoyées) :")
+        for motif, p in sorted(regles["favorables"].items(), key=lambda x: -x[1]["candidatures"]):
+            lignes.append(
+                f"  + {motif} (retenu {p['candidatures']} fois sur {p['total']}, "
+                f"{p['taux']:.0%}, poids +{p['poids']})"
+            )
+    elif regles["nb_candidatures"]:
+        lignes.append("Aucun critère favorable : aucun ne se répète assez d'une candidature à l'autre.")
     if regles["exclusions"]:
         lignes.append("Exclusions apprises :")
         for motif, p in sorted(regles["exclusions"].items(), key=lambda x: -x[1]["refus"]):

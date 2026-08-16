@@ -30,6 +30,7 @@ from compagnies import (  # noqa: E402
     compter_offres,
     offres_compagnie,
 )
+from criteres import VERSION_ANALYSE_CRITERES, extraire as extraire_criteres  # noqa: E402
 from filtres import (  # noqa: E402
     VERSION_ANALYSE_LANGUE,
     langue_bloquante,
@@ -278,22 +279,26 @@ def est_pertinent(titre: str, extrait: str, bourse_emploi: bool = False) -> bool
     return bourse_emploi or bool(MOTS_RECRUTEMENT.search(champ))
 
 
-def examiner_langue(lien: str, texte_deja_lu: str = "") -> tuple[dict | None, bool]:
-    """Lit l'annonce en entier et y cherche l'exigence d'une troisième langue.
+def examiner_annonce(lien: str, texte_deja_lu: str = "") -> tuple[dict | None, list[str], bool]:
+    """Lit l'annonce en entier et en tire tout ce qu'on sait en tirer.
 
-    Renvoie ``(verdict, lue)`` où ``verdict`` décrit la langue réclamée — ou
-    None s'il n'y en a pas — et ``lue`` dit si le texte intégral a pu être
-    obtenu. La distinction compte : « aucune langue trouvée » et « page
-    inaccessible » ne se valent pas, et seule la première est définitive. Une
-    page inaccessible sera relue à la prochaine exécution.
+    Renvoie ``(verdict_langue, criteres, lue)``. ``lue`` dit si le texte
+    intégral a pu être obtenu : la distinction compte, car « rien trouvé » et
+    « page inaccessible » ne se valent pas. Seule la première est définitive ;
+    une page inaccessible sera relue à la prochaine exécution.
+
+    Les deux analyses partagent le même téléchargement. C'est la raison d'être
+    de cette fonction : la fiche ne doit être demandée qu'une fois au serveur,
+    quel que soit le nombre de choses qu'on veut y lire.
     """
     texte = texte_deja_lu or telecharger_texte(lien)
     if not texte:
-        return None, False
+        return None, [], False
     verdict = langue_bloquante(texte)
-    if not verdict:
-        return None, True
-    return {"extrait": verdict[0], "nature": verdict[1], "source": verdict[2]}, True
+    verdict_dict = (
+        {"extrait": verdict[0], "nature": verdict[1], "source": verdict[2]} if verdict else None
+    )
+    return verdict_dict, extraire_criteres(texte), True
 
 
 def traduire_fr(texte: str) -> str:
@@ -335,8 +340,14 @@ def relire_annonces(base: dict, maintenant: str) -> None:
     limite = datetime.now(timezone.utc) - timedelta(days=FENETRE_RELECTURE_JOURS)
     a_relire = []
     for annonce in base["annonces"]:
-        # Jamais lue, ou lue par une version antérieure des motifs.
-        if annonce.get("analyse_langue", 0) >= VERSION_ANALYSE_LANGUE:
+        # Jamais lue, ou lue par une version antérieure de l'une des analyses.
+        # Les deux partagent le téléchargement : dès que l'une est en retard,
+        # la fiche est reprise et les deux sont refaites.
+        a_jour = (
+            annonce.get("analyse_langue", 0) >= VERSION_ANALYSE_LANGUE
+            and annonce.get("analyse_criteres", 0) >= VERSION_ANALYSE_CRITERES
+        )
+        if a_jour:
             continue
         brut = annonce.get("date_publication") or annonce.get("premiere_collecte") or ""
         try:
@@ -359,16 +370,20 @@ def relire_annonces(base: dict, maintenant: str) -> None:
 
     ecartees = 0
     illisibles = 0
+    total_criteres = 0
     for annonce in a_relire[:RELECTURE_MAX]:
-        verdict, lue = examiner_langue(annonce["lien"])
+        verdict, criteres, lue = examiner_annonce(annonce["lien"])
         if not lue:
             illisibles += 1
             time.sleep(DELAI_ENTRE_REQUETES)
             continue
         annonce["langue_exigee"] = verdict
+        annonce["criteres"] = criteres
         annonce["texte_lu"] = True
         annonce["analyse_langue"] = VERSION_ANALYSE_LANGUE
+        annonce["analyse_criteres"] = VERSION_ANALYSE_CRITERES
         annonce["relue_le"] = maintenant
+        total_criteres += len(criteres)
         if verdict:
             # Le sort dépend de la nature ET du réglage : dire « écartée » pour
             # un simple atout conservé rendrait le journal trompeur.
@@ -380,7 +395,12 @@ def relire_annonces(base: dict, maintenant: str) -> None:
             print(f"  {sort} — {verdict['nature']} « {verdict['extrait'][:55]} » : "
                   f"{annonce['titre_fr'][:55]}")
         time.sleep(DELAI_ENTRE_REQUETES)
-    print(f"  {ecartees} annonce(s) écartée(s) sur la langue, {illisibles} page(s) inaccessible(s)")
+    lues = min(len(a_relire), RELECTURE_MAX) - illisibles
+    moyenne = total_criteres / lues if lues else 0
+    print(
+        f"  {ecartees} annonce(s) écartée(s) sur la langue, {illisibles} page(s) inaccessible(s), "
+        f"{total_criteres} critère(s) extrait(s) ({moyenne:.1f} par annonce)"
+    )
 
 
 def collecter() -> None:
@@ -444,9 +464,9 @@ def collecter() -> None:
             if identifiant in ids_connus or cle_titre in titres_connus:
                 continue
 
-            # Lecture intégrale : une exigence linguistique se cache presque
-            # toujours sous « Profil recherché », jamais dans le titre.
-            verdict_langue, texte_lu = examiner_langue(
+            # Lecture intégrale : exigences linguistiques comme critères de
+            # poste se cachent sous « Profil recherché », jamais dans le titre.
+            verdict_langue, criteres, texte_lu = examiner_annonce(
                 item["lien"], item.get("texte_integral", "")
             )
             if not item.get("texte_integral"):
@@ -470,8 +490,10 @@ def collecter() -> None:
                 "extrait": item["extrait"],
                 "premiere_collecte": maintenant,
                 "langue_exigee": verdict_langue,
+                "criteres": criteres,
                 "texte_lu": texte_lu,
                 "analyse_langue": VERSION_ANALYSE_LANGUE if texte_lu else 0,
+                "analyse_criteres": VERSION_ANALYSE_CRITERES if texte_lu else 0,
             }
             nouvelles.append(annonce)
             ids_connus.add(identifiant)

@@ -6053,8 +6053,18 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:astreinte|exigence",
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "experience:heures:500-1500|exigence",
+    "licence:FAA|exigence",
+    "responsabilite:encadrement|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "7d73d5d82430cac6",
@@ -6069,8 +6079,18 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:astreinte|exigence",
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "experience:heures:500-1500|exigence",
+    "licence:FAA|exigence",
+    "responsabilite:encadrement|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "321d9e9cd25a987a",
@@ -6085,8 +6105,15 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "ca4d88849ac35987",
@@ -6101,8 +6128,17 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:astreinte|exigence",
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "experience:heures:1500-3000|exigence",
+    "qualification:de type à détenir|exigence",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "a49fb36e7051b8be",
@@ -6117,8 +6153,18 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:astreinte|exigence",
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "experience:heures:3000+|exigence",
+    "qualification:de type à détenir|exigence",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "c4a972bdef06b318",
@@ -6133,8 +6179,16 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "qualification:de type non requise|exigence",
+    "responsabilite:instruction|exigence",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "774e5c57e684fc89",
@@ -6149,8 +6203,15 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "responsabilite:instruction|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "15ee94dd3ef520e3",
@@ -6165,8 +6226,16 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "contrat:temps partiel|mention",
+    "responsabilite:instruction|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "47dea74a61435edb",
@@ -6181,8 +6250,15 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "responsabilite:instruction|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "d490b28f6519f074",
@@ -6197,8 +6273,15 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "responsabilite:instruction|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "1df950e66e23f90d",
@@ -6213,8 +6296,15 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "responsabilite:instruction|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "336252e31799462f",
@@ -6229,8 +6319,15 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "responsabilite:instruction|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "78d9df29c8b0200b",
@@ -6245,8 +6342,15 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "responsabilite:instruction|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "9ddf52e034c3155d",
@@ -6261,8 +6365,20 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:hélicoptère|mention",
+    "contrat:expatriation|mention",
+    "experience:heures:500-1500|exigence",
+    "licence:FAA|exigence",
+    "licence:IR|atout",
+    "secteur:fret|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "5ac34f58bfebccff",
@@ -6277,8 +6393,20 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:vols de nuit|exigence",
+    "contrat:expatriation|mention",
+    "experience:heures:500-1500|exigence",
+    "licence:FAA|exigence",
+    "licence:IR|exigence",
+    "secteur:fret|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "564e6fc7335e0c0b",
@@ -6297,8 +6425,15 @@
     "source": "citee"
    },
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "responsabilite:encadrement|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "0b4a8b249af289bc",
@@ -6317,8 +6452,18 @@
     "source": "citee"
    },
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:militaire|mention",
+    "activite:régional|mention",
+    "experience:heures:0-500|mention",
+    "licence:FAA|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "83d01050722e1857",
@@ -6333,8 +6478,17 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "experience:heures:0-500|exigence",
+    "licence:EASA|mention",
+    "licence:FAA|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "a85693511324ebe2",
@@ -6349,8 +6503,15 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "9b43bec285ce439d",
@@ -6365,8 +6526,17 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "licence:ATPL|mention",
+    "licence:EASA|mention",
+    "responsabilite:instruction|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "170460e993a7144c",
@@ -6381,8 +6551,19 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "licence:ATPL|mention",
+    "licence:EASA|mention",
+    "licence:FAA|mention",
+    "qualification:de type non requise|exigence",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "239193b22de90b23",
@@ -6397,8 +6578,18 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "experience:heures:500-1500|exigence",
+    "licence:ATPL|exigence",
+    "licence:EASA|exigence",
+    "licence:FAA|exigence",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "8a4ee9d597c5ddbd",
@@ -6413,8 +6604,18 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "experience:heures:500-1500|mention",
+    "responsabilite:encadrement|exigence",
+    "secteur:fret|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "a4469d7bb6596a01",
@@ -6429,8 +6630,17 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "experience:heures:0-500|exigence",
+    "licence:FAA|exigence",
+    "secteur:aviation d'affaires|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "6f75a1fa29832813",
@@ -6445,8 +6655,21 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:militaire|atout",
+    "activite:régional|mention",
+    "certificat:classe 1|mention",
+    "experience:heures:3000+|mention",
+    "langue:anglais6|mention",
+    "licence:ATPL|mention",
+    "licence:EASA|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "c79238a32bce6613",
@@ -6461,8 +6684,22 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "activite:vols de nuit|exigence",
+    "contrat:expatriation|mention",
+    "contrat:indépendant|mention",
+    "experience:heures:500-1500|exigence",
+    "licence:FAA|exigence",
+    "licence:IR|exigence",
+    "secteur:fret|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "2dc61affa096184c",
@@ -6525,8 +6762,18 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|atout",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "certificat:classe 1|atout",
+    "experience:heures:0-500|atout",
+    "qualification:de type à détenir|atout",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "639f0c78f7e7c2fd",
@@ -6541,8 +6788,17 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:temps partiel|mention",
+    "responsabilite:instruction|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "db2773f1274fbc9a",
@@ -6593,8 +6849,21 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:hélicoptère|mention",
+    "activite:régional|mention",
+    "contrat:expatriation|mention",
+    "experience:heures:0-500|exigence",
+    "licence:FAA|exigence",
+    "licence:IR|exigence",
+    "secteur:fret|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "87ab2a833b559afc",
@@ -6609,8 +6878,21 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:hélicoptère|mention",
+    "activite:régional|mention",
+    "contrat:expatriation|mention",
+    "experience:heures:0-500|exigence",
+    "licence:FAA|exigence",
+    "licence:IR|exigence",
+    "secteur:fret|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "858250a7301358d4",
@@ -6625,8 +6907,18 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "experience:heures:3000+|mention",
+    "licence:ATPL|mention",
+    "licence:CPL|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "ad41d9c6d8facfec",
@@ -6641,8 +6933,16 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "experience:heures:3000+|exigence",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "a1afbebd5c2031fa",
@@ -6661,8 +6961,28 @@
     "source": "citee"
    },
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "certificat:UPRT|exigence",
+    "certificat:classe 1|exigence",
+    "langue:anglais5|exigence",
+    "licence:ATPL|exigence",
+    "licence:CPL|exigence",
+    "licence:IR|mention",
+    "licence:MPL|mention",
+    "licence:licence nationale|mention",
+    "responsabilite:contrôle|mention",
+    "responsabilite:encadrement|exigence",
+    "responsabilite:instruction|mention",
+    "secteur:formation|mention",
+    "seniorite:confirmé|mention",
+    "seniorite:débutant|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "f583802b10d71f68",
@@ -6677,8 +6997,20 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:rotation imposée|exigence",
+    "contrat:CDI|exigence",
+    "experience:heures:500-1500|exigence",
+    "langue:anglais4|exigence",
+    "licence:ATPL|exigence",
+    "licence:EASA|exigence",
+    "seniorite:confirmé|exigence"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "0617295d70290d5b",
@@ -6693,8 +7025,18 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:astreinte|exigence",
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "experience:heures:1500-3000|exigence",
+    "qualification:de type à détenir|exigence",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "597e2de07ae12924",
@@ -6709,8 +7051,15 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "94406eac288521c3",
@@ -6725,8 +7074,23 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:rotation imposée|mention",
+    "activite:régional|mention",
+    "certificat:classe 1|mention",
+    "experience:heures:500-1500|exigence",
+    "langue:anglais4|mention",
+    "licence:ATPL|exigence",
+    "licence:CPL|exigence",
+    "licence:EASA|exigence",
+    "licence:FAA|exigence",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "0ecdb8b60e98b91c",
@@ -6742,7 +7106,14 @@
    "langue_exigee": null,
    "texte_lu": true,
    "analyse_langue": 3,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00"
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "159d7bd54a5f6fc5",
@@ -6757,8 +7128,23 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "certificat:classe 1|exigence",
+    "contrat:expatriation|mention",
+    "experience:heures:3000+|exigence",
+    "langue:anglais5|atout",
+    "licence:ATPL|mention",
+    "licence:EASA|mention",
+    "licence:FAA|mention",
+    "licence:IR|exigence",
+    "seniorite:confirmé|exigence"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "4f783d7ddd3c5110",
@@ -6773,8 +7159,16 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:hélicoptère|mention",
+    "activite:régional|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "6bbbcdff3d51a16e",
@@ -6789,8 +7183,24 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:militaire|exigence",
+    "activite:régional|mention",
+    "activite:vols de nuit|mention",
+    "contrat:expatriation|mention",
+    "contrat:indépendant|mention",
+    "experience:heures:500-1500|mention",
+    "licence:FAA|exigence",
+    "licence:IR|mention",
+    "secteur:fret|mention",
+    "secteur:secours et sanitaire|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "087bc8bfd13d1429",
@@ -6805,8 +7215,18 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:rotation imposée|exigence",
+    "contrat:CDI|exigence",
+    "langue:anglais4|exigence",
+    "licence:EASA|exigence",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "b011f53c257842b3",
@@ -6825,8 +7245,19 @@
     "source": "citee"
    },
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:rotation imposée|mention",
+    "activite:régional|mention",
+    "experience:heures:1500-3000|exigence",
+    "licence:EASA|mention",
+    "qualification:de type à détenir|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "cf4872b0a97a2dce",
@@ -6841,8 +7272,20 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T16:07:13.323940+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "contrat:indépendant|mention",
+    "experience:heures:0-500|exigence",
+    "experience:heures:1500-3000|exigence",
+    "langue:anglais4|exigence",
+    "licence:ATPL|exigence",
+    "licence:EASA|exigence",
+    "responsabilite:encadrement|mention",
+    "secteur:offshore|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 1
   },
   {
    "id": "cfad0f07a8b4d739",
@@ -6857,8 +7300,18 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T16:07:13.323940+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "experience:heures:0-500|exigence",
+    "experience:heures:0-500|mention",
+    "experience:heures:500-1500|exigence",
+    "experience:heures:500-1500|mention",
+    "licence:FAA|mention",
+    "secteur:fret|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 1
   },
   {
    "id": "1468193341b24bbc",
@@ -6873,8 +7326,18 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T16:07:13.323940+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "experience:heures:0-500|exigence",
+    "experience:heures:0-500|mention",
+    "experience:heures:500-1500|exigence",
+    "experience:heures:500-1500|mention",
+    "licence:FAA|mention",
+    "secteur:fret|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 1
   },
   {
    "id": "238ab3bb62873b03",
@@ -6889,8 +7352,18 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T16:07:13.323940+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "experience:heures:0-500|exigence",
+    "experience:heures:0-500|mention",
+    "experience:heures:500-1500|exigence",
+    "experience:heures:500-1500|mention",
+    "licence:FAA|mention",
+    "secteur:fret|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 1
   },
   {
    "id": "689ea40f8ac1cd5f",
@@ -6905,8 +7378,18 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T16:07:13.323940+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "experience:heures:0-500|exigence",
+    "experience:heures:0-500|mention",
+    "experience:heures:500-1500|exigence",
+    "experience:heures:500-1500|mention",
+    "licence:FAA|mention",
+    "secteur:fret|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 1
   },
   {
    "id": "6c2ab36d5e07f68a",
@@ -6921,8 +7404,18 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T16:07:13.323940+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "experience:heures:0-500|exigence",
+    "experience:heures:0-500|mention",
+    "experience:heures:500-1500|exigence",
+    "experience:heures:500-1500|mention",
+    "licence:FAA|mention",
+    "secteur:fret|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 1
   },
   {
    "id": "ce6e14001c4fcd0e",
@@ -6937,8 +7430,18 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T16:07:13.323940+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "experience:heures:0-500|exigence",
+    "experience:heures:0-500|mention",
+    "experience:heures:500-1500|exigence",
+    "experience:heures:500-1500|mention",
+    "licence:FAA|mention",
+    "secteur:fret|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 1
   },
   {
    "id": "3d2bc73915448328",
@@ -6953,8 +7456,17 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T16:07:13.323940+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "experience:heures:0-500|exigence",
+    "experience:heures:1500-3000|exigence",
+    "experience:heures:3000+|exigence",
+    "experience:heures:500-1500|exigence",
+    "qualification:de type à détenir|exigence",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 1
   },
   {
    "id": "5a7db8ed5194fe34",
@@ -7000,8 +7512,14 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T16:07:13.323940+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "certificat:classe 1|exigence",
+    "contrat:expatriation|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 1
   },
   {
    "id": "f16cec47c566f644",
@@ -7016,8 +7534,13 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T16:07:13.323940+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "licence:EASA|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 1
   },
   {
    "id": "479b82e4fd8e817a",
@@ -7036,8 +7559,25 @@
     "source": "citee"
    },
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T16:07:13.323940+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "certificat:UPRT|mention",
+    "certificat:classe 1|exigence",
+    "langue:anglais5|exigence",
+    "licence:ATPL|mention",
+    "licence:CPL|mention",
+    "licence:IR|mention",
+    "licence:MPL|mention",
+    "licence:licence nationale|mention",
+    "responsabilite:encadrement|mention",
+    "responsabilite:instruction|mention",
+    "secteur:formation|mention",
+    "secteur:travail aérien|mention",
+    "seniorite:confirmé|mention",
+    "seniorite:débutant|mention"
+   ],
+   "analyse_criteres": 1
   },
   {
    "id": "03d111f4de165c0b",
@@ -7064,8 +7604,17 @@
    "premiere_collecte": "2026-08-12T19:10:34.510888+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "activite:astreinte|exigence",
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "experience:heures:1500-3000|exigence",
+    "qualification:de type à détenir|exigence",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "32107569fd012d8f",
@@ -7080,8 +7629,20 @@
    "premiere_collecte": "2026-08-13T06:42:35.413527+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00",
-   "analyse_langue": 3
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "analyse_langue": 3,
+   "criteres": [
+    "certificat:classe 1|atout",
+    "contrat:CDD|mention",
+    "experience:heures:500-1500|atout",
+    "langue:anglais5|exigence",
+    "langue:francais6|atout",
+    "licence:ATPL gelé|exigence",
+    "licence:ATPL|exigence",
+    "licence:CPL|mention",
+    "licence:IR|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "83d844362061d3aa",
@@ -7097,7 +7658,21 @@
    "langue_exigee": null,
    "texte_lu": true,
    "analyse_langue": 3,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00"
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:hélicoptère|mention",
+    "activite:militaire|exigence",
+    "activite:vols de nuit|mention",
+    "contrat:indépendant|mention",
+    "experience:heures:0-500|exigence",
+    "licence:FAA|exigence",
+    "licence:IR|mention",
+    "secteur:fret|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "414232a7572725fe",
@@ -7113,7 +7688,15 @@
    "langue_exigee": null,
    "texte_lu": true,
    "analyse_langue": 3,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00"
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:rotation imposée|mention",
+    "responsabilite:instruction|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
   },
   {
    "id": "f5afed35515d2daf",
@@ -7129,18 +7712,369 @@
    "langue_exigee": null,
    "texte_lu": true,
    "analyse_langue": 3,
-   "relue_le": "2026-08-13T13:27:42.331909+00:00"
+   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "experience:heures:500-1500|exigence",
+    "licence:EASA|mention",
+    "licence:FAA|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "analyse_criteres": 4
+  },
+  {
+   "id": "f0b327ac9c17e3dd",
+   "titre_original": "Gulfstream G650 Captain - Commutable Northeast — US-NJ-Teterboro",
+   "titre_fr": "Capitaine du Gulfstream G650 - Commutable Nord-Est — US-NJ-Teterboro",
+   "lien": "https://www.allflyingjobs.com/jobs/gulfstream-g650-captain-commutable-northeast",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-15T17:35:01+00:00",
+   "extrait": "Gulfstream G650 Captain - Commutable Northeast Location US-NJ-Teterboro ID 2026-1982 Category Pilot Position Type Full-Time",
+   "premiere_collecte": "2026-08-16T16:07:13.323940+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:astreinte|exigence",
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "experience:heures:1500-3000|exigence",
+    "qualification:de type à détenir|exigence",
+    "seniorite:confirmé|mention"
+   ],
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 4,
+   "relue_le": "2026-08-16T17:39:04.869722+00:00"
+  },
+  {
+   "id": "66c1fbcc3153838f",
+   "titre_original": "Pilot Fixed Wing — US-NE-North Platte",
+   "titre_fr": "Pilote à voilure fixe — US-NE-North Platte",
+   "lien": "https://www.allflyingjobs.com/jobs/pilot-fixed-wing",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-14T15:40:00+00:00",
+   "extrait": "Pilot Fixed Wing Location US-NE-North Platte ID 2026-10373 Category Aviation Position Type Regular Full-Time Remote No",
+   "premiere_collecte": "2026-08-16T16:07:13.323940+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "activite:vols de nuit|exigence",
+    "contrat:expatriation|mention",
+    "contrat:indépendant|mention",
+    "experience:heures:500-1500|exigence",
+    "licence:FAA|exigence",
+    "licence:IR|exigence",
+    "secteur:fret|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 4,
+   "relue_le": "2026-08-16T17:39:04.869722+00:00"
+  },
+  {
+   "id": "11c27676b3366c94",
+   "titre_original": "Helicopter Pilot — US-IN-Corydon",
+   "titre_fr": "Pilote d'hélicoptère — US-IN-Corydon",
+   "lien": "https://www.allflyingjobs.com/jobs/helicopter-pilot-19",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-14T12:09:00+00:00",
+   "extrait": "Helicopter Pilot Location US-IN-Corydon ID 2026-10397 Category Aviation Position Type Regular Full-Time Remote No Location",
+   "premiere_collecte": "2026-08-16T16:07:13.323940+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:hélicoptère|mention",
+    "contrat:expatriation|mention",
+    "experience:heures:0-500|exigence",
+    "licence:FAA|exigence",
+    "licence:IR|exigence",
+    "secteur:fret|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 4,
+   "relue_le": "2026-08-16T17:39:04.869722+00:00"
+  },
+  {
+   "id": "114e872bf41e2d21",
+   "titre_original": "First Officer - Embraer Regional Jet 135/145 (ERJ) — Contour BNA - Nashville, TN 37214",
+   "titre_fr": "Copilote - Embraer Regional Jet 135/145 (ERJ) — Contour BNA - Nashville, TN 37214",
+   "lien": "https://www.allflyingjobs.com/jobs/first-officer-embraer-regional-jet-135145-erj-0",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-15T02:45:02+00:00",
+   "extrait": "Contour is a long-established aviation services company with a diverse range of capabilities. At Contour Airlines, our core values",
+   "premiere_collecte": "2026-08-16T16:07:13.323940+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 4,
+   "relue_le": "2026-08-16T17:39:04.869722+00:00"
+  },
+  {
+   "id": "81ac5c54dd78f032",
+   "titre_original": "First Officer - Bombardier Canadair Regional Jet (CRJ200) — Contour BNA - Nashville, TN 37214",
+   "titre_fr": "Copilote - Bombardier Canadair Regional Jet (CRJ200) — Contour BNA - Nashville, TN 37214",
+   "lien": "https://www.allflyingjobs.com/jobs/first-officer-bombardier-canadair-regional-jet-crj200-0",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-15T02:45:02+00:00",
+   "extrait": "Contour is a long-established aviation services company with a diverse range of capabilities. At Contour Airlines, our core values",
+   "premiere_collecte": "2026-08-16T16:07:13.323940+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:militaire|mention",
+    "activite:régional|mention",
+    "experience:heures:0-500|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 4,
+   "relue_le": "2026-08-16T17:39:04.869722+00:00"
+  },
+  {
+   "id": "51dfc729e8abebe6",
+   "titre_original": "Flexjet Europe First Officer: UK & EU Based — GB-Remote",
+   "titre_fr": "Premier officier de Flexjet Europe : basé au Royaume-Uni et dans l'UE – GB-Remote",
+   "lien": "https://www.allflyingjobs.com/jobs/flexjet-europe-first-officer-uk-eu-based",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Europe",
+   "date_publication": "2026-08-14T17:50:01+00:00",
+   "extrait": "Join a global leader in private aviation, offering access to an ultramodern fleet of private aircraft through fractional ownership,",
+   "premiere_collecte": "2026-08-16T16:07:13.323940+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "certificat:MCC|mention",
+    "certificat:UPRT|mention",
+    "certificat:classe 1|mention",
+    "experience:heures:500-1500|exigence",
+    "langue:anglais5|exigence",
+    "licence:ATPL|exigence",
+    "licence:EASA|exigence",
+    "licence:IR|mention",
+    "responsabilite:encadrement|mention",
+    "secteur:aviation d'affaires|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 4,
+   "relue_le": "2026-08-16T17:39:04.869722+00:00"
+  },
+  {
+   "id": "80f6ac5609c877a8",
+   "titre_original": "Falcon 7X Captain - East Coast Commutable — US-FL-West Palm Beach",
+   "titre_fr": "Capitaine du Falcon 7X - Commutable sur la côte Est — US-FL-West Palm Beach",
+   "lien": "https://www.allflyingjobs.com/jobs/falcon-7x-captain-east-coast-commutable",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-14T17:25:02+00:00",
+   "extrait": "Falcon 7X Captain - East Coast Commutable Location US-FL-West Palm Beach ID 2026-1980 Category Pilot Position Type Full-Time",
+   "premiere_collecte": "2026-08-16T16:07:13.323940+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:astreinte|exigence",
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "experience:heures:3000+|exigence",
+    "qualification:de type à détenir|exigence",
+    "seniorite:confirmé|mention"
+   ],
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 4,
+   "relue_le": "2026-08-16T17:39:04.869722+00:00"
+  },
+  {
+   "id": "3f32aa8de0ed6c94",
+   "titre_original": "SIC – Falcon 900EX Regional Commute — Jet Linx Minneapolis",
+   "titre_fr": "SIC – Navette régionale Falcon 900EX – Jet Linx Minneapolis",
+   "lien": "https://www.allflyingjobs.com/jobs/sic-falcon-900ex-regional-commute",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-14T15:10:02+00:00",
+   "extrait": "Apply Description Second in Command – Falcon 900EXFull-Time – Commutable, USA Jet Linx is seeking qualified Pilot in Command can",
+   "premiere_collecte": "2026-08-16T16:07:13.323940+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:astreinte|exigence",
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "experience:heures:0-500|exigence",
+    "licence:FAA|exigence",
+    "responsabilite:encadrement|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 4,
+   "relue_le": "2026-08-16T17:39:04.869722+00:00"
+  },
+  {
+   "id": "52d5fc0625e9aaa6",
+   "titre_original": "Expired: PIC – Gulfstream G280 **PT 91 Only**",
+   "titre_fr": "Expiré : PIC – Gulfstream G280 **PT 91 uniquement**",
+   "lien": "https://www.allflyingjobs.com/jobs/pic-gulfstream-g280-pt-91-only",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Monde",
+   "date_publication": "2026-08-14T15:10:02+00:00",
+   "extrait": "Apply Description Pilot in Command – Gulfstream G80 Full-Time – Miami, FL Jet Linx is seeking qualified Pilot in Command candida",
+   "premiere_collecte": "2026-08-16T16:07:13.323940+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 4,
+   "relue_le": "2026-08-16T17:39:04.869722+00:00"
+  },
+  {
+   "id": "d35f46a242e7ea86",
+   "titre_original": "Direct Entry Pilot - Long-haul - UK CAA licence holder — Heathrow, England",
+   "titre_fr": "Pilote à entrée directe - Long-courrier - Titulaire d'une licence CAA au Royaume-Uni — Heathrow, Angleterre",
+   "lien": "https://www.allflyingjobs.com/jobs/direct-entry-pilot-long-haul-uk-caa-licence-holder",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Europe",
+   "date_publication": "2026-08-13T18:45:02+00:00",
+   "extrait": "On this page you can apply for Pilot job vacancy: Direct Entry Pilot - Long-haul - UK CAA licence holder",
+   "premiere_collecte": "2026-08-16T16:07:13.323940+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:long-courrier|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 4,
+   "relue_le": "2026-08-16T17:39:04.869722+00:00"
+  },
+  {
+   "id": "46c8da90d1792d48",
+   "titre_original": "Jet Aviation Staffing-Chief Pilot-Part 135 — Uvalde, TX, US",
+   "titre_fr": "Jet Aviation Staffing-Chief Pilot-Part 135 — Uvalde, TX, États-Unis",
+   "lien": "https://www.allflyingjobs.com/jobs/jet-aviation-staffing-chief-pilot-part-135",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-13T18:20:01+00:00",
+   "extrait": "Jet Aviation Staffing-Chief Pilot-Part 135 Location: Uvalde, TX, US Flexible Work Arrangement: Remote Job Category: Flight",
+   "premiere_collecte": "2026-08-16T16:07:13.323940+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:charter|mention",
+    "activite:essais en vol|mention",
+    "licence:FAA|exigence",
+    "responsabilite:contrôle|mention",
+    "responsabilite:encadrement|mention",
+    "responsabilite:sécurité|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 4,
+   "relue_le": "2026-08-16T17:39:04.869722+00:00"
+  },
+  {
+   "id": "fef9119b6c7839af",
+   "titre_original": "FAA First Officer (BE350) — Papua New Guinea",
+   "titre_fr": "Premier officier de la FAA (BE350) — Papouasie-Nouvelle-Guinée",
+   "lien": "https://www.allflyingjobs.com/jobs/faa-first-officer-be350",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Monde",
+   "date_publication": "2026-08-13T15:40:02+00:00",
+   "extrait": "",
+   "premiere_collecte": "2026-08-16T16:07:13.323940+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:rotation imposée|mention",
+    "activite:régional|atout",
+    "licence:CPL|exigence",
+    "licence:FAA|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 4,
+   "relue_le": "2026-08-16T17:39:04.869722+00:00"
+  },
+  {
+   "id": "729d91ede118477b",
+   "titre_original": "Praetor 600 (EMB-550) - Type Rated Pilots (PIC & SIC) - EU Based - EASA (EJME) — London, GB, W8 5EH",
+   "titre_fr": "Praetor 600 (EMB-550) - Pilotes qualifiés de type (PIC et SIC) - Basés dans l'UE - EASA (EJME) - Londres, GB, W8 5EH",
+   "lien": "https://www.allflyingjobs.com/jobs/praetor-600-emb-550-type-rated-pilots-pic-sic-eu-based-easa-ejme-0",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Europe",
+   "date_publication": "2026-08-16T17:20:01+00:00",
+   "extrait": "Title: Praetor 600 (EMB-550) - Type Rated Pilots (PIC & SIC) - EU Based - EASA (EJME) Company: Area of Interest: Crewmembers",
+   "premiere_collecte": "2026-08-16T17:39:04.869722+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:militaire|atout",
+    "activite:régional|mention",
+    "certificat:classe 1|mention",
+    "experience:heures:3000+|mention",
+    "langue:anglais6|mention",
+    "licence:ATPL|mention",
+    "licence:EASA|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 4
   }
  ],
- "derniere_collecte": "2026-08-16T13:43:06.112375+00:00",
+ "derniere_collecte": "2026-08-16T17:39:04.869722+00:00",
  "compagnies": {
   "French bee": {
    "offres_ouvertes": 4,
-   "releve_le": "2026-08-16T13:43:06.112375+00:00"
+   "releve_le": "2026-08-16T17:39:04.869722+00:00"
   },
   "Air Caraïbes": {
    "offres_ouvertes": 7,
-   "releve_le": "2026-08-16T13:43:06.112375+00:00"
+   "releve_le": "2026-08-16T17:39:04.869722+00:00"
   }
  }
 }

@@ -154,11 +154,35 @@ Le fichier accepte aussi une liste d'exports, le lien pouvant être partagé.
 python collecteur/genere_site.py    # affiche le rapport d'ajustement
 ```
 
-**Ce qui est déduit.** Chaque annonce est décrite par des traits qui décrivent
-son **contenu** : région, appareil, type de poste, nature de la mission (fret,
-médical, offshore, travail aérien, affaires, école…), contrat, marqueurs du
-profil, mentions linguistiques. Un trait fréquent chez les annonces refusées et
-rare ailleurs devient une règle.
+**L'annonce est lue en entier, et ses critères sont figés à la collecte.**
+`collecteur/criteres.py` extrait de la fiche complète — pendant qu'elle est
+déjà téléchargée pour l'examen linguistique — les critères qui caractérisent
+le poste : expérience exigée, licences, qualifications de type, certificats,
+niveaux de langue, séniorité, contrat, responsabilités, secteur, nature de
+l'activité. Le titre et l'extrait de 400 caractères n'en montraient qu'une
+vitrine : mesuré sur 18 annonces, les diplômes passent de 2 à 10 détections,
+les contrats de 1 à 10, les responsabilités de 3 à 15.
+
+Ce sont les **critères** qui sont stockés, pas le texte brut : 568 annonces de
+2 600 caractères pèseraient 1,5 Mo réécrits deux fois par jour dans le dépôt.
+`VERSION_ANALYSE_CRITERES` les versionne, comme pour l'analyse linguistique :
+l'incrémenter fait relire les annonces analysées par une version antérieure.
+
+**Chaque critère porte sa modalité.** « 1500 heures minimum » et « 1500 heures
+appréciées » n'engagent pas de la même façon. Trois modalités : `exigence`,
+`atout`, `mention` (le critère est cité sans qu'on sache ce qu'on en attend).
+La modalité se lit dans **la phrase** qui porte le critère, pas dans une
+fenêtre de caractères : dans « 3000 hours would be a plus. CPL/IR required. »,
+la licence se trouve à trente caractères de « plus » et en héritait à tort.
+
+Les valeurs numériques sont regroupées par tranches — `0-500`, `500-1500`,
+`1500-3000`, `3000+` heures. Sans cela « 1500 h », « 1800 h » et « 2000 h »
+seraient trois critères distincts, chacun trop rare pour qu'un apprentissage y
+voie quoi que ce soit.
+
+**Ce qui est déduit.** Aux critères extraits s'ajoutent des traits du titre :
+région, appareil, type de poste, marqueurs du profil. Un trait fréquent chez
+les annonces refusées et rare ailleurs devient une règle.
 
 **Ni la compagnie ni la source ne sont jamais des motifs.** Écarter une annonce
 juge son contenu, pas l'employeur qui la publie ni la bourse d'emploi où elle a
@@ -183,10 +207,35 @@ ne coûte rien. Un nom d'employeur peut apparaître dans cette liste — c'est s
 danger, elle n'agit pas — et il s'y montre rarement, un nom propre ne se
 répétant presque jamais d'une annonce à l'autre.
 
-| Seuil | Conséquence |
-| --- | --- |
-| ≥ 3 refus **et** ≥ 75 % des annonces portant le trait | exclusion automatique, sans confirmation |
-| ≥ 2 refus **et** ≥ 50 % | pénalité de score : l'annonce descend en bas de liste, jamais masquée |
+**Deux ensembles distincts, jamais mélangés.** Les critères favorables naissent
+des annonces « Candidature envoyée », les défavorables des « Pas intéressé ».
+Ils ne se compensent qu'au moment du score final, jamais à la construction. Les
+deux versants appliquent **les mêmes seuils** — auparavant une seule candidature
+suffisait à installer un critère favorable définitif, exactement le travers
+qu'on refuse au versant négatif :
+
+| Origine | Seuil | Conséquence |
+| --- | --- | --- |
+| Refus | ≥ 3 **et** ≥ 75 % | exclusion automatique, sans confirmation |
+| Refus | ≥ 2 **et** ≥ 50 % | pénalité de score (−2) |
+| Candidatures | ≥ 3 **et** ≥ 75 % | critère favorable fort (+4) |
+| Candidatures | ≥ 2 **et** ≥ 50 % | critère favorable faible (+2) |
+
+Le veto reste distinct des critères favorables : il protège dès la **première**
+candidature, alors qu'un critère favorable doit être confirmé. Protéger et
+valoriser ne demandent pas la même preuve.
+
+**Trois issues, pas deux.** Chaque annonce est confrontée aux deux ensembles :
+
+| Issue | Condition | Effet |
+| --- | --- | --- |
+| `ecarter` | porte un motif d'exclusion | masquée |
+| `examiner` | score ≤ −4 par cumul de pénalités | **affichée**, signalée « ⚠ À examiner » |
+| `conserver` | sinon | affichée, triée par score |
+
+La deuxième existe pour ne pas trancher sur un faisceau d'indices encore mince.
+La fiche affiche ses critères favorables en vert et défavorables en rouge, à
+côté des marqueurs du profil en jaune.
 
 **Trois garde-fous contre le surapprentissage.** Sur trois refus, une machine
 conclut n'importe quoi : si vos trois premiers rejets sont des postes en
