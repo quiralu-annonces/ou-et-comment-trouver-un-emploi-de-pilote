@@ -7589,7 +7589,13 @@
    "region": "Océanie",
    "date_publication": "",
    "extrait": "",
-   "premiere_collecte": "2026-08-12T13:47:05.979095+00:00"
+   "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
+   "langue_exigee": null,
+   "criteres": [],
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 4,
+   "relue_le": "2026-08-19T13:55:28.947356+00:00"
   },
   {
    "id": "b86fe0514c7b4fce",
@@ -8066,15 +8072,15 @@
    "analyse_criteres": 4
   }
  ],
- "derniere_collecte": "2026-08-19T05:44:19.678474+00:00",
+ "derniere_collecte": "2026-08-19T13:55:28.947356+00:00",
  "compagnies": {
   "French bee": {
-   "offres_ouvertes": 4,
-   "releve_le": "2026-08-19T05:44:19.678474+00:00"
+   "offres_ouvertes": 3,
+   "releve_le": "2026-08-19T13:55:28.947356+00:00"
   },
   "Air Caraïbes": {
    "offres_ouvertes": 7,
-   "releve_le": "2026-08-19T05:44:19.678474+00:00"
+   "releve_le": "2026-08-19T13:55:28.947356+00:00"
   }
  }
 }
