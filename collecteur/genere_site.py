@@ -167,6 +167,22 @@ MODELE = r"""<!DOCTYPE html>
   .actions button.undo { color: var(--text-dim); }
   .empty { color: var(--text-dim); text-align: center; padding: 40px 0; font-size: 14px; }
 
+  /* Rappel d'export : assez visible pour ne pas être manqué, assez sobre pour
+     ne pas passer devant les annonces, qui restent le contenu principal. */
+  .rappel {
+    display: flex; gap: 14px; align-items: center; justify-content: space-between;
+    flex-wrap: wrap;
+    background: var(--panel-2); border: 1px solid var(--accent-2);
+    border-left: 4px solid var(--accent-2);
+    border-radius: var(--radius); padding: 12px 16px; margin-bottom: 16px; font-size: 13px;
+  }
+  .rappel-detail { color: var(--text-dim); font-size: 12px; line-height: 1.6; margin-top: 5px; }
+  .rappel code { background: var(--panel); padding: 1px 5px; border-radius: 4px; }
+  .rappel button {
+    background: var(--accent-2); color: #0f1416; border: none; border-radius: 6px;
+    padding: 9px 16px; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap;
+  }
+
   /* Compagnies suivies : dépliant fermé par défaut, il ne doit pas repousser
      les annonces — c'est un aide-mémoire, pas le contenu principal. */
   details.compagnies {
@@ -242,6 +258,7 @@ signalés en jaune sur la fiche.<br>
 <div id="toolbar" class="toolbar"></div>
 <div class="searchbar"><input id="search" type="search" placeholder="Rechercher (compagnie, appareil, pays…)" aria-label="Rechercher dans les annonces"></div>
 <div id="countBadge" class="count-badge"></div>
+<div id="rappel"></div>
 <div id="list"></div>
 
 <!-- Les dépliants viennent APRÈS les annonces : ce sont des aide-mémoire, pas
@@ -268,6 +285,11 @@ const STATUSES = {
 };
 
 const CLE = "veille-pilote:status:";
+const CLE_EXPORT = "veille-pilote:dernier-export";
+/* En dessous de trois décisions, un export n'apprendrait rien : les seuils du
+   collecteur demandent qu'un critère se répète. Réclamer l'export dès le
+   premier clic ne ferait qu'habituer à ignorer le message. */
+const SEUIL_RAPPEL = 3;
 let statusMap = {};
 let currentRegionFilter = "Toutes";
 let currentStatusFilter = "Nouvelle";
@@ -400,24 +422,28 @@ function renderCard(a) {
    serveur distant deux fois par jour, ne peut pas les lire. Cet export est le
    seul pont entre les deux. Il ne contient que des identifiants et des statuts
    — le texte des annonces est déjà en base, inutile de le renvoyer. */
-function exporterDecisions() {
-  /* On lit le stockage du navigateur, PAS la liste affichée. Une annonce
-     quitte la page au bout d'un mois, mais la décision prise dessus reste
-     mémorisée : parcourir ANNONCES perdait tout l'historique, c'est-à-dire
-     justement ce dont l'apprentissage a le plus besoin. Le collecteur, lui,
-     retrouve ces annonces — sa base ne supprime jamais rien. */
+/* On lit le stockage du navigateur, PAS la liste affichée. Une annonce quitte
+   la page au bout d'un mois, mais la décision prise dessus reste mémorisée :
+   parcourir ANNONCES perdait tout l'historique, c'est-à-dire justement ce dont
+   l'apprentissage a le plus besoin. Le collecteur, lui, retrouve ces annonces
+   — sa base ne supprime jamais rien. */
+function decisionsMemorisees() {
   const decisions = {};
-  let horsPage = 0;
-  const affichees = new Set(ANNONCES.map(a => a.id));
   for (let i = 0; i < localStorage.length; i++) {
     const cle = localStorage.key(i);
     if (!cle || cle.indexOf(CLE) !== 0) continue;
     const statut = localStorage.getItem(cle);
     if (!statut || statut === "Nouvelle") continue;
-    const id = cle.slice(CLE.length);
-    decisions[id] = statut;
-    if (!affichees.has(id)) horsPage++;
+    decisions[cle.slice(CLE.length)] = statut;
   }
+  return decisions;
+}
+
+function exporterDecisions() {
+  const decisions = decisionsMemorisees();
+  const affichees = new Set(ANNONCES.map(a => a.id));
+  let horsPage = 0;
+  for (const id of Object.keys(decisions)) if (!affichees.has(id)) horsPage++;
   const nb = Object.keys(decisions).length;
   if (!nb) {
     alert("Aucune décision à exporter. Marquez d'abord des annonces « Pas intéressé » ou « Candidature envoyée ».");
@@ -432,10 +458,42 @@ function exporterDecisions() {
   lien.download = "decisions.json";
   lien.click();
   URL.revokeObjectURL(lien.href);
+  /* On retient combien de décisions ont été exportées : le rappel ne
+     réapparaîtra qu'après de NOUVELLES décisions, et pas à chaque visite. */
+  try { localStorage.setItem(CLE_EXPORT, String(nb)); } catch (e) { console.error(e); }
+  render();
+}
+
+/* Les décisions restent dans ce navigateur tant qu'on ne les exporte pas. Rien
+   ne le disait : on pouvait trier des dizaines d'annonces en croyant que le
+   système en tenait compte, alors qu'il n'en voyait aucune. Ce rappel n'appa-
+   raît qu'une fois le tri commencé, et disparaît dès l'export. */
+function renderRappel() {
+  const zone = document.getElementById("rappel");
+  const nb = Object.keys(decisionsMemorisees()).length;
+  const exportees = parseInt(localStorage.getItem(CLE_EXPORT) || "0", 10);
+
+  if (nb < SEUIL_RAPPEL || nb <= exportees) { zone.innerHTML = ""; return; }
+
+  const nouvelles = nb - exportees;
+  zone.innerHTML = `
+    <div class="rappel">
+      <div>
+        <strong>${nb} décision${nb > 1 ? "s" : ""} enregistrée${nb > 1 ? "s" : ""} sur cet appareil</strong>
+        ${exportees ? ` — dont ${nouvelles} depuis votre dernier export` : ""}.
+        <div class="rappel-detail">
+          Elles ne quittent pas ce navigateur : le collecteur ne les voit pas et n'apprend
+          rien tant qu'elles n'ont pas été exportées. Exportez le fichier, puis transmettez-le
+          pour qu'il soit déposé dans <code>data/decisions.json</code> du dépôt.
+        </div>
+      </div>
+      <button onclick="exporterDecisions()">⬇ Exporter maintenant</button>
+    </div>`;
 }
 
 function render() {
   renderToolbar();
+  renderRappel();
   const list = document.getElementById("list");
   const badge = document.getElementById("countBadge");
 
