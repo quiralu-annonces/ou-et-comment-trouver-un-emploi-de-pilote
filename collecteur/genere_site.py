@@ -30,6 +30,7 @@ from apprentissage import (  # noqa: E402
     resume,
 )
 from criteres import libelle as libelle_critere  # noqa: E402
+from profil import atouts as atouts_profil, ecarts as ecarts_profil  # noqa: E402
 from compagnies import COMPAGNIES, MODES_AUTOMATIQUES  # noqa: E402
 from filtres import criteres_presents, motif_exclusion, texte_annonce  # noqa: E402
 
@@ -249,6 +250,10 @@ aux <strong>États-Unis</strong> ne sont pas retenues, ni celles qui <strong>exi
 langue</strong> au-delà du français et de l'anglais, ni celles qui réclament « la maîtrise des
 langues locales du pays d'emploi ». Une langue précise citée comme simple atout n'écarte pas
 l'annonce : le poste reste accessible.<br>
+Les annonces sont confrontées au dossier réel du candidat — <strong>290 heures de vol, anglais
+niveau 4, EASA ATPL, aucune qualification de type</strong>. Sont écartés les postes de
+<strong>maintenance seule</strong> (un poste mixte pilotage-maintenance, lui, est conservé), ceux
+exigeant un niveau de langue supérieur, et ceux dont le plancher d'heures est hors d'atteinte.<br>
 Chaque annonce publiée porte au moins un des marqueurs du profil recherché — <strong>pilote ou copilote,
 entry level, minimum 300 heures de vol, anglais niveau 4, non type rated, EASA ATPL, first officer</strong> —
 signalés en jaune sur la fiche.<br>
@@ -392,6 +397,12 @@ function renderCard(a) {
     .map(c => `<span class="tag defavorable">▼ ${echap(c)}</span>`).join("");
   const examen = a.issue === "examiner"
     ? `<span class="tag examen">⚠ À examiner — ressemble à vos refus (score ${a.score})</span>` : "";
+  /* Confrontation à votre dossier : ce que vous détenez, ce qui vous manque.
+     Ces mentions n'écartent rien, elles évitent d'ouvrir pour rien. */
+  const atouts = (a.atouts || [])
+    .map(c => `<span class="tag favorable">✔ vous avez : ${echap(c)}</span>`).join("");
+  const ecarts = (a.ecarts || [])
+    .map(c => `<span class="tag defavorable">✖ ${echap(c)}</span>`).join("");
   return `
   <div class="card ${dismissedCls}">
     <div class="card-title">${echap(a.titre_fr)}</div>
@@ -401,7 +412,7 @@ function renderCard(a) {
       <span class="tag">${echap(a.region)}</span>
       <span class="tag">${echap((a.langue || "").toUpperCase())}</span>
       <span class="tag ${statusMeta.cls}">${statusMeta.label === "Nouvelles" ? "Nouvelle" : statusMeta.label}</span>
-      ${criteres}${favorables}${defavorables}${examen}
+      ${criteres}${atouts}${ecarts}${favorables}${defavorables}${examen}
     </div>
     ${extrait}
     ${details}
@@ -577,6 +588,7 @@ def appliquer_regles(annonces: list[dict], regles: dict | None = None) -> tuple[
         "actualites": 0, "nationalite": 0, "langue": 0, "criteres": 0,
         "trop_anciennes": 0, "sans_date": 0, "etats_unis": 0, "canada": 0,
         "appris": 0, "a_examiner": 0,
+        "maintenance": 0, "niveau_langue": 0, "heures": 0,
     }
 
     for annonce in annonces:
@@ -594,9 +606,14 @@ def appliquer_regles(annonces: list[dict], regles: dict | None = None) -> tuple[
             stats["langue"] += 1
             continue
         if motif == "criteres":
-            # Aucun des sept marqueurs du profil : l'annonce ne s'adresse pas
+            # Aucun des huit marqueurs du profil : l'annonce ne s'adresse pas
             # au candidat, quelle que soit sa fraîcheur.
             stats["criteres"] += 1
+            continue
+        if motif in ("maintenance", "niveau_langue", "heures"):
+            # Incompatible avec le profil réel : poste de maintenance seule,
+            # langue au-dessus du niveau détenu, plancher d'heures hors portée.
+            stats[motif] += 1
             continue
 
         date_ref = _date_reference(annonce)
@@ -637,6 +654,8 @@ def appliquer_regles(annonces: list[dict], regles: dict | None = None) -> tuple[
             "score": verdict["score"],
             "issue": verdict["issue"],
             "favorables": [libelle_critere(m) for m in verdict["favorables"]],
+            "ecarts": ecarts_profil(annonce),
+            "atouts": atouts_profil(annonce),
             "defavorables": [libelle_critere(m) for m in verdict["defavorables"]],
         })
 
@@ -897,6 +916,8 @@ def generer() -> None:
         f"{stats['criteres']} sans aucun marqueur du profil recherché, "
         f"{stats['trop_anciennes']} de plus de {FENETRE_JOURS} jours, "
         f"{stats['etats_unis']} aux États-Unis, {stats['sans_date']} sans date exploitable\n"
+        f"             {stats['maintenance']} maintenance seule, {stats['niveau_langue']} langue au-dessus du niveau, "
+        f"{stats['heures']} heures hors de portée,\n"
         f"             {stats['appris']} sur une règle apprise des refus "
         f"({stats['a_examiner']} signalée(s) « à examiner », affichée(s))\n"
         f"  reclassées « {REGION_CANADA} » : {stats['canada']}\n"

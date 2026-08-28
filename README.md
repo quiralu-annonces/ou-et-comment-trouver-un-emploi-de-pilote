@@ -34,6 +34,43 @@ réapparaissent plus.
 - **Identifiants stables** : les décisions des visiteurs (stockées en
   localStorage sous `veille-pilote:status:<id>`) survivent aux mises à jour.
 
+## Le profil du candidat
+
+`collecteur/profil.py` décrit le dossier réel du candidat, en un seul endroit
+pour qu'il suive son évolution — ses heures augmenteront, son anglais peut
+passer au niveau 5, une qualification de type peut s'ajouter :
+
+| Élément | Valeur |
+| --- | --- |
+| Heures de vol | 290 dont 144 PIC |
+| Anglais | FCL.055 (ELP) niveau 4 |
+| Français | langue maternelle |
+| Licences | EASA ATPL, CPL/MEP, ME/IR |
+| Certificats | Classe 1, MCC/JOC, Advanced UPRT |
+| Qualification de type | **aucune** |
+
+Trois règles en découlent, appliquées après tous les autres filtres et
+seulement sur les annonces lues en entier — une annonce non encore relue n'est
+jamais écartée sur une supposition :
+
+**Maintenance seule.** Le candidat vient de la maintenance — Part-66 B1, CAT A,
+dix ans sur Falcon, Bombardier et A320 — et cherche un poste de **pilote**. Ces
+annonces lui correspondent parfaitement sur le papier sans l'intéresser. Un
+poste **mixte pilotage-maintenance**, en revanche, lui convient : la présence
+d'un seul mot de pilotage suffit à conserver l'annonce.
+
+**Niveau de langue au-dessus du sien.** Un poste exigeant un anglais niveau 5
+ou 6 est hors d'atteinte avec un FCL.055 niveau 4.
+
+**Plancher d'heures inatteignable.** La comparaison porte sur le **minimum**
+exigé par l'annonce, jamais sur le maximum : une fiche proposant un copilote à
+250 h et un commandant à 3000 h reste ouverte par le bas. Seuil dans
+`SEUIL_HEURES_HORS_PORTEE`.
+
+Les fiches affichent en outre ce que le candidat **détient** parmi les critères
+réclamés (vert) et ce qui lui **manque** (rouge) — sans que ces mentions
+écartent quoi que ce soit. Elles évitent d'ouvrir une annonce pour rien.
+
 ## Critères de sélection des annonces
 
 Une offre n'est publiée que si elle porte **au moins un** des sept marqueurs du

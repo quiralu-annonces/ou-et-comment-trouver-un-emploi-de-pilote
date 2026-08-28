@@ -709,14 +709,15 @@
   {
    "id": "25e8a0da5e2e3d41",
    "titre_original": "Akasa Air is expanding its fleet and hiring pilots once again - HR Katha",
-   "titre_fr": "Error 500 (Server Error)!!1500.That’s an error.There was an error. Please try again later.That’s all we know.",
+   "titre_fr": "Akasa Air is expanding its fleet and hiring pilots once again - HR Katha",
    "lien": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQUEw4YklRTjg4WnpGSVNKR1IwSGQxbFFYZGdndnRydFJOUklMUk9SeVRnTGtVTDdHRTlYQWdVUjdzUWpnaVVpeXE1X2ZNVDJpQnVwQWdFOFVFMThYYTBnOEZNSGM5eGJQV2J1SlpqY3JodUlnTDNSb0RhckxDbDBaZm1KT3JxRVZ3RWptQVQ0eDI?oc=5",
    "source": "HR Katha (via Google News États-Unis)",
    "langue": "en",
    "region": "Amérique du Nord",
    "date_publication": "2026-01-29T08:00:00+00:00",
    "extrait": "Akasa Air is expanding its fleet and hiring pilots once again HR Katha",
-   "premiere_collecte": "2026-07-15T16:17:16.168216+00:00"
+   "premiere_collecte": "2026-07-15T16:17:16.168216+00:00",
+   "analyse_criteres": 0
   },
   {
    "id": "0cebf0e9073c06ac",
@@ -3476,7 +3477,8 @@
    "region": "Asie",
    "date_publication": "2026-02-27T08:00:00+00:00",
    "extrait": "南非航空推动法律程序阻止罢工同步加速飞行员招聘_苏里南_新闻 华人头条",
-   "premiere_collecte": "2026-07-15T16:17:16.168216+00:00"
+   "premiere_collecte": "2026-07-15T16:17:16.168216+00:00",
+   "analyse_criteres": 0
   },
   {
    "id": "79c508b28b0dfab0",
@@ -3488,7 +3490,8 @@
    "region": "Asie",
    "date_publication": "2025-06-01T07:00:00+00:00",
    "extrait": "国际市场：仅30%航司将飞行员招聘列为优先；IATA警告：“有史以来最糟糕” CARNOC.com",
-   "premiere_collecte": "2026-07-15T16:17:16.168216+00:00"
+   "premiere_collecte": "2026-07-15T16:17:16.168216+00:00",
+   "analyse_criteres": 0
   },
   {
    "id": "0752eca105e64c16",
@@ -3524,7 +3527,8 @@
    "region": "Asie",
    "date_publication": "2019-12-16T08:00:00+00:00",
    "extrait": "外媒称因波音737MAX停飞 中国放缓招聘外籍飞行员 新浪网",
-   "premiere_collecte": "2026-07-15T16:17:16.168216+00:00"
+   "premiere_collecte": "2026-07-15T16:17:16.168216+00:00",
+   "analyse_criteres": 0
   },
   {
    "id": "d5d198c6527a3e86",
@@ -3548,7 +3552,8 @@
    "region": "Asie",
    "date_publication": "2023-06-13T07:00:00+00:00",
    "extrait": "美国制裁招聘外国飞行员训练中国空军的公司 RFI",
-   "premiere_collecte": "2026-07-15T16:17:16.168216+00:00"
+   "premiere_collecte": "2026-07-15T16:17:16.168216+00:00",
+   "analyse_criteres": 0
   },
   {
    "id": "4a6af8c1bbc49e50",
@@ -3608,7 +3613,8 @@
    "region": "Asie",
    "date_publication": "2024-10-11T07:00:00+00:00",
    "extrait": "航空理工学専攻初、JAL自社養成パイロット採用選考を突破 kogakuin.ac.jp",
-   "premiere_collecte": "2026-07-15T16:17:16.168216+00:00"
+   "premiere_collecte": "2026-07-15T16:17:16.168216+00:00",
+   "analyse_criteres": 0
   },
   {
    "id": "3f5b3c81300d23e5",
@@ -3644,7 +3650,8 @@
    "region": "Asie",
    "date_publication": "2021-08-05T07:00:00+00:00",
    "extrait": "JAL、海外派遣会社や在外邦人のパイロット採用 2030年問題や新機種移行対応 Aviation Wire",
-   "premiere_collecte": "2026-07-15T16:17:16.168216+00:00"
+   "premiere_collecte": "2026-07-15T16:17:16.168216+00:00",
+   "analyse_criteres": 0
   },
   {
    "id": "611e0151d9bb284e",
@@ -3704,7 +3711,8 @@
    "region": "Asie",
    "date_publication": "2026-03-04T08:00:00+00:00",
    "extrait": "ピーチ、新卒CA採用2倍超120人 既卒パイロット訓練生も募集＝27年度 Aviation Wire",
-   "premiere_collecte": "2026-07-15T16:17:16.168216+00:00"
+   "premiere_collecte": "2026-07-15T16:17:16.168216+00:00",
+   "analyse_criteres": 0
   },
   {
    "id": "05e0e3089d5b1d65",
@@ -3752,7 +3760,8 @@
    "region": "Asie",
    "date_publication": "2021-08-05T07:00:00+00:00",
    "extrait": "攻めた！ JALがパイロット50名超採用へ 理由は「将来の乗員不足問題」＆新型機も関係？ 乗りものニュース",
-   "premiere_collecte": "2026-07-15T16:17:16.168216+00:00"
+   "premiere_collecte": "2026-07-15T16:17:16.168216+00:00",
+   "analyse_criteres": 0
   },
   {
    "id": "5758159281cede04",
@@ -3776,7 +3785,8 @@
    "region": "Asie",
    "date_publication": "2021-08-19T07:00:00+00:00",
    "extrait": "大韓航空がパイロット採用 コロナ後の輸送増に備え 聯合ニュース",
-   "premiere_collecte": "2026-07-15T16:17:16.168216+00:00"
+   "premiere_collecte": "2026-07-15T16:17:16.168216+00:00",
+   "analyse_criteres": 0
   },
   {
    "id": "a0e90a73db82dd2d",
@@ -3800,7 +3810,8 @@
    "region": "Asie",
    "date_publication": "2018-03-02T08:00:00+00:00",
    "extrait": "ピーチ、パイロット採用でライセンス取得から自社養成へ--夏に第1期生募集 マイナビニュース",
-   "premiere_collecte": "2026-07-15T16:17:16.168216+00:00"
+   "premiere_collecte": "2026-07-15T16:17:16.168216+00:00",
+   "analyse_criteres": 0
   },
   {
    "id": "c11dce1d97ac7a74",
@@ -3860,7 +3871,8 @@
    "region": "Asie",
    "date_publication": "2015-02-02T08:00:00+00:00",
    "extrait": "春秋航空日本が国際線展開 機材数増加でパイロット募集 TRAICY（トライシー）",
-   "premiere_collecte": "2026-07-15T16:17:16.168216+00:00"
+   "premiere_collecte": "2026-07-15T16:17:16.168216+00:00",
+   "analyse_criteres": 0
   },
   {
    "id": "31961f6403993db0",
@@ -4220,7 +4232,8 @@
    "region": "Asie",
    "date_publication": "2021-09-24T07:00:00+00:00",
    "extrait": "コロナ禍でもJALとANAがパイロットの採用を継続、その「裏側」とは？ ダイヤモンド・オンライン",
-   "premiere_collecte": "2026-07-16T11:21:31.733362+00:00"
+   "premiere_collecte": "2026-07-16T11:21:31.733362+00:00",
+   "analyse_criteres": 0
   },
   {
    "id": "1a3260256e42b150",
@@ -4352,7 +4365,8 @@
    "region": "Asie",
    "date_publication": "2022-10-09T07:00:00+00:00",
    "extrait": "一线人力紧缺，国泰航空拟招聘2000名空乘、700名飞行员 环球旅讯",
-   "premiere_collecte": "2026-07-17T11:07:38.295603+00:00"
+   "premiere_collecte": "2026-07-17T11:07:38.295603+00:00",
+   "analyse_criteres": 0
   },
   {
    "id": "630810f8394d02d2",
@@ -4484,7 +4498,8 @@
    "region": "Asie",
    "date_publication": "2010-09-10T07:00:00+00:00",
    "extrait": "厦门航空举行飞行员招聘复试暂定29人合格_新浪航空航天_新浪网 新浪军事_手机新浪网",
-   "premiere_collecte": "2026-07-18T10:04:16.991777+00:00"
+   "premiere_collecte": "2026-07-18T10:04:16.991777+00:00",
+   "analyse_criteres": 0
   },
   {
    "id": "88fa1d65e5b5844f",
@@ -4532,7 +4547,8 @@
    "region": "Asie",
    "date_publication": "2020-06-08T07:00:00+00:00",
    "extrait": "航空会社「Peach」パイロット採用担当アラサー女子はおうち時間に何してる？ Oggi.jp",
-   "premiere_collecte": "2026-07-18T16:15:15.033660+00:00"
+   "premiere_collecte": "2026-07-18T16:15:15.033660+00:00",
+   "analyse_criteres": 0
   },
   {
    "id": "48f57db04ea60395",
@@ -4556,7 +4572,8 @@
    "region": "Asie",
    "date_publication": "2018-11-19T08:00:00+00:00",
    "extrait": "招聘 | 三大航今年在湖北招录250名飞行员，600名00后参加初检 搜狐网",
-   "premiere_collecte": "2026-07-19T10:44:10.797945+00:00"
+   "premiere_collecte": "2026-07-19T10:44:10.797945+00:00",
+   "analyse_criteres": 0
   },
   {
    "id": "55a9ae0753dd1720",
@@ -4640,7 +4657,8 @@
    "region": "Asie",
    "date_publication": "2023-09-27T07:00:00+00:00",
    "extrait": "阿联酋航空招聘A380机长：月薪8.7万，至少7000小时多发飞行经验 腾讯新闻",
-   "premiere_collecte": "2026-07-20T13:15:38.674686+00:00"
+   "premiere_collecte": "2026-07-20T13:15:38.674686+00:00",
+   "analyse_criteres": 0
   },
   {
    "id": "5a4a06e070a4c943",
@@ -4928,7 +4946,8 @@
    "region": "Asie",
    "date_publication": "2026-02-27T08:00:00+00:00",
    "extrait": "南非航空推动法律程序阻止罢工同步加速飞行员招聘_南非_新闻 华人头条",
-   "premiere_collecte": "2026-07-28T12:20:04.555452+00:00"
+   "premiere_collecte": "2026-07-28T12:20:04.555452+00:00",
+   "analyse_criteres": 0
   },
   {
    "id": "8fec78f47c931a9b",
@@ -4952,7 +4971,8 @@
    "region": "Asie",
    "date_publication": "2024-06-24T07:00:00+00:00",
    "extrait": "新罗大学航空运行学科与釜山航空合作开展新任飞行员招聘评估- 阿视亚经济 아시아경제",
-   "premiere_collecte": "2026-07-28T12:20:04.555452+00:00"
+   "premiere_collecte": "2026-07-28T12:20:04.555452+00:00",
+   "analyse_criteres": 0
   },
   {
    "id": "dbbf78cbaf7effbf",
@@ -6053,18 +6073,28 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:astreinte|exigence",
     "activite:base libre|mention",
     "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "experience:heures:500-1500|exigence",
     "licence:FAA|exigence",
     "responsabilite:encadrement|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": 500,
+    "heures_max_exigees": 500,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "7d73d5d82430cac6",
@@ -6079,18 +6109,28 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:astreinte|exigence",
     "activite:base libre|mention",
     "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "experience:heures:500-1500|exigence",
     "licence:FAA|exigence",
     "responsabilite:encadrement|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": 500,
+    "heures_max_exigees": 500,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "321d9e9cd25a987a",
@@ -6105,15 +6145,24 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
     "activite:régional|mention",
+    "contrat:CDI|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "ca4d88849ac35987",
@@ -6128,17 +6177,27 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:astreinte|exigence",
     "activite:base libre|mention",
     "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "experience:heures:1500-3000|exigence",
     "qualification:de type à détenir|exigence",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": 250,
+    "heures_max_exigees": 1500,
+    "langues_exigees": {},
+    "type_rating_exige": true,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "a49fb36e7051b8be",
@@ -6153,18 +6212,27 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:astreinte|exigence",
     "activite:base libre|mention",
     "activite:essais en vol|mention",
     "activite:régional|mention",
+    "contrat:CDI|mention",
     "experience:heures:3000+|exigence",
     "qualification:de type à détenir|exigence",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": 250,
+    "heures_max_exigees": 3000,
+    "langues_exigees": {},
+    "type_rating_exige": true,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "c4a972bdef06b318",
@@ -6179,16 +6247,26 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "qualification:de type non requise|exigence",
     "responsabilite:instruction|exigence",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "774e5c57e684fc89",
@@ -6203,15 +6281,25 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "responsabilite:instruction|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "15ee94dd3ef520e3",
@@ -6226,16 +6314,26 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "contrat:temps partiel|mention",
     "responsabilite:instruction|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "47dea74a61435edb",
@@ -6250,15 +6348,25 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "responsabilite:instruction|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "d490b28f6519f074",
@@ -6273,15 +6381,25 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "responsabilite:instruction|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "1df950e66e23f90d",
@@ -6296,15 +6414,25 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "responsabilite:instruction|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "336252e31799462f",
@@ -6319,15 +6447,25 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "responsabilite:instruction|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "78d9df29c8b0200b",
@@ -6342,15 +6480,25 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "responsabilite:instruction|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "9ddf52e034c3155d",
@@ -6365,20 +6513,25 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
     "activite:hélicoptère|mention",
-    "contrat:expatriation|mention",
-    "experience:heures:500-1500|exigence",
-    "licence:FAA|exigence",
-    "licence:IR|atout",
-    "secteur:fret|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "5ac34f58bfebccff",
@@ -6393,12 +6546,14 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
+    "activite:régional|mention",
     "activite:vols de nuit|exigence",
+    "contrat:CDI|mention",
     "contrat:expatriation|mention",
     "experience:heures:500-1500|exigence",
     "licence:FAA|exigence",
@@ -6406,7 +6561,15 @@
     "secteur:fret|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": 50,
+    "heures_max_exigees": 1000,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "564e6fc7335e0c0b",
@@ -6425,15 +6588,25 @@
     "source": "citee"
    },
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "responsabilite:encadrement|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "0b4a8b249af289bc",
@@ -6452,18 +6625,27 @@
     "source": "citee"
    },
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
     "activite:militaire|mention",
     "activite:régional|mention",
+    "contrat:CDI|mention",
     "experience:heures:0-500|mention",
     "licence:FAA|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "83d01050722e1857",
@@ -6478,17 +6660,27 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "experience:heures:0-500|exigence",
     "licence:EASA|mention",
     "licence:FAA|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": 300,
+    "heures_max_exigees": 300,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "a85693511324ebe2",
@@ -6503,15 +6695,24 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
     "activite:régional|mention",
+    "contrat:CDI|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "9b43bec285ce439d",
@@ -6526,17 +6727,27 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "licence:ATPL|mention",
     "licence:EASA|mention",
     "responsabilite:instruction|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "170460e993a7144c",
@@ -6551,19 +6762,29 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
-    "activite:régional|mention",
+    "contrat:CDI|mention",
     "licence:ATPL|mention",
     "licence:EASA|mention",
     "licence:FAA|mention",
     "qualification:de type non requise|exigence",
-    "seniorite:confirmé|mention"
+    "seniorite:confirmé|mention",
+    "seniorite:débutant|mention",
+    "seniorite:entrée directe commandant|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "239193b22de90b23",
@@ -6578,18 +6799,28 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "experience:heures:500-1500|exigence",
     "licence:ATPL|exigence",
     "licence:EASA|exigence",
     "licence:FAA|exigence",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": 500,
+    "heures_max_exigees": 500,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "8a4ee9d597c5ddbd",
@@ -6604,18 +6835,24 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
     "activite:régional|mention",
-    "experience:heures:500-1500|mention",
-    "responsabilite:encadrement|exigence",
-    "secteur:fret|mention",
+    "contrat:CDI|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "a4469d7bb6596a01",
@@ -6630,17 +6867,27 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "experience:heures:0-500|exigence",
     "licence:FAA|exigence",
     "secteur:aviation d'affaires|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": 150,
+    "heures_max_exigees": 300,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "6f75a1fa29832813",
@@ -6655,7 +6902,7 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
@@ -6663,13 +6910,22 @@
     "activite:militaire|atout",
     "activite:régional|mention",
     "certificat:classe 1|mention",
+    "contrat:CDI|mention",
     "experience:heures:3000+|mention",
     "langue:anglais6|mention",
     "licence:ATPL|mention",
     "licence:EASA|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "c79238a32bce6613",
@@ -6684,13 +6940,14 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
     "activite:régional|mention",
     "activite:vols de nuit|exigence",
+    "contrat:CDI|mention",
     "contrat:expatriation|mention",
     "contrat:indépendant|mention",
     "experience:heures:500-1500|exigence",
@@ -6699,7 +6956,15 @@
     "secteur:fret|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": 100,
+    "heures_max_exigees": 500,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "2dc61affa096184c",
@@ -6762,18 +7027,28 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|atout",
     "activite:essais en vol|mention",
-    "activite:régional|mention",
     "certificat:classe 1|atout",
+    "contrat:CDI|mention",
     "experience:heures:0-500|atout",
     "qualification:de type à détenir|atout",
-    "seniorite:confirmé|mention"
+    "seniorite:confirmé|mention",
+    "seniorite:débutant|mention",
+    "seniorite:entrée directe commandant|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": true,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "639f0c78f7e7c2fd",
@@ -6788,17 +7063,26 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
-    "activite:base libre|mention",
     "activite:essais en vol|mention",
-    "activite:régional|mention",
+    "contrat:CDI|mention",
     "contrat:temps partiel|mention",
     "responsabilite:instruction|mention",
-    "seniorite:confirmé|mention"
+    "seniorite:confirmé|mention",
+    "seniorite:débutant|mention",
+    "seniorite:entrée directe commandant|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "db2773f1274fbc9a",
@@ -6849,13 +7133,14 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
     "activite:hélicoptère|mention",
     "activite:régional|mention",
+    "contrat:CDI|mention",
     "contrat:expatriation|mention",
     "experience:heures:0-500|exigence",
     "licence:FAA|exigence",
@@ -6863,7 +7148,15 @@
     "secteur:fret|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": 50,
+    "heures_max_exigees": 100,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "87ab2a833b559afc",
@@ -6878,13 +7171,14 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
     "activite:hélicoptère|mention",
     "activite:régional|mention",
+    "contrat:CDI|mention",
     "contrat:expatriation|mention",
     "experience:heures:0-500|exigence",
     "licence:FAA|exigence",
@@ -6892,7 +7186,15 @@
     "secteur:fret|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": 50,
+    "heures_max_exigees": 100,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "858250a7301358d4",
@@ -6907,18 +7209,27 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
     "activite:régional|mention",
+    "contrat:CDI|mention",
     "experience:heures:3000+|mention",
     "licence:ATPL|mention",
     "licence:CPL|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "ad41d9c6d8facfec",
@@ -6933,16 +7244,25 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
     "activite:régional|mention",
+    "contrat:CDI|mention",
     "experience:heures:3000+|exigence",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": 4000,
+    "heures_max_exigees": 4000,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "a1afbebd5c2031fa",
@@ -6955,34 +7275,28 @@
    "date_publication": "2026-08-05T16:40:01+00:00",
    "extrait": "DescriptionJob Purpose Conduct flight instruction and examination in accordance with GCAA CAR FCL Rev.5. Exercise examiner and",
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
-   "langue_exigee": {
-    "extrait": "Fluent in English (Arabic",
-    "nature": "atout",
-    "source": "citee"
-   },
+   "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
     "activite:régional|mention",
-    "certificat:UPRT|exigence",
-    "certificat:classe 1|exigence",
-    "langue:anglais5|exigence",
-    "licence:ATPL|exigence",
-    "licence:CPL|exigence",
-    "licence:IR|mention",
-    "licence:MPL|mention",
-    "licence:licence nationale|mention",
+    "contrat:CDI|mention",
     "responsabilite:contrôle|mention",
-    "responsabilite:encadrement|exigence",
     "responsabilite:instruction|mention",
-    "secteur:formation|mention",
-    "seniorite:confirmé|mention",
-    "seniorite:débutant|mention"
+    "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "f583802b10d71f68",
@@ -6997,12 +7311,13 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
     "activite:rotation imposée|exigence",
+    "activite:régional|mention",
     "contrat:CDI|exigence",
     "experience:heures:500-1500|exigence",
     "langue:anglais4|exigence",
@@ -7010,7 +7325,17 @@
     "licence:EASA|exigence",
     "seniorite:confirmé|exigence"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": 500,
+    "heures_max_exigees": 500,
+    "langues_exigees": {
+     "anglais": 4
+    },
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "0617295d70290d5b",
@@ -7025,18 +7350,27 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:astreinte|exigence",
     "activite:base libre|mention",
     "activite:essais en vol|mention",
     "activite:régional|mention",
+    "contrat:CDI|mention",
     "experience:heures:1500-3000|exigence",
     "qualification:de type à détenir|exigence",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": 250,
+    "heures_max_exigees": 1500,
+    "langues_exigees": {},
+    "type_rating_exige": true,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "597e2de07ae12924",
@@ -7074,7 +7408,7 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
@@ -7082,6 +7416,7 @@
     "activite:rotation imposée|mention",
     "activite:régional|mention",
     "certificat:classe 1|mention",
+    "contrat:CDI|mention",
     "experience:heures:500-1500|exigence",
     "langue:anglais4|mention",
     "licence:ATPL|exigence",
@@ -7090,7 +7425,15 @@
     "licence:FAA|exigence",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": 500,
+    "heures_max_exigees": 500,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "0ecdb8b60e98b91c",
@@ -7128,13 +7471,14 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
     "activite:régional|mention",
     "certificat:classe 1|exigence",
+    "contrat:CDI|mention",
     "contrat:expatriation|mention",
     "experience:heures:3000+|exigence",
     "langue:anglais5|atout",
@@ -7144,7 +7488,15 @@
     "licence:IR|exigence",
     "seniorite:confirmé|exigence"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": 4000,
+    "heures_max_exigees": 4000,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "4f783d7ddd3c5110",
@@ -7159,16 +7511,25 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
     "activite:hélicoptère|mention",
     "activite:régional|mention",
+    "contrat:CDI|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "6bbbcdff3d51a16e",
@@ -7215,18 +7576,29 @@
    "premiere_collecte": "2026-08-12T13:47:05.979095+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
     "activite:rotation imposée|exigence",
+    "activite:régional|mention",
     "contrat:CDI|exigence",
     "langue:anglais4|exigence",
     "licence:EASA|exigence",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {
+     "anglais": 4
+    },
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "b011f53c257842b3",
@@ -7245,19 +7617,28 @@
     "source": "citee"
    },
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
     "activite:rotation imposée|mention",
     "activite:régional|mention",
+    "contrat:CDI|mention",
     "experience:heures:1500-3000|exigence",
     "licence:EASA|mention",
     "qualification:de type à détenir|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": 1500,
+    "heures_max_exigees": 1500,
+    "langues_exigees": {},
+    "type_rating_exige": true,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "cf4872b0a97a2dce",
@@ -7610,17 +7991,27 @@
    "premiere_collecte": "2026-08-12T19:10:34.510888+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "activite:astreinte|exigence",
     "activite:base libre|mention",
     "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "experience:heures:1500-3000|exigence",
     "qualification:de type à détenir|exigence",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": 250,
+    "heures_max_exigees": 1500,
+    "langues_exigees": {},
+    "type_rating_exige": true,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "32107569fd012d8f",
@@ -7635,7 +8026,7 @@
    "premiere_collecte": "2026-08-13T06:42:35.413527+00:00",
    "langue_exigee": null,
    "texte_lu": true,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "analyse_langue": 3,
    "criteres": [
     "certificat:classe 1|atout",
@@ -7648,7 +8039,17 @@
     "licence:CPL|mention",
     "licence:IR|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {
+     "anglais": 5
+    },
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "83d844362061d3aa",
@@ -7664,13 +8065,15 @@
    "langue_exigee": null,
    "texte_lu": true,
    "analyse_langue": 3,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
     "activite:hélicoptère|mention",
     "activite:militaire|exigence",
+    "activite:régional|mention",
     "activite:vols de nuit|mention",
+    "contrat:CDI|mention",
     "contrat:indépendant|mention",
     "experience:heures:0-500|exigence",
     "licence:FAA|exigence",
@@ -7678,7 +8081,15 @@
     "secteur:fret|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": 50,
+    "heures_max_exigees": 100,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "414232a7572725fe",
@@ -7694,15 +8105,25 @@
    "langue_exigee": null,
    "texte_lu": true,
    "analyse_langue": 3,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
     "activite:rotation imposée|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "responsabilite:instruction|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "f5afed35515d2daf",
@@ -7718,16 +8139,26 @@
    "langue_exigee": null,
    "texte_lu": true,
    "analyse_langue": 3,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00",
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "experience:heures:500-1500|exigence",
     "licence:EASA|mention",
     "licence:FAA|mention",
     "seniorite:confirmé|mention"
    ],
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": 200,
+    "heures_max_exigees": 500,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "f0b327ac9c17e3dd",
@@ -7745,14 +8176,24 @@
     "activite:astreinte|exigence",
     "activite:base libre|mention",
     "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "experience:heures:1500-3000|exigence",
     "qualification:de type à détenir|exigence",
     "seniorite:confirmé|mention"
    ],
    "texte_lu": true,
    "analyse_langue": 3,
-   "analyse_criteres": 4,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00"
+   "analyse_criteres": 5,
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
+   "exigences": {
+    "heures_min_exigees": 250,
+    "heures_max_exigees": 1500,
+    "langues_exigees": {},
+    "type_rating_exige": true,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "66c1fbcc3153838f",
@@ -7771,6 +8212,7 @@
     "activite:essais en vol|mention",
     "activite:régional|mention",
     "activite:vols de nuit|exigence",
+    "contrat:CDI|mention",
     "contrat:expatriation|mention",
     "contrat:indépendant|mention",
     "experience:heures:500-1500|exigence",
@@ -7781,8 +8223,16 @@
    ],
    "texte_lu": true,
    "analyse_langue": 3,
-   "analyse_criteres": 4,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00"
+   "analyse_criteres": 5,
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
+   "exigences": {
+    "heures_min_exigees": 100,
+    "heures_max_exigees": 500,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "11c27676b3366c94",
@@ -7800,6 +8250,8 @@
     "activite:base libre|mention",
     "activite:essais en vol|mention",
     "activite:hélicoptère|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "contrat:expatriation|mention",
     "experience:heures:0-500|exigence",
     "licence:FAA|exigence",
@@ -7809,8 +8261,16 @@
    ],
    "texte_lu": true,
    "analyse_langue": 3,
-   "analyse_criteres": 4,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00"
+   "analyse_criteres": 5,
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
+   "exigences": {
+    "heures_min_exigees": 50,
+    "heures_max_exigees": 100,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "114e872bf41e2d21",
@@ -7879,6 +8339,7 @@
     "certificat:MCC|mention",
     "certificat:UPRT|mention",
     "certificat:classe 1|mention",
+    "contrat:CDI|mention",
     "experience:heures:500-1500|exigence",
     "langue:anglais5|exigence",
     "licence:ATPL|exigence",
@@ -7890,8 +8351,18 @@
    ],
    "texte_lu": true,
    "analyse_langue": 3,
-   "analyse_criteres": 4,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00"
+   "analyse_criteres": 5,
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
+   "exigences": {
+    "heures_min_exigees": 250,
+    "heures_max_exigees": 500,
+    "langues_exigees": {
+     "anglais": 5
+    },
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "80f6ac5609c877a8",
@@ -7909,14 +8380,24 @@
     "activite:astreinte|exigence",
     "activite:base libre|mention",
     "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "experience:heures:3000+|exigence",
     "qualification:de type à détenir|exigence",
     "seniorite:confirmé|mention"
    ],
    "texte_lu": true,
    "analyse_langue": 3,
-   "analyse_criteres": 4,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00"
+   "analyse_criteres": 5,
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
+   "exigences": {
+    "heures_min_exigees": 250,
+    "heures_max_exigees": 3000,
+    "langues_exigees": {},
+    "type_rating_exige": true,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "3f32aa8de0ed6c94",
@@ -7935,6 +8416,7 @@
     "activite:base libre|mention",
     "activite:essais en vol|mention",
     "activite:régional|mention",
+    "contrat:CDI|mention",
     "experience:heures:0-500|exigence",
     "licence:FAA|exigence",
     "responsabilite:encadrement|mention",
@@ -7942,8 +8424,16 @@
    ],
    "texte_lu": true,
    "analyse_langue": 3,
-   "analyse_criteres": 4,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00"
+   "analyse_criteres": 5,
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
+   "exigences": {
+    "heures_min_exigees": 150,
+    "heures_max_exigees": 150,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "52d5fc0625e9aaa6",
@@ -7983,12 +8473,22 @@
     "activite:base libre|mention",
     "activite:essais en vol|mention",
     "activite:long-courrier|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "seniorite:confirmé|mention"
    ],
    "texte_lu": true,
    "analyse_langue": 3,
-   "analyse_criteres": 4,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00"
+   "analyse_criteres": 5,
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "46c8da90d1792d48",
@@ -8004,18 +8504,24 @@
    "langue_exigee": null,
    "criteres": [
     "activite:base libre|mention",
-    "activite:charter|mention",
     "activite:essais en vol|mention",
-    "licence:FAA|exigence",
-    "responsabilite:contrôle|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "responsabilite:encadrement|mention",
-    "responsabilite:sécurité|mention",
     "seniorite:confirmé|mention"
    ],
    "texte_lu": true,
    "analyse_langue": 3,
-   "analyse_criteres": 4,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00"
+   "analyse_criteres": 5,
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "fef9119b6c7839af",
@@ -8032,16 +8538,23 @@
    "criteres": [
     "activite:base libre|mention",
     "activite:essais en vol|mention",
-    "activite:rotation imposée|mention",
-    "activite:régional|atout",
-    "licence:CPL|exigence",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
     "licence:FAA|mention",
     "seniorite:confirmé|mention"
    ],
    "texte_lu": true,
    "analyse_langue": 3,
-   "analyse_criteres": 4,
-   "relue_le": "2026-08-16T17:39:04.869722+00:00"
+   "analyse_criteres": 5,
+   "relue_le": "2026-08-28T16:51:24.417914+00:00",
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   }
   },
   {
    "id": "729d91ede118477b",
@@ -8061,6 +8574,7 @@
     "activite:militaire|atout",
     "activite:régional|mention",
     "certificat:classe 1|mention",
+    "contrat:CDI|mention",
     "experience:heures:3000+|mention",
     "langue:anglais6|mention",
     "licence:ATPL|mention",
@@ -8069,18 +8583,1878 @@
    ],
    "texte_lu": true,
    "analyse_langue": 3,
-   "analyse_criteres": 4
+   "analyse_criteres": 5,
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "relue_le": "2026-08-28T16:51:24.417914+00:00"
+  },
+  {
+   "id": "f89091040395bf32",
+   "titre_original": "Cadet Pilot Program 2026 — Singapore HQ",
+   "titre_fr": "Cadet Pilot Program 2026 — Singapore HQ",
+   "lien": "https://www.allflyingjobs.com/jobs/cadet-pilot-program-2026",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Asie",
+   "date_publication": "2026-08-28T00:00:00+00:00",
+   "extrait": "",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:essais en vol|mention",
+    "activite:long-courrier|exigence",
+    "certificat:classe 1|mention",
+    "contrat:CDI|mention",
+    "licence:ATPL|mention",
+    "licence:MPL|mention",
+    "seniorite:confirmé|mention",
+    "seniorite:débutant|mention",
+    "seniorite:entrée directe commandant|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "16bc8d04a04dd2d2",
+   "titre_original": "Experienced co-pilots (m/f/d) in full-time and permanent positions — Cologne, Berlin",
+   "titre_fr": "Copilotes expérimentés (h/f/d) occupant des postes à temps plein et permanents — Cologne, Berlin",
+   "lien": "https://www.allflyingjobs.com/jobs/experienced-co-pilots-mfd-full-time-and-permanent-positions",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Europe",
+   "date_publication": "2026-08-28T09:42:17+00:00",
+   "extrait": "Cologne, Berlin Permanent position, full-time Experienced co-pilots (m/f/d) in full-time and permanent positions Shape the future",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": {
+    "extrait": "Language Proficiency Level 4 or higher Native speaker: German",
+    "nature": "exigence",
+    "source": "citee"
+   },
+   "criteres": [
+    "activite:charter|mention",
+    "activite:essais en vol|mention",
+    "certificat:classe 1|mention",
+    "contrat:CDI|exigence",
+    "langue:anglais4|mention",
+    "licence:ATPL|mention",
+    "licence:EASA|mention",
+    "qualification:de type non requise|exigence",
+    "seniorite:confirmé|exigence",
+    "seniorite:débutant|mention",
+    "seniorite:entrée directe commandant|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "23cf2fe7dbaa3206",
+   "titre_original": "Pilot Rotor Wing — US-ID-Salmon",
+   "titre_fr": "Aile de rotor pilote — US-ID-Salmon",
+   "lien": "https://www.allflyingjobs.com/jobs/pilot-rotor-wing",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-26T18:15:00+00:00",
+   "extrait": "Pilot Rotor Wing Location US-ID-Salmon ID 2026-10467 Category Aviation Position Type Regular Full-Time Remote No Location",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "contrat:expatriation|mention",
+    "experience:heures:0-500|exigence",
+    "licence:FAA|exigence",
+    "licence:IR|exigence",
+    "secteur:fret|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": 50,
+    "heures_max_exigees": 100,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "112ffbb946798a84",
+   "titre_original": "Helicopter Pilot — US-AL-Sylacauga",
+   "titre_fr": "Pilote d'hélicoptère — US-AL-Sylacauga",
+   "lien": "https://www.allflyingjobs.com/jobs/helicopter-pilot-39",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-26T18:02:00+00:00",
+   "extrait": "Helicopter Pilot Location US-AL-Sylacauga ID 2026-10458 Category Aviation Position Type Regular Full-Time Remote No",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:hélicoptère|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "contrat:expatriation|mention",
+    "experience:heures:0-500|exigence",
+    "licence:FAA|exigence",
+    "licence:IR|exigence",
+    "secteur:fret|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": 50,
+    "heures_max_exigees": 100,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "a24420b6843d08d8",
+   "titre_original": "Helicopter Pilot — US-CA-Twentynine Palms",
+   "titre_fr": "Pilote d'hélicoptère — US-CA-Twentynine Palms",
+   "lien": "https://www.allflyingjobs.com/jobs/helicopter-pilot-27",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-26T18:27:00+00:00",
+   "extrait": "Helicopter Pilot Location US-CA-Twentynine Palms ID 2026-10474 Category Aviation Position Type Regular Full-Time Remote Yes",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:hélicoptère|mention",
+    "activite:militaire|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "contrat:expatriation|mention",
+    "experience:heures:0-500|exigence",
+    "licence:FAA|exigence",
+    "licence:IR|exigence",
+    "secteur:fret|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": 50,
+    "heures_max_exigees": 100,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "a96a111b3c373faa",
+   "titre_original": "Captain Opportunity for Pilots seeking O-1 Sponsorship — 2026-6057",
+   "titre_fr": "Opportunité de capitaine pour les pilotes recherchant un parrainage O-1 — 2026-6057",
+   "lien": "https://www.allflyingjobs.com/jobs/captain-opportunity-pilots-seeking-o-1-sponsorship",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Monde",
+   "date_publication": "2026-08-27T15:05:02+00:00",
+   "extrait": "Captain Opportunity for Pilots seeking O-1 Sponsorship Job ID 2026-6057 Brand Vista America Category Flight Deck Location :",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "experience:heures:500-1500|exigence",
+    "licence:FAA|exigence",
+    "responsabilite:encadrement|mention",
+    "responsabilite:sécurité|mention",
+    "secteur:aviation d'affaires|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": 300,
+    "heures_max_exigees": 1000,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "8cdc5b799e0796d2",
+   "titre_original": "First Officer (m/f/d) A330, Base FRA — Frankfurt",
+   "titre_fr": "Copilote (h/f/d) A330, Base FRA — Francfort",
+   "lien": "https://www.allflyingjobs.com/jobs/first-officer-mfd-a330-base-fra",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Monde",
+   "date_publication": "2026-08-27T05:10:01+00:00",
+   "extrait": "First Officer (m/f/d) A330 If you’re passionate about aviation, love to travel and live and breathe customer centricity, Discover",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": {
+    "extrait": "Language Proficiency Level 4) Good oral & written command of German",
+    "nature": "exigence",
+    "source": "citee"
+   },
+   "criteres": [
+    "activite:essais en vol|mention",
+    "certificat:classe 1|atout",
+    "contrat:CDI|mention",
+    "experience:heures:1500-3000|exigence",
+    "langue:allemand4|mention",
+    "licence:ATPL|exigence",
+    "licence:EASA|exigence",
+    "licence:IR|exigence",
+    "licence:MPL|exigence",
+    "seniorite:confirmé|mention",
+    "seniorite:débutant|mention",
+    "seniorite:entrée directe commandant|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": 1500,
+    "heures_max_exigees": 1500,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "8a65baa01af30e56",
+   "titre_original": "First Officer (m/f/d) A320, Base FRA — Frankfurt",
+   "titre_fr": "Copilote (h/f/d) A320, Base FRA — Francfort",
+   "lien": "https://www.allflyingjobs.com/jobs/first-officer-mfd-a320-base-fra",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Monde",
+   "date_publication": "2026-08-27T05:10:01+00:00",
+   "extrait": "First Officer (m/f/d) A320 If you’re passionate about aviation, love to travel and live and breathe customer centricity, Discover",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": {
+    "extrait": "Language Proficiency Level 4) Good oral & written command of German",
+    "nature": "exigence",
+    "source": "citee"
+   },
+   "criteres": [
+    "activite:essais en vol|mention",
+    "certificat:classe 1|exigence",
+    "contrat:CDI|mention",
+    "langue:allemand4|mention",
+    "licence:ATPL|exigence",
+    "licence:CPL|exigence",
+    "licence:EASA|exigence",
+    "licence:IR|exigence",
+    "licence:MPL|exigence",
+    "seniorite:confirmé|mention",
+    "seniorite:entrée directe commandant|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "cecd8563c14d6878",
+   "titre_original": "BA Cityflyer - Direct Entry Captain - London City base — London, England",
+   "titre_fr": "BA Cityflyer - Direct Entry Captain - Base de Londres City — Londres, Angleterre",
+   "lien": "https://www.allflyingjobs.com/jobs/ba-cityflyer-direct-entry-captain-london-city-base",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Europe",
+   "date_publication": "2026-08-27T03:05:02+00:00",
+   "extrait": "On this page you can apply for Pilot job vacancy: BA Cityflyer - Direct Entry Captain - London City base",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "seniorite:confirmé|mention",
+    "seniorite:entrée directe commandant|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "92dbc5ee959c5461",
+   "titre_original": "BA Cityflyer - Direct Entry Captain - Edinburgh base — Edinburgh, Scotland",
+   "titre_fr": "BA Cityflyer - Direct Entry Captain - Base d'Édimbourg — Édimbourg, Écosse",
+   "lien": "https://www.allflyingjobs.com/jobs/ba-cityflyer-direct-entry-captain-edinburgh-base",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Monde",
+   "date_publication": "2026-08-27T03:05:02+00:00",
+   "extrait": "On this page you can apply for Pilot job vacancy: BA Cityflyer - Direct Entry Captain - Edinburgh base",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "seniorite:confirmé|mention",
+    "seniorite:entrée directe commandant|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "4e023b77ef0b9321",
+   "titre_original": "Captain Gulfstream G550 - Hong Kong based",
+   "titre_fr": "Capitaine Gulfstream G550 - basé à Hong Kong",
+   "lien": "https://www.allflyingjobs.com/jobs/captain-gulfstream-g550-hong-kong-based",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Asie",
+   "date_publication": "2026-08-26T18:00:03+00:00",
+   "extrait": "On this page you can apply for Pilot job vacancy: Captain Gulfstream G550 - Hong Kong based",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "9f9db3df3adb5086",
+   "titre_original": "FAA First Officer (B350) — Papua New Guinea",
+   "titre_fr": "Premier officier de la FAA (B350) — Papouasie-Nouvelle-Guinée",
+   "lien": "https://www.allflyingjobs.com/jobs/faa-first-officer-b350",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Monde",
+   "date_publication": "2026-08-26T17:05:02+00:00",
+   "extrait": "",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:charter|mention",
+    "activite:essais en vol|mention",
+    "activite:rotation imposée|mention",
+    "activite:régional|atout",
+    "contrat:CDI|mention",
+    "licence:CPL|exigence",
+    "licence:FAA|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "cd486cdc0cf389d9",
+   "titre_original": "Chief Pilot (B350) — Papua New Guinea",
+   "titre_fr": "Pilote en chef (B350) — Papouasie-Nouvelle-Guinée",
+   "lien": "https://www.allflyingjobs.com/jobs/chief-pilot-b350",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Monde",
+   "date_publication": "2026-08-26T17:05:02+00:00",
+   "extrait": "",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:charter|mention",
+    "activite:essais en vol|mention",
+    "activite:rotation imposée|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "licence:ATPL|exigence",
+    "licence:FAA|exigence",
+    "responsabilite:encadrement|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "b81d56392772b11b",
+   "titre_original": "Instructor Pilot - GBTS SME (FAcT) — Richmond, BC, Canada",
+   "titre_fr": "Pilote d'instructeur - GBTS SME (FAcT) — Richmond, BC, Canada",
+   "lien": "https://www.allflyingjobs.com/jobs/instructor-pilot-gbts-sme-fact-1",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-24T16:20:34+00:00",
+   "extrait": "On this page you can apply for Pilot job vacancy: Instructor Pilot - GBTS SME (FAcT)",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "responsabilite:instruction|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "0b4b1cdbb467c1ee",
+   "titre_original": "Full Time Phenom 100/300 Instructor Pilot (Retention Bonus) — Dallas",
+   "titre_fr": "Pilote d'instructeur Phenom 100/300 à temps plein (prime de rétention) — Dallas",
+   "lien": "https://www.allflyingjobs.com/jobs/full-time-phenom-100300-instructor-pilot-retention-bonus-0",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-24T16:20:34+00:00",
+   "extrait": "On this page you can apply for Pilot job vacancy: Full Time Phenom 100/300 Instructor Pilot (Retention Bonus)",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "responsabilite:instruction|atout",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "506ebca8b02c2b6b",
+   "titre_original": "Chinook Flight Instructor — Benson, United Kingdom",
+   "titre_fr": "Instructeur de vol Chinook — Benson, Royaume-Uni",
+   "lien": "https://www.allflyingjobs.com/jobs/chinook-flight-instructor",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Europe",
+   "date_publication": "2026-08-26T00:00:00+00:00",
+   "extrait": "On this page you can apply for Pilot job vacancy: Chinook Flight Instructor",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "responsabilite:instruction|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "7391d67d335f9b5d",
+   "titre_original": "Challenger 650 (CL605/650) - Type Rated Pilots (PIC & SIC) - Spain | LEBL — London, GB, W8 5EH",
+   "titre_fr": "Challenger 650 (CL605/650) - Pilotes qualifiés de type (PIC et SIC) - Espagne | LEBL — Londres, GB, W8 5EH",
+   "lien": "https://www.allflyingjobs.com/jobs/challenger-650-cl605650-type-rated-pilots-pic-sic-spain-lebl-0",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Europe",
+   "date_publication": "2026-08-25T17:35:01+00:00",
+   "extrait": "Title: Challenger 650 (CL605/650) - Type Rated Pilots (PIC & SIC) - Spain | LEBL Company: Executive Jet Management (Europe) Limited",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:militaire|atout",
+    "activite:régional|mention",
+    "certificat:classe 1|mention",
+    "contrat:CDI|mention",
+    "experience:heures:3000+|mention",
+    "langue:anglais6|mention",
+    "licence:ATPL|mention",
+    "licence:EASA|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "d769b2b3e866fc9f",
+   "titre_original": "Director, Base Chief Pilot — Las Vegas",
+   "titre_fr": "Directeur, pilote en chef de la base — Las Vegas",
+   "lien": "https://www.allflyingjobs.com/jobs/director-base-chief-pilot-2",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-25T00:36:41+00:00",
+   "extrait": "**Company** Horizon Air **The Team** Guided by our purpose, core values, and leadership principles, we are creating an airline peopl",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:militaire|exigence",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "experience:annees:5-10|exigence",
+    "licence:FAA|mention",
+    "responsabilite:encadrement|mention",
+    "responsabilite:instruction|mention",
+    "responsabilite:sécurité|mention",
+    "seniorite:confirmé|atout"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "96b116b8112e9377",
+   "titre_original": "Director, Base Chief Pilot — Portland",
+   "titre_fr": "Directeur, pilote en chef de la base — Portland",
+   "lien": "https://www.allflyingjobs.com/jobs/director-base-chief-pilot-1",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-25T00:36:41+00:00",
+   "extrait": "**Company** Horizon Air **The Team** Guided by our purpose, core values, and leadership principles, we are creating an airline peopl",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:essais en vol|mention",
+    "activite:militaire|exigence",
+    "contrat:CDI|mention",
+    "experience:annees:5-10|exigence",
+    "licence:FAA|mention",
+    "responsabilite:encadrement|mention",
+    "responsabilite:instruction|mention",
+    "responsabilite:sécurité|mention",
+    "seniorite:confirmé|atout",
+    "seniorite:entrée directe commandant|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "39a0c9bef9da60bf",
+   "titre_original": "Director, Base Chief Pilot — SeaTac",
+   "titre_fr": "Director, Base Chief Pilot — SeaTac",
+   "lien": "https://www.allflyingjobs.com/jobs/director-base-chief-pilot-0",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-25T00:36:40+00:00",
+   "extrait": "**Company** Horizon Air **The Team** Guided by our purpose, core values, and leadership principles, we are creating an airline peopl",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:militaire|exigence",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "experience:annees:5-10|exigence",
+    "licence:FAA|mention",
+    "responsabilite:encadrement|mention",
+    "responsabilite:instruction|mention",
+    "responsabilite:sécurité|mention",
+    "seniorite:confirmé|atout"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "b4c1d9af6e606d89",
+   "titre_original": "Director, Base Chief Pilot — Anchorage",
+   "titre_fr": "Directeur, pilote en chef de la base — Anchorage",
+   "lien": "https://www.allflyingjobs.com/jobs/director-base-chief-pilot",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-25T00:36:41+00:00",
+   "extrait": "**Company** Horizon Air **The Team** Guided by our purpose, core values, and leadership principles, we are creating an airline peopl",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:militaire|exigence",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "experience:annees:5-10|exigence",
+    "licence:FAA|mention",
+    "responsabilite:encadrement|mention",
+    "responsabilite:instruction|mention",
+    "responsabilite:sécurité|mention",
+    "seniorite:confirmé|atout"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "89e17eb84d4e95f5",
+   "titre_original": "PIC – Falcon 900EX (Regional Commuter) — Jet Linx Minneapolis",
+   "titre_fr": "PIC – Falcon 900EX (Regional Commuter) — Jet Linx Minneapolis",
+   "lien": "https://www.allflyingjobs.com/jobs/pic-falcon-900ex-regional-commuter",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-25T16:20:01+00:00",
+   "extrait": "Apply Description Pilot in Command – Falcon 900EXFull-Time – Commutable, USAJet Linx is seeking qualified Pilot in Command candi",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:astreinte|exigence",
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "experience:heures:3000+|exigence",
+    "licence:FAA|exigence",
+    "responsabilite:encadrement|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": 300,
+    "heures_max_exigees": 3500,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "b17d0e836e1dbb55",
+   "titre_original": "PIC – Citation XLS/XLS+ Floater — Global Safety & Operations Center",
+   "titre_fr": "PIC – Citation XLS/XLS+ Floater — Global Safety & Operations Center",
+   "lien": "https://www.allflyingjobs.com/jobs/pic-citation-xlsxls-floater-0",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-25T16:20:01+00:00",
+   "extrait": "Apply Description Pilot in Command – Citation XLS/XLS+Full-Time – Commutable, USAJet Linx is seeking qualified Pilot in Command",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:astreinte|exigence",
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "experience:heures:3000+|exigence",
+    "licence:FAA|exigence",
+    "responsabilite:encadrement|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": 300,
+    "heures_max_exigees": 3500,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "cc037a174655e06d",
+   "titre_original": "Helicopter Pilot — US-CA-Susanville",
+   "titre_fr": "Helicopter Pilot — US-CA-Susanville",
+   "lien": "https://www.allflyingjobs.com/jobs/helicopter-pilot-38",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-24T13:12:00+00:00",
+   "extrait": "Helicopter Pilot Location US-CA-Susanville ID 2026-10455 Category Aviation Position Type Regular Full-Time Remote No",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:hélicoptère|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "experience:heures:0-500|exigence",
+    "licence:FAA|exigence",
+    "licence:IR|exigence",
+    "secteur:fret|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": 50,
+    "heures_max_exigees": 100,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "824bce3537599848",
+   "titre_original": "Crew Scheduler, Pilots — Fort Worth, TX, USA",
+   "titre_fr": "Crew Scheduler, Pilots — Fort Worth, TX, USA",
+   "lien": "https://www.allflyingjobs.com/jobs/crew-scheduler-pilots",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-25T15:05:02+00:00",
+   "extrait": "Job vacancy details: Job Description Intro Are you ready to explore a world of possibilities, both at work and during your time off? Join our American",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "experience:annees:2-5|atout",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "347b345d6c0c5182",
+   "titre_original": "JOIN SAS AS AN A320 NEO FIRST OFFICER- LONDON HEATHROW — Heathrow, ENG, GB",
+   "titre_fr": "JOIN SAS AS AN A320 NEO FIRST OFFICER- LONDON HEATHROW — Heathrow, ENG, GB",
+   "lien": "https://www.allflyingjobs.com/jobs/join-sas-a320-neo-first-officer-london-heathrow",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Europe",
+   "date_publication": "2026-08-25T03:50:01+00:00",
+   "extrait": "JOIN SAS AS AN EXPERIENCED A320 FIRST OFFICER - LONDON HEATHROW SAS Crew Services Ltd. (an SAS Group company) is seeking experienced",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:essais en vol|mention",
+    "contrat:CDI|mention",
+    "langue:anglais5|exigence",
+    "licence:ATPL|exigence",
+    "licence:CPL|exigence",
+    "licence:EASA|exigence",
+    "seniorite:confirmé|mention",
+    "seniorite:entrée directe commandant|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {
+     "anglais": 5
+    },
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "b90d7e1796cf4023",
+   "titre_original": "Pilatus PC-24 Captain - Commutable — US-ID-Hayden",
+   "titre_fr": "Pilatus PC-24 Captain - Commutable — US-ID-Hayden",
+   "lien": "https://www.allflyingjobs.com/jobs/pilatus-pc-24-captain-commutable",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-24T18:25:01+00:00",
+   "extrait": "Pilatus PC-24 Captain - Commutable Location US-ID-Hayden ID 2026-2002 Category Pilot Position Type Full-Time Remote No",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:astreinte|exigence",
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "experience:heures:1500-3000|exigence",
+    "qualification:de type à détenir|exigence",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": 250,
+    "heures_max_exigees": 1500,
+    "langues_exigees": {},
+    "type_rating_exige": true,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "a30e75e1580aabce",
+   "titre_original": "Helicopter Captain - AW189",
+   "titre_fr": "Helicopter Captain - AW189",
+   "lien": "https://www.allflyingjobs.com/jobs/helicopter-captain-aw189",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Moyen-Orient",
+   "date_publication": "2026-08-24T04:45:20+00:00",
+   "extrait": "General Information Ref # 2600008V Location Qatar-Doha Job family Pilots & Flight Operations Closing Date: 2026-09-06",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:hélicoptère|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "experience:heures:500-1500|exigence",
+    "qualification:de type à détenir|mention",
+    "secteur:aviation d'affaires|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": 100,
+    "heures_max_exigees": 1000,
+    "langues_exigees": {},
+    "type_rating_exige": true,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "d85f32589a503e61",
+   "titre_original": "Helicopter Captain - AW139",
+   "titre_fr": "Helicopter Captain - AW139",
+   "lien": "https://www.allflyingjobs.com/jobs/helicopter-captain-aw139",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Moyen-Orient",
+   "date_publication": "2026-08-24T04:45:27+00:00",
+   "extrait": "General Information Ref # 2600008W Location Qatar-Doha Job family Pilots & Flight Operations Closing Date: 2026-09-06",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:hélicoptère|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "experience:heures:500-1500|exigence",
+    "qualification:de type à détenir|mention",
+    "secteur:aviation d'affaires|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": 100,
+    "heures_max_exigees": 1000,
+    "langues_exigees": {},
+    "type_rating_exige": true,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "a33cf787084304c7",
+   "titre_original": "Pilot - First Officer — Dallas, Texas, United States of America",
+   "titre_fr": "Pilot - First Officer — Dallas, Texas, United States of America",
+   "lien": "https://www.allflyingjobs.com/jobs/pilot-first-officer",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-24T00:00:00+00:00",
+   "extrait": "JOB DESCRIPTION Department:Flight OperationsOur Company PromiseWe are committed to provide our Employees a stable work environment",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:militaire|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "experience:heures:500-1500|mention",
+    "licence:FAA|exigence",
+    "responsabilite:encadrement|exigence",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "812eb43a23101c28",
+   "titre_original": "PC 12 Instructor Pilot - Part Time — Lake Nona, FL, USA",
+   "titre_fr": "PC 12 Instructor Pilot - Part Time — Lake Nona, FL, USA",
+   "lien": "https://www.allflyingjobs.com/jobs/pc-12-instructor-pilot-part-time",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-21T16:15:32+00:00",
+   "extrait": "On this page you can apply for Pilot job vacancy: PC 12 Instructor Pilot - Part Time",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "contrat:temps partiel|mention",
+    "responsabilite:instruction|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "c53d8537447f7509",
+   "titre_original": "BE-400 Instructor Pilot — Orlando",
+   "titre_fr": "BE-400 Instructor Pilot — Orlando",
+   "lien": "https://www.allflyingjobs.com/jobs/be-400-instructor-pilot",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-21T16:15:32+00:00",
+   "extrait": "On this page you can apply for Pilot job vacancy: BE-400 Instructor Pilot",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "responsabilite:instruction|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "48d502b71303d431",
+   "titre_original": "Phenom 300 Captain - Chicago, IL — US-IL-Wheeling",
+   "titre_fr": "Phenom 300 Captain - Chicago, IL — US-IL-Wheeling",
+   "lien": "https://www.allflyingjobs.com/jobs/phenom-300-captain-chicago-il",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-22T18:10:02+00:00",
+   "extrait": "Phenom 300 Captain - Chicago, IL Location US-IL-Wheeling ID 2026-1997 Category Pilot Position Type Full-Time Remote No",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:astreinte|exigence",
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "experience:heures:3000+|exigence",
+    "qualification:de type à détenir|exigence",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": 250,
+    "heures_max_exigees": 3000,
+    "langues_exigees": {},
+    "type_rating_exige": true,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "2990ed3437e0083b",
+   "titre_original": "Gulfstream G650 & Falcon 900EX EASy Captain - Sacramento, CA — US-CA-Sacramento",
+   "titre_fr": "Gulfstream G650 & Falcon 900EX EASy Captain - Sacramento, CA — US-CA-Sacramento",
+   "lien": "https://www.allflyingjobs.com/jobs/gulfstream-g650-falcon-900ex-easy-captain-sacramento-ca",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-22T18:10:02+00:00",
+   "extrait": "Gulfstream G650 & Falcon 900EX EASy Captain - Sacramento, CA Location US-CA-Sacramento ID 2026-1991 Category Pilot Position",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:astreinte|exigence",
+    "activite:essais en vol|mention",
+    "contrat:CDI|mention",
+    "experience:heures:1500-3000|exigence",
+    "qualification:de type à détenir|exigence",
+    "seniorite:confirmé|mention",
+    "seniorite:débutant|mention",
+    "seniorite:entrée directe commandant|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": 250,
+    "heures_max_exigees": 1500,
+    "langues_exigees": {},
+    "type_rating_exige": true,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "52797a4fbbd3044f",
+   "titre_original": "Gulfstream G550 Captain - Van Nuys, CA — US-CA-Van Nuys",
+   "titre_fr": "Gulfstream G550 Captain - Van Nuys, CA — US-CA-Van Nuys",
+   "lien": "https://www.allflyingjobs.com/jobs/gulfstream-g550-captain-van-nuys-ca",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-22T18:10:02+00:00",
+   "extrait": "Gulfstream G550 Captain - Van Nuys, CA Location US-CA-Van Nuys ID 2026-2000 Category Pilot Position Type Full-Time Remote No",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:astreinte|exigence",
+    "activite:essais en vol|mention",
+    "contrat:CDI|mention",
+    "experience:heures:1500-3000|exigence",
+    "qualification:de type à détenir|exigence",
+    "seniorite:confirmé|mention",
+    "seniorite:débutant|mention",
+    "seniorite:entrée directe commandant|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": 250,
+    "heures_max_exigees": 1500,
+    "langues_exigees": {},
+    "type_rating_exige": true,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "d984b60daee3775b",
+   "titre_original": "Helicopter Pilot — US-CA-Borrego Springs",
+   "titre_fr": "Helicopter Pilot — US-CA-Borrego Springs",
+   "lien": "https://www.allflyingjobs.com/jobs/helicopter-pilot-36",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-21T11:58:00+00:00",
+   "extrait": "Helicopter Pilot Location US-CA-Borrego Springs ID 2026-10429 Category Aviation Position Type Regular Full-Time Remote No",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:hélicoptère|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "contrat:expatriation|mention",
+    "experience:heures:500-1500|exigence",
+    "licence:FAA|exigence",
+    "licence:IR|exigence",
+    "secteur:fret|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": 50,
+    "heures_max_exigees": 1000,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "3df323adaa7ed8a0",
+   "titre_original": "Fixed Wing Pilot — US-CO-Grand Junction",
+   "titre_fr": "Pilote à voilure fixe — US-CO-Grand Junction",
+   "lien": "https://www.allflyingjobs.com/jobs/fixed-wing-pilot-4",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-21T13:05:00+00:00",
+   "extrait": "Fixed Wing Pilot Location US-CO-Grand Junction ID 2025-8729 Category Aviation Position Type Regular Full-Time Remote No",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "activite:vols de nuit|atout",
+    "contrat:CDI|mention",
+    "contrat:expatriation|mention",
+    "experience:heures:500-1500|exigence",
+    "licence:FAA|exigence",
+    "licence:IR|exigence",
+    "secteur:fret|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": 100,
+    "heures_max_exigees": 500,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "4dc3316dada5efec",
+   "titre_original": "Praetor 600 Captain - San Jose, CA — US-CA-San Jose",
+   "titre_fr": "Praetor 600 Captain - San Jose, CA — US-CA-San Jose",
+   "lien": "https://www.allflyingjobs.com/jobs/praetor-600-captain-san-jose-ca",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-21T18:05:02+00:00",
+   "extrait": "Praetor 600 Captain - San Jose, CA Location US-CA-San Jose ID 2026-1993 Category Pilot Position Type Full-Time Remote No",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:astreinte|exigence",
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "experience:heures:3000+|exigence",
+    "qualification:de type à détenir|exigence",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": 250,
+    "heures_max_exigees": 3000,
+    "langues_exigees": {},
+    "type_rating_exige": true,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "de6c56fe79278783",
+   "titre_original": "PIC – Nextant 400XTi — Jet Linx Indianapolis",
+   "titre_fr": "PIC – Nextant 400XTi — Jet Linx Indianapolis",
+   "lien": "https://www.allflyingjobs.com/jobs/pic-nextant-400xti",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Asie",
+   "date_publication": "2026-08-21T15:55:02+00:00",
+   "extrait": "Apply Description Pilot in Command – Nextant 400XTi Full-Time – Indianapolis, IN Jet Linx is seeking qualified Pilot in Command",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:astreinte|exigence",
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "experience:heures:0-500|exigence",
+    "licence:FAA|exigence",
+    "responsabilite:encadrement|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": 300,
+    "heures_max_exigees": 300,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "35667a60ad09a33e",
+   "titre_original": "Assistant Chief Pilot — Contour Aviation Headquarters - Smyrna, TN 37167",
+   "titre_fr": "Assistant Chief Pilot — Contour Aviation Headquarters - Smyrna, TN 37167",
+   "lien": "https://www.allflyingjobs.com/jobs/assistant-chief-pilot-0",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-21T03:30:03+00:00",
+   "extrait": "Contour is a long-established aviation services company with a diverse range of capabilities. At Contour, our core values guide every",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:militaire|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "experience:heures:0-500|mention",
+    "responsabilite:encadrement|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "cdc7dfa1de0b1195",
+   "titre_original": "Global 6000 Captain - Chicago, IL — US-IL-Wheeling",
+   "titre_fr": "Global 6000 Captain - Chicago, IL — US-IL-Wheeling",
+   "lien": "https://www.allflyingjobs.com/jobs/global-6000-captain-chicago-il",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-20T18:00:02+00:00",
+   "extrait": "Global 6000 Captain - Chicago, IL Location US-IL-Wheeling ID 2026-1988 Category Pilot Position Type Full-Time Remote No",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:astreinte|exigence",
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "experience:heures:3000+|exigence",
+    "qualification:de type à détenir|exigence",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": 250,
+    "heures_max_exigees": 3000,
+    "langues_exigees": {},
+    "type_rating_exige": true,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "95e805a72028b2b1",
+   "titre_original": "Falcon 7X Captain - Bedford, MA — US-MA-Bedford",
+   "titre_fr": "Falcon 7X Captain - Bedford, MA — US-MA-Bedford",
+   "lien": "https://www.allflyingjobs.com/jobs/falcon-7x-captain-bedford-ma",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-20T18:00:02+00:00",
+   "extrait": "Falcon 7X Captain - Bedford, MA Location US-MA-Bedford ID 2026-1990 Category Pilot Position Type Full-Time Remote No",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:astreinte|exigence",
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "experience:heures:3000+|exigence",
+    "qualification:de type à détenir|exigence",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": 250,
+    "heures_max_exigees": 3000,
+    "langues_exigees": {},
+    "type_rating_exige": true,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "a483ce63008b75f1",
+   "titre_original": "First Officer - Global Express XRS - US Based",
+   "titre_fr": "Premier officier - Global Express XRS - Basé aux États-Unis",
+   "lien": "https://www.allflyingjobs.com/jobs/first-officer-global-express-xrs-us-based",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Monde",
+   "date_publication": "2026-08-20T17:20:02+00:00",
+   "extrait": "On this page you can apply for Pilot job vacancy: First Officer - Global Express XRS - US Based",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "ad3bc604423bd049",
+   "titre_original": "Captain - Global Express XRS - US Based",
+   "titre_fr": "Captain - Global Express XRS - US Based",
+   "lien": "https://www.allflyingjobs.com/jobs/captain-global-express-xrs-us-based",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Monde",
+   "date_publication": "2026-08-20T17:20:02+00:00",
+   "extrait": "On this page you can apply for Pilot job vacancy: Captain - Global Express XRS - US Based",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "026d96c4feb2d2d4",
+   "titre_original": "Program Regional Relief Pilot — US-NV-Reno",
+   "titre_fr": "Program Regional Relief Pilot — US-NV-Reno",
+   "lien": "https://www.allflyingjobs.com/jobs/program-regional-relief-pilot",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-19T11:31:00+00:00",
+   "extrait": "Program Regional Relief Pilot Location US-NV-Reno ID 2026-10419 Category Aviation Position Type Regular Full-Time Remote No",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "contrat:expatriation|mention",
+    "contrat:indépendant|mention",
+    "experience:heures:500-1500|exigence",
+    "licence:FAA|exigence",
+    "licence:IR|exigence",
+    "secteur:fret|mention",
+    "seniorite:confirmé|mention",
+    "seniorite:débutant|mention",
+    "seniorite:entrée directe commandant|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": 50,
+    "heures_max_exigees": 1000,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "1f8acecb050f9ac4",
+   "titre_original": "First Officer (m/w/d) — Germany, Berlin, Dusseldorf, Frankfurt, Hamburg, Munich",
+   "titre_fr": "First Officer (m/w/d) — Allemagne, Berlin, Düsseldorf, Francfort, Hambourg, Munich",
+   "lien": "https://www.allflyingjobs.com/jobs/first-officer-mwd",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Europe",
+   "date_publication": "2026-08-20T04:30:02+00:00",
+   "extrait": "First Officer (m/w/d) Die K5-Aviation GmbH wurde 2010 gegründet und bietet Flugzeug-Management und Charteroperation für",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": {
+    "extrait": "Fließend Deutsch",
+    "nature": "atout",
+    "source": "citee"
+   },
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "certificat:classe 1|mention",
+    "contrat:CDI|mention",
+    "licence:EASA|mention",
+    "secteur:aviation d'affaires|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "34d197bd30420de4",
+   "titre_original": "First Officer Global 7500/8000 (m/w/d) — Germany, Berlin, Dusseldorf, Frankfurt, Hamburg, Munich",
+   "titre_fr": "First Officer Global 7500/8000 (m/w/d) — Germany, Berlin, Dusseldorf, Frankfurt, Hamburg, Munich",
+   "lien": "https://www.allflyingjobs.com/jobs/first-officer-global-75008000-mwd",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Europe",
+   "date_publication": "2026-08-20T04:30:02+00:00",
+   "extrait": "First Officer Global 7500/8000 (m/w/d) Die K5-Aviation GmbH wurde 2010 gegründet und bietet Flugzeug-Management und Charteroperation",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": {
+    "extrait": "Fließend Deutsch",
+    "nature": "atout",
+    "source": "citee"
+   },
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "certificat:classe 1|exigence",
+    "contrat:CDI|mention",
+    "licence:EASA|exigence",
+    "secteur:aviation d'affaires|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "06b5f274d18826d9",
+   "titre_original": "Chief Pilot — US-CO-Greenwood Village",
+   "titre_fr": "Pilote en chef — US-CO-Greenwood Village",
+   "lien": "https://www.allflyingjobs.com/jobs/chief-pilot",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-18T12:37:00+00:00",
+   "extrait": "Chief Pilot Location US-CO-Greenwood Village ID 2026-10380 Category Executive Position Type Regular Full-Time Remote No",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "contrat:expatriation|exigence",
+    "experience:annees:2-5|exigence",
+    "licence:FAA|mention",
+    "responsabilite:encadrement|mention",
+    "responsabilite:instruction|mention",
+    "responsabilite:sécurité|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "0419d8376f2c88f3",
+   "titre_original": "Gulfstream G600 Captain - Seattle, WA — US-WA-Seattle",
+   "titre_fr": "Gulfstream G600 Captain - Seattle, WA — US-WA-Seattle",
+   "lien": "https://www.allflyingjobs.com/jobs/gulfstream-g600-captain-seattle-wa",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-18T17:50:01+00:00",
+   "extrait": "Gulfstream G600 Captain - Seattle, WA Location US-WA-Seattle ID 2026-1987 Category Pilot Position Type Full-Time Remote No",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:astreinte|exigence",
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "experience:heures:1500-3000|exigence",
+    "qualification:de type à détenir|exigence",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": 250,
+    "heures_max_exigees": 1500,
+    "langues_exigees": {},
+    "type_rating_exige": true,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "cd70969165afd3af",
+   "titre_original": "Sierra West Airlines-Metro First Officer — El Paso",
+   "titre_fr": "Sierra West Airlines-Metro First Officer — El Paso",
+   "lien": "https://www.allflyingjobs.com/jobs/sierra-west-airlines-metro-first-officer",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-18T16:20:02+00:00",
+   "extrait": "On this page you can apply for Pilot job vacancy: Sierra West Airlines-Metro First Officer",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "3330fd157ff4aa6b",
+   "titre_original": "Sierra West Airlines - First Officer LR 60 — Oakdale",
+   "titre_fr": "Sierra West Airlines - First Officer LR 60 — Oakdale",
+   "lien": "https://www.allflyingjobs.com/jobs/sierra-west-airlines-first-officer-lr-60",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-18T16:20:02+00:00",
+   "extrait": "On this page you can apply for Pilot job vacancy: Sierra West Airlines - First Officer LR 60",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
+  },
+  {
+   "id": "da89f7dc1fe5f5bb",
+   "titre_original": "BA Cityflyer Direct Entry Pilot — London, England",
+   "titre_fr": "Pilote d'entrée directe BA Cityflyer — Londres, Angleterre",
+   "lien": "https://www.allflyingjobs.com/jobs/ba-cityflyer-direct-entry-pilot",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Europe",
+   "date_publication": "2026-08-18T02:10:01+00:00",
+   "extrait": "On this page you can apply for Pilot job vacancy: BA Cityflyer Direct Entry Pilot",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:essais en vol|mention",
+    "contrat:CDI|mention",
+    "seniorite:confirmé|mention",
+    "seniorite:débutant|mention",
+    "seniorite:entrée directe commandant|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "af74be8aa7418c3c",
+   "titre_original": "Citation XLS Captain - Morristown, NJ — US-NJ-Morristown",
+   "titre_fr": "Citation XLS Captain - Morristown, NJ — US-NJ-Morristown",
+   "lien": "https://www.allflyingjobs.com/jobs/citation-xls-captain-morristown-nj",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-08-17T17:45:02+00:00",
+   "extrait": "Citation XLS Captain - Morristown, NJ Location US-NJ-Morristown ID 2026-1985 Category Pilot Position Type Full-Time Remote",
+   "premiere_collecte": "2026-08-28T16:51:24.417914+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:astreinte|exigence",
+    "activite:base libre|mention",
+    "activite:essais en vol|mention",
+    "activite:régional|mention",
+    "contrat:CDI|mention",
+    "experience:heures:3000+|exigence",
+    "qualification:de type à détenir|exigence",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": 250,
+    "heures_max_exigees": 3000,
+    "langues_exigees": {},
+    "type_rating_exige": true,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 0
   }
  ],
- "derniere_collecte": "2026-08-27T16:28:47.226573+00:00",
+ "derniere_collecte": "2026-08-28T16:51:24.417914+00:00",
  "compagnies": {
   "French bee": {
    "offres_ouvertes": 5,
-   "releve_le": "2026-08-27T16:28:47.226573+00:00"
+   "releve_le": "2026-08-28T16:51:24.417914+00:00"
   },
   "Air Caraïbes": {
    "offres_ouvertes": 11,
-   "releve_le": "2026-08-27T16:28:47.226573+00:00"
+   "releve_le": "2026-08-28T16:51:24.417914+00:00"
   }
  }
 }

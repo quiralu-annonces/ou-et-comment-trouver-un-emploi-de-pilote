@@ -34,6 +34,8 @@ from __future__ import annotations
 import re
 from urllib.parse import urlparse
 
+from profil import motif_profil
+
 # --- 1. Origines reconnues comme publiant de véritables offres --------------
 
 # Domaines de sites d'emploi, bourses fédérales et cabinets de recrutement.
@@ -478,4 +480,8 @@ def motif_exclusion(annonce: dict) -> str | None:
         return "langue"
     if not criteres_presents(texte):
         return "criteres"
-    return None
+    # Confrontation au profil réel du candidat : maintenance seule, niveau de
+    # langue au-dessus du sien, plancher d'heures hors d'atteinte. Ces règles
+    # viennent en dernier car elles supposent la fiche lue en entier ; une
+    # annonce non encore relue n'est jamais écartée sur cette base.
+    return motif_profil(annonce)

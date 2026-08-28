@@ -36,7 +36,7 @@ from filtres import ATOUT, EXIGENCE
 # Version de l'extracteur. À incrémenter dès que les motifs changent : le
 # collecteur relit alors les annonces analysées par une version antérieure,
 # comme il le fait déjà pour l'examen linguistique.
-VERSION_ANALYSE_CRITERES = 4
+VERSION_ANALYSE_CRITERES = 5
 
 # Bornes de phrase. Une fiche de poste énumère ses exigences en puces ou en
 # phrases courtes : chacune qualifie son propre critère.
@@ -347,6 +347,84 @@ def extraire(texte: str) -> list[str]:
                     f"{famille}:{libelle}|{modalite(texte, trouve.start(), trouve.end())}"
                 )
     return sorted(traits)
+
+
+# --- Mesures chiffrées, pour confronter l'annonce à un profil --------------
+#
+# Les traits ci-dessus servent à l'apprentissage : ils se comptent. Les mesures
+# ci-dessous servent à décider : elles se comparent. Un candidat détenant 290
+# heures ne peut pas postuler à un poste en exigeant 1500, quelle que soit la
+# fréquence de ce critère dans ses refus passés.
+
+# Postes de maintenance. Le candidat en vient — dix ans, Part-66 B1 — et ces
+# annonces lui correspondent parfaitement sans l'intéresser.
+MAINTENANCE = re.compile(
+    r"m[ée]canicien|technicien\s+a[ée]ronautique|maintenance\s+(?:technician|engineer|mechanic)|"
+    r"aircraft\s+(?:technician|mechanic|engineer)|part[\s-]?66|\bA&P\b|\bAMT\b|\bLAE\b|"
+    r"licensed\s+aircraft\s+engineer|avionics\s+technician|technicien\s+avionique|"
+    r"line\s+maintenance|base\s+maintenance|atelier|\bCRS\b|airworthiness\s+review",
+    re.IGNORECASE,
+)
+
+# Postes de pilotage. Leur seule présence suffit à conserver l'annonce, même si
+# elle parle aussi de maintenance : un poste mixte convient au candidat.
+PILOTAGE = re.compile(
+    r"\bpilote?s?\b|\bpilots?\b|co-?pilot|copilote|first\s+officer|second\s+officer|"
+    r"\bOPL\b|\bSIC\b|\bPIC\b|commandant\s+de\s+bord|captain|capitaine|"
+    r"instructeur\s+de\s+vol|flight\s+instructor|\bFI\s*\(|cadet|[ée]l[èe]ve[\s-]pilote|"
+    r"flight\s+crew|personnel\s+navigant\s+technique|\bPNT\b|\bATPL\b|\bCPL\b",
+    re.IGNORECASE,
+)
+
+TYPE_RATING_EXIGE = re.compile(
+    r"current\s+type\s+rating|valid\s+type\s+rating|type[\s-]?rated\s+on|"
+    r"qualification\s+de\s+type\s+(?:en\s+cours|valide|requise)",
+    re.IGNORECASE,
+)
+
+
+def mesures(texte: str) -> dict:
+    """Valeurs chiffrées et natures de poste, pour comparaison à un profil.
+
+    ``heures_min_exigees`` est le **plancher** des exigences, pas le plafond :
+    une fiche qui propose un copilote à 250 h et un commandant à 3000 h reste
+    accessible par le bas. Retenir le maximum aurait écarté toute annonce
+    couvrant plusieurs postes.
+    """
+    if not texte:
+        return {}
+
+    exigees = []
+    for trouve in HEURES.finditer(texte):
+        brut = trouve.group(1) or trouve.group(2)
+        try:
+            valeur = int(brut)
+        except (TypeError, ValueError):
+            continue
+        if valeur < 50:
+            continue
+        if modalite(texte, trouve.start(), trouve.end()) == "exigence":
+            exigees.append(valeur)
+
+    langues_exigees: dict[str, int] = {}
+    for trouve in NIVEAU_LANGUE.finditer(texte):
+        langue = (trouve.group(1) or trouve.group(4) or "").lower()
+        niveau = trouve.group(2) or trouve.group(3)
+        if not langue or not niveau:
+            continue
+        if modalite(texte, trouve.start(), trouve.end()) != "exigence":
+            continue
+        langue = NORMALISATION_LANGUE.get(langue, langue)
+        langues_exigees[langue] = max(langues_exigees.get(langue, 0), int(niveau))
+
+    return {
+        "heures_min_exigees": min(exigees) if exigees else None,
+        "heures_max_exigees": max(exigees) if exigees else None,
+        "langues_exigees": langues_exigees,
+        "type_rating_exige": bool(TYPE_RATING_EXIGE.search(texte)),
+        "maintenance": bool(MAINTENANCE.search(texte)),
+        "pilotage": bool(PILOTAGE.search(texte)),
+    }
 
 
 def libelle(trait: str) -> str:

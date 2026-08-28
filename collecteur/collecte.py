@@ -30,7 +30,11 @@ from compagnies import (  # noqa: E402
     compter_offres,
     offres_compagnie,
 )
-from criteres import VERSION_ANALYSE_CRITERES, extraire as extraire_criteres  # noqa: E402
+from criteres import (  # noqa: E402
+    VERSION_ANALYSE_CRITERES,
+    extraire as extraire_criteres,
+    mesures as mesurer_exigences,
+)
 from filtres import (  # noqa: E402
     VERSION_ANALYSE_LANGUE,
     langue_bloquante,
@@ -279,7 +283,7 @@ def est_pertinent(titre: str, extrait: str, bourse_emploi: bool = False) -> bool
     return bourse_emploi or bool(MOTS_RECRUTEMENT.search(champ))
 
 
-def examiner_annonce(lien: str, texte_deja_lu: str = "") -> tuple[dict | None, list[str], bool]:
+def examiner_annonce(lien: str, texte_deja_lu: str = "") -> tuple[dict | None, list[str], dict, bool]:
     """Lit l'annonce en entier et en tire tout ce qu'on sait en tirer.
 
     Renvoie ``(verdict_langue, criteres, lue)``. ``lue`` dit si le texte
@@ -293,24 +297,51 @@ def examiner_annonce(lien: str, texte_deja_lu: str = "") -> tuple[dict | None, l
     """
     texte = texte_deja_lu or telecharger_texte(lien)
     if not texte:
-        return None, [], False
+        return None, [], {}, False
     verdict = langue_bloquante(texte)
     verdict_dict = (
         {"extrait": verdict[0], "nature": verdict[1], "source": verdict[2]} if verdict else None
     )
-    return verdict_dict, extraire_criteres(texte), True
+    return verdict_dict, extraire_criteres(texte), mesurer_exigences(texte), True
+
+
+# Le service de traduction répond parfois par sa page d'erreur avec un code
+# HTTP 200. Sans ce garde-fou, « Error 500 (Server Error)!!1500. That's an
+# error. » se retrouvait enregistré comme intitulé d'annonce — et son « 1500 »
+# était même lu comme une exigence de 1500 heures de vol.
+TRADUCTION_SUSPECTE = re.compile(
+    r"^\s*error\s*\d{3}|server\s+error|that'?s\s+an\s+error|"
+    r"<!doctype|<html|too\s+many\s+requests|service\s+unavailable",
+    re.IGNORECASE,
+)
 
 
 def traduire_fr(texte: str) -> str:
-    """Traduction gratuite vers le français ; renvoie le texte original en cas d'échec."""
+    """Traduction gratuite vers le français ; renvoie le texte original en cas d'échec.
+
+    Une réponse reconnaissable comme page d'erreur est rejetée : mieux vaut un
+    intitulé anglais qu'un intitulé faux.
+
+    Le contrôle porte sur la forme de la réponse, jamais sur sa longueur. Un
+    critère de longueur paraissait raisonnable — une traduction ne devrait pas
+    doubler le texte — mais il rejetait toutes les traductions de titres
+    chinois et japonais, dont les idéogrammes tiennent en trois fois moins de
+    caractères que le français.
+    """
     try:
         from deep_translator import GoogleTranslator
 
         traduit = GoogleTranslator(source="auto", target="fr").translate(texte[:4500])
-        return traduit or texte
     except Exception as erreur:  # noqa: BLE001 — la traduction ne doit jamais bloquer la collecte
         print(f"    (traduction impossible : {erreur})", file=sys.stderr)
         return texte
+
+    if not traduit:
+        return texte
+    if TRADUCTION_SUSPECTE.search(traduit):
+        print(f"    (traduction rejetée, réponse anormale : {traduit[:60]!r})", file=sys.stderr)
+        return texte
+    return traduit
 
 
 def charger_base() -> dict:
@@ -372,13 +403,14 @@ def relire_annonces(base: dict, maintenant: str) -> None:
     illisibles = 0
     total_criteres = 0
     for annonce in a_relire[:RELECTURE_MAX]:
-        verdict, criteres, lue = examiner_annonce(annonce["lien"])
+        verdict, criteres, exigences, lue = examiner_annonce(annonce["lien"])
         if not lue:
             illisibles += 1
             time.sleep(DELAI_ENTRE_REQUETES)
             continue
         annonce["langue_exigee"] = verdict
         annonce["criteres"] = criteres
+        annonce["exigences"] = exigences
         annonce["texte_lu"] = True
         annonce["analyse_langue"] = VERSION_ANALYSE_LANGUE
         annonce["analyse_criteres"] = VERSION_ANALYSE_CRITERES
@@ -466,7 +498,7 @@ def collecter() -> None:
 
             # Lecture intégrale : exigences linguistiques comme critères de
             # poste se cachent sous « Profil recherché », jamais dans le titre.
-            verdict_langue, criteres, texte_lu = examiner_annonce(
+            verdict_langue, criteres, exigences, texte_lu = examiner_annonce(
                 item["lien"], item.get("texte_integral", "")
             )
             if not item.get("texte_integral"):
@@ -491,6 +523,7 @@ def collecter() -> None:
                 "premiere_collecte": maintenant,
                 "langue_exigee": verdict_langue,
                 "criteres": criteres,
+                "exigences": exigences,
                 "texte_lu": texte_lu,
                 "analyse_langue": VERSION_ANALYSE_LANGUE if texte_lu else 0,
                 "analyse_criteres": VERSION_ANALYSE_CRITERES if texte_lu else 0,
