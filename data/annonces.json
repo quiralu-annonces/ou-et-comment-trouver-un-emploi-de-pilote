@@ -7975,8 +7975,16 @@
    "criteres": [],
    "texte_lu": true,
    "analyse_langue": 3,
-   "analyse_criteres": 4,
-   "relue_le": "2026-08-19T13:55:28.947356+00:00"
+   "analyse_criteres": 5,
+   "relue_le": "2026-08-29T17:05:54.309366+00:00",
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": false
+   }
   },
   {
    "id": "b86fe0514c7b4fce",
@@ -10446,15 +10454,15 @@
    "analyse_criteres": 0
   }
  ],
- "derniere_collecte": "2026-08-29T11:38:53.078096+00:00",
+ "derniere_collecte": "2026-08-29T17:05:54.309366+00:00",
  "compagnies": {
   "French bee": {
    "offres_ouvertes": 5,
-   "releve_le": "2026-08-29T11:38:53.078096+00:00"
+   "releve_le": "2026-08-29T17:05:54.309366+00:00"
   },
   "Air Caraïbes": {
    "offres_ouvertes": 11,
-   "releve_le": "2026-08-29T11:38:53.078096+00:00"
+   "releve_le": "2026-08-29T17:05:54.309366+00:00"
   }
  }
 }
