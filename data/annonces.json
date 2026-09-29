@@ -10454,15 +10454,15 @@
    "analyse_criteres": 0
   }
  ],
- "derniere_collecte": "2026-09-29T11:20:19.614863+00:00",
+ "derniere_collecte": "2026-09-29T18:36:49.000619+00:00",
  "compagnies": {
   "French bee": {
-   "offres_ouvertes": 3,
-   "releve_le": "2026-09-29T11:20:19.614863+00:00"
+   "offres_ouvertes": 4,
+   "releve_le": "2026-09-29T18:36:49.000619+00:00"
   },
   "Air Caraïbes": {
    "offres_ouvertes": 16,
-   "releve_le": "2026-09-29T11:20:19.614863+00:00"
+   "releve_le": "2026-09-29T18:36:49.000619+00:00"
   }
  }
 }
