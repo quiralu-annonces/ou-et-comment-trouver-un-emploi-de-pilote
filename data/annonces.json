@@ -10452,17 +10452,42 @@
    "texte_lu": true,
    "analyse_langue": 3,
    "analyse_criteres": 0
+  },
+  {
+   "id": "5b7f744fb0e32b3e",
+   "titre_original": "Stage – Ressources Humaines | DRH",
+   "titre_fr": "Stage – Ressources Humaines | DRH",
+   "lien": "https://carrieres.airtahiti.com/jobs/8542384-stage-ressources-humaines-drh",
+   "source": "Groupe Air Tahiti",
+   "langue": "fr",
+   "region": "Océanie",
+   "date_publication": "2026-10-14T06:29:02+00:00",
+   "extrait": "Rejoignez celles et ceux qui font grandir les talents d’Air Tahiti Derrière chaque vol, il y a des pilotes, des PNC, des techniciens, des agents d’escale et des équipes support. La Direction des Ressources Humaines les accompagne tout au long de leur parcours : recrutement, intégration, formation, développement des compétences, administration du personnel et dialogue social. Un stage à la DRH vous",
+   "premiere_collecte": "2026-10-14T10:08:11.627880+00:00",
+   "langue_exigee": null,
+   "criteres": [],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
   }
  ],
- "derniere_collecte": "2026-10-13T19:51:03.504872+00:00",
+ "derniere_collecte": "2026-10-14T10:08:11.627880+00:00",
  "compagnies": {
   "French bee": {
    "offres_ouvertes": 3,
-   "releve_le": "2026-10-13T19:51:03.504872+00:00"
+   "releve_le": "2026-10-14T10:08:11.627880+00:00"
   },
   "Air Caraïbes": {
    "offres_ouvertes": 16,
-   "releve_le": "2026-10-13T19:51:03.504872+00:00"
+   "releve_le": "2026-10-14T10:08:11.627880+00:00"
   }
  }
 }
