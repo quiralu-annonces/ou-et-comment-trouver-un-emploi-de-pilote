@@ -10477,17 +10477,52 @@
    "texte_lu": true,
    "analyse_langue": 3,
    "analyse_criteres": 5
+  },
+  {
+   "id": "d6db8664dc891854",
+   "titre_original": "La FFVP recrute un instructeur planeur pour le CNVP",
+   "titre_fr": "La FFVP recrute un instructeur planeur pour le CNVP",
+   "lien": "https://www.ffvp.fr/bourse-a-emploi/la-ffvp-recrute-un-instructeur-planeur-pour-le-cnvp",
+   "source": "FFVP — bourse à l'emploi (France)",
+   "langue": "fr",
+   "region": "Europe",
+   "date_publication": "2026-10-28T14:03:50+00:00",
+   "extrait": "La Fédération Française de Vol en Planeur renforce l’équipe du CNVP et recherche un instructeur planeur, motivé, désireux de transmettre sa passion et de progresser au sein de la structure... The post La FFVP recrute un instructeur planeur pour le CNVP appeared first on Fédération Française de Vol en Planeur .",
+   "premiere_collecte": "2026-10-28T18:48:45.814377+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:ULM|mention",
+    "activite:planeur|mention",
+    "contrat:CDD|mention",
+    "contrat:CDI|mention",
+    "responsabilite:contrôle|mention",
+    "responsabilite:instruction|mention",
+    "secteur:formation|mention",
+    "secteur:travail aérien|mention",
+    "seniorite:confirmé|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": null,
+    "heures_max_exigees": null,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
   }
  ],
- "derniere_collecte": "2026-10-28T11:17:52.968587+00:00",
+ "derniere_collecte": "2026-10-28T18:48:45.814377+00:00",
  "compagnies": {
   "French bee": {
    "offres_ouvertes": 3,
-   "releve_le": "2026-10-28T11:17:52.968587+00:00"
+   "releve_le": "2026-10-28T18:48:45.814377+00:00"
   },
   "Air Caraïbes": {
    "offres_ouvertes": 15,
-   "releve_le": "2026-10-28T11:17:52.968587+00:00"
+   "releve_le": "2026-10-28T18:48:45.814377+00:00"
   }
  }
 }
