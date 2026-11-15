@@ -12453,17 +12453,82 @@
    "texte_lu": true,
    "analyse_langue": 3,
    "analyse_criteres": 5
+  },
+  {
+   "id": "f0a70e6571c304e6",
+   "titre_original": "Helicopter Pilot — US-IA-Fort Dodge",
+   "titre_fr": "Helicopter Pilot — US-IA-Fort Dodge",
+   "lien": "https://www.allflyingjobs.com/jobs/helicopter-pilot-16",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-11-14T18:46:00+00:00",
+   "extrait": "Helicopter Pilot Location US-IA-Fort Dodge ID 2026-9264 Category Aviation Position Type Regular Full-Time Remote No",
+   "premiere_collecte": "2026-11-15T19:20:56.907848+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:essais en vol|mention",
+    "activite:hélicoptère|mention",
+    "contrat:expatriation|mention",
+    "experience:heures:500-1500|exigence",
+    "licence:IR|exigence",
+    "responsabilite:instruction|mention",
+    "secteur:fret|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": 50,
+    "heures_max_exigees": 1000,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
+  },
+  {
+   "id": "98e60473cb14af74",
+   "titre_original": "Flight Ops Flight Instructor - HDQ — Dallas, Texas, United States of America",
+   "titre_fr": "Flight Ops Flight Instructor - HDQ — Dallas, Texas, United States of America",
+   "lien": "https://www.allflyingjobs.com/jobs/flight-ops-flight-instructor-hdq-0",
+   "source": "AllFlyingJobs",
+   "langue": "en",
+   "region": "Amérique du Nord",
+   "date_publication": "2026-11-15T00:00:00+00:00",
+   "extrait": "Department:Flight OperationsOur Company PromiseWe are committed to provide our Employees a stable work environment with equal",
+   "premiere_collecte": "2026-11-15T19:20:56.907848+00:00",
+   "langue_exigee": null,
+   "criteres": [
+    "activite:essais en vol|mention",
+    "activite:hélicoptère|mention",
+    "activite:militaire|mention",
+    "experience:heures:500-1500|exigence",
+    "licence:FAA|mention",
+    "responsabilite:instruction|mention"
+   ],
+   "exigences": {
+    "heures_min_exigees": 500,
+    "heures_max_exigees": 500,
+    "langues_exigees": {},
+    "type_rating_exige": false,
+    "maintenance": false,
+    "pilotage": true
+   },
+   "texte_lu": true,
+   "analyse_langue": 3,
+   "analyse_criteres": 5
   }
  ],
- "derniere_collecte": "2026-11-15T12:41:28.770748+00:00",
+ "derniere_collecte": "2026-11-15T19:20:56.907848+00:00",
  "compagnies": {
   "French bee": {
    "offres_ouvertes": 2,
-   "releve_le": "2026-11-15T12:41:28.770748+00:00"
+   "releve_le": "2026-11-15T19:20:56.907848+00:00"
   },
   "Air Caraïbes": {
    "offres_ouvertes": 10,
-   "releve_le": "2026-11-15T12:41:28.770748+00:00"
+   "releve_le": "2026-11-15T19:20:56.907848+00:00"
   }
  }
 }
